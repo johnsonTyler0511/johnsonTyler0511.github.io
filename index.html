@@ -358,7 +358,7 @@
             <section class="clearfix">
               <div class="project-section">
                 <div class="project-container">
-                  <div class="project-img-container" onclick="document.getElementById('modal-wrapper').style.display='block'">
+                  <div class="project-img-container" onclick="document.getElementById('modal-vslam').style.display='block'">
                     <img src="./images/floor.jpg" alt="project image">
                   </div>
                   <p class="project-title">Visual Slam in Urban Environments</p>
@@ -375,10 +375,9 @@
                   </div>
                   <p class="project-title">Impulse-VR (BCI-VR Game)</p>
                 </div>
-              <div id="modal-wrapper" class="modal">
 
+              <div id="modal-vslam" class="modal">
                 <form class="modal-content animate">
-
                   <div class="imgcontainer">
                     <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
                     <img src="images/floor.jpg" alt="project" class="avatar">
@@ -386,15 +385,18 @@
                   </div>
 
                   <div class="container">
-                    <input type="text" placeholder="Project Name" name="uname" readonly>
-                    <textarea class="project_description" rows="3" placeholder="Project Description" readonly></textarea>
-                    <input type="url" placeholder="Project Link"readonly>
-                    <input type="text" placeholder="Languages used" readonly>
-                    <button class="project_submit" type="submit">Submit</button>
+                    <input type="text" placeholder="Visual Slam in Urban Envornments" name="Tyler Johnson" readonly>
+                    <textarea class="project_description" rows="3" placeholder="Project Description" readonly>
+                      This project was my Final project for my SLAM class at Carnegie Mellon during my Masters program. 
+                      We investigated the use of ORB-SLAM2 in urban environments. 
+                      We tested using common data sets such as KITTI. We wanted to learn how robust the algorithm is to 
+                      environmental interference such as motion blur and other aspects. We compared the performance of 
+                      the baseline algorithm alongside modified inputs streams.
+                    </textarea>
+                    <input type="url" placeholder="https://github.com/joshliu11/16833_Final_Project"readonly>
+                    <input type="text" placeholder="C++, Python" readonly>
                   </div>
-
                 </form>
-
               </div>
             </section>
           </div>
@@ -427,16 +429,12 @@
                     <h4>
                       About Me
                     </h4>
-                    <p>
-                      I am a passionate Robotics Software engineer. 
-                    <p>
-                      I am a quick learner and I am always looking for new challenges.
-                    </p>
-                      I enjoy working on side projects and I am always tinkering with new ideas to learn and grow.
-                    </p>
-                    <p>
-                      Thanks for visiting my person portfolio website. 
-                    </p>
+                    <ul>
+                      <li>I am a passionate Robotics Software engineer.</li> 
+                      <li>I am a quick learner and I am always looking for new challenges.</li>
+                      <li>I enjoy working on side projects and I am always tinkering with new ideas to learn and grow.</li>
+                      <li>Thanks for visiting my person portfolio website.</li> 
+                    </ul>
                   </div>
                 </div>
               </div>
