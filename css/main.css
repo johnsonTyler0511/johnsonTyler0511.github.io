@@ -887,8 +887,9 @@ body {
 input[type=text], .project_description, input[type=url] {
   height: 50px;
   width: 85%;
-  padding: 8px 15px;
+  padding: 12px 20px;
   margin: 5px 26px;
+  text-align: left;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
