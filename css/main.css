@@ -852,7 +852,7 @@ body {
 }
 
 .project-container {
-  max-width: 240px;
+  max-width: 400px;
   border-radius: 5px;
   background-color: #5cb85c;
   color: #fff;
