@@ -885,8 +885,9 @@ body {
   font-weight: bold;
 }
 input[type=text], .project_description, input[type=url] {
+  height: 50px;
   width: 100%;
-  padding: 12px 20px;
+  padding: 8px 15px;
   margin: 5px 26px;
   display: inline-block;
   border: 1px solid #ccc;
