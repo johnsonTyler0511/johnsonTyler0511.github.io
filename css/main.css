@@ -852,7 +852,7 @@ body {
 }
 
 .project-container {
-  max-width: 400px;
+  max-width: 240px;
   border-radius: 5px;
   background-color: #5cb85c;
   color: #fff;
@@ -885,16 +885,16 @@ body {
   font-weight: bold;
 }
 input[type=text], .project_description, input[type=url] {
-  width: 85%;
+  width: 100%;
   padding: 12px 20px;
   margin: 5px 26px;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size:16px;
+  font-size:10px;
 }
 .project_description{
-  max-width: 85%;
+  max-width: 100%;
 }
 
 /* Set a style for all buttons */
