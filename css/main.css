@@ -885,7 +885,6 @@ body {
   font-weight: bold;
 }
 input[type=text], .project_description, input[type=url] {
-  height: 50px;
   width: 85%;
   padding: 12px 20px;
   margin: 5px 26px;
