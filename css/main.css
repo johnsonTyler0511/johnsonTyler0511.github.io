@@ -886,13 +886,13 @@ body {
 }
 input[type=text], .project_description, input[type=url] {
   height: 50px;
-  width: 100%;
+  width: 85%;
   padding: 8px 15px;
   margin: 5px 26px;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size:10px;
+  font-size:11px;
 }
 .project_description{
   max-width: 100%;
