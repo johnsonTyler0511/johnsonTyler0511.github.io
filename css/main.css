@@ -885,14 +885,14 @@ body {
   font-weight: bold;
 }
 input[type=text], .project_description, input[type=url] {
-  width: 85%;
+  width: 100%;
   padding: 12px 20px;
   margin: 5px 26px;
   text-align: left;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-  font-size:11px;
+  font-size:12px;
 }
 .project_description{
   max-width: 100%;
