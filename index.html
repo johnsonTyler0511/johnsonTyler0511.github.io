@@ -119,20 +119,34 @@
                     Tyler Johnson
                   </h2>
                   <h4>
-                    Robotics Software Engineer
+                    Senior Robotics Software Engineer
                   </h4>
                   <p>
-                    I am currently working for Kawasaki Robotics as a Robotics Software Engineer. I develop applications using the Kawasaki Real-Time Control (RTC) and Robot Network API.
-                    I also consult with many universities, startups and larger companies on how to use RTC on Kawasaki Robots. My work also includes developing and supporting
-                    applications that perform tasks such as automating robot configuration and purchase order checking/tracking, data logging and visualization, 
-                    QA testing robots for RTC and other applications, robot programming IDE, among others. I mainly use C++, Python, ROS, and C# to solve problems.  
-                    Additionally I work with vision systems (3D/2D) and other new technologies to design applications and demo systems with Kawasaki Robots.
+                    I work at Kuka as a Senior Robotics Software Engineer. I work on developing core robot OS modules for motion and external control interfaces. 
+                    I also work on designing external control interfaces that focus on ease of use, comprehensive functionality, and scalable deployement of robot solutions. 
+                    I help develop a inverse kinematics and motion planning library leveraging saturation in nullspace (SNS) based algorithms. 
                   </p>
                   <p>
-                    A work project I am excited about is the development of a live body tracking robot following/teaching application. This application will use a Kinect to track a person's body and
+                    A work project I am proud of designing and developing at Kuka was an external jogging interface leveraging the SNS library, a 3D space mouse, ROS2, and Kuka RTC interfaces.
+                    I utilized the velocity inverse kinematics functions developed by my team to convert twist commands from the 3D space mouse movements into end effector velocities. 
+                    I then integrated the velocities to create a joint position command to stream to the robot controller over ROS2 control and RTC driver interfaces. 
+                    This resulted in very smooth jogging even on large payload robots due to maintaining robot torque and acceleration constratins directly with our SNS solver. 
+                    The SNS solver allowed us to easily extend functionality to do constraint jogging, we could lock one linear axis or rotation axis and it would only take into account the other inputs. 
+                    We also extended the applications features to leverage relaxed axes functions of our algorithms such that the jogging solution could leverage the null space joint velocity solutions even with a non over-actuated robot. 
+                    The user could relax the RY orientation for instance and the velocity solution would not constrain that state which would allow the robot to more often smoothly pass through singularities or joint limit issues. 
+                  </p> 
+                  <p>
+                    At my previous position I worked at Kawasaki Robotics as a Robotics Software Engineer. I develop applications using the Kawasaki Real-Time Control (RTC) and Robot Network API.
+                    I also consult with many universities, startups and larger companies on how to use RTC on Kawasaki Robots. My work also includes developing and supporting
+                    applications that perform tasks such as automating robot configuration and purchase order checking/tracking, data logging and visualization, 
+                    QA testing robots for RTC and other applications, robot programming IDE, among others. I mainly used C++, Python, ROS2, and C# to solve my engineering tasks.  
+                    Additionally I worked with vision systems (3D/2D) and other new technologies to design applications and demo systems with Kawasaki Robots.
+                  </p>
+                  <p>
+                    A work project I am proud of designing and developing at Kawasaki was a live body tracking robot following/teaching application. This application used a Kinect to track a person's body and
                     then use the robot's arm to follow the person's movements. The robot will also be able to record positions and motions similar to teaching with a teach pendant. 
-                    I am using the RTC interface for Kawasaki robots, along side ROS to integrate packages easily. The ROS packages that I am leveraging are MoveIT, Azure Kinect ROS Driver, alongside ROS packages made to interface with the robot easily 
-                    and abstract behaviors written by my team and I. 
+                    I used the RTC interface for Kawasaki robots, along side ROS to integrate packages easily. The ROS packages that I am leveraging are MoveIT, Azure Kinect ROS Driver, alongside ROS packages made to interface with the robot easily 
+                    and abstract behaviors written by my Kawasaki team and I. 
                   </p>
                   <p>
                     I have been focusing on learning Motion Planning and Controls for robots. I have gained a strong attachment for these fields and they are the main part of my Robotics knowledge I want to improve and learn more about.
