@@ -382,7 +382,6 @@
           <!-- End skills Tab Data -->
           <!-- ----------------------------------------------------------------------------------- -->
           <!-- Projects Tab Data -->
-          <!-- TODO: -->
           <style>
             .project-title {
               text-align: center;
@@ -407,39 +406,33 @@
           </style>
 
           <!-- End Projects tab -->
-          <!-- ----------------------------------------------------------------------------------- -->
-          <!-- Contact Tab Data -->
-          <div id="contact">
+          <div id="portfolio">
             <section class="clearfix">
-              <div id="portfolio">
-                <section class="clearfix">
-                  <div class="project-section">
-                    <div class="project-container">
-                      <div class="project-img-container" onclick="document.getElementById('modal-vslam').style.display='block'">
-                        <img src="./images/OrbSlam.jpeg" alt="project image">
-                      </div>
-                      <p class="project-title">Visual Slam in Urban Environments</p>
-                    </div>
-                    <div class="project-container">
-                      <div class="project-img-container" onclick="document.getElementById('modal-magik').style.display='block'">
-                        <img src="./images/21Magik.jpeg" alt="project image">
-                      </div>
-                      <p class="project-title">21 Magiks Video Game</p>
-                    </div>
-                    <div class="project-container">
-                      <div class="project-img-container" onclick="document.getElementById('modal-impulse').style.display='block'">
-                        <img src="./images/ImpulseVR.jpeg" alt="project image">
-                      </div>
-                      <p class="project-title">Impulse-VR (BCI-VR Game)</p>
-                    </div>
-                    <div class="project-container">
-                      <div class="project-img-container" onclick="document.getElementById('modal-prm').style.display='block'">
-                        <img src="./images/PRM_with_shortest_path.PNG" alt="project image">
-                      </div>
-                      <p class="project-title">Robotics Motion Planning Playground</p>
-                    </div>
+              <div class="project-section">
+                <div class="project-container">
+                  <div class="project-img-container" onclick="document.getElementById('modal-vslam').style.display='block'">
+                    <img src="./images/OrbSlam.jpeg" alt="project image">
                   </div>
-                </section>
+                  <p class="project-title">Visual Slam in Urban Environments</p>
+                </div>
+                <div class="project-container">
+                  <div class="project-img-container" onclick="document.getElementById('modal-magik').style.display='block'">
+                    <img src="./images/21Magik.jpeg" alt="project image">
+                  </div>
+                  <p class="project-title">21 Magiks Video Game</p>
+                </div>
+                <div class="project-container">
+                  <div class="project-img-container" onclick="document.getElementById('modal-impulse').style.display='block'">
+                    <img src="./images/ImpulseVR.jpeg" alt="project image">
+                  </div>
+                  <p class="project-title">Impulse-VR (BCI-VR Game)</p>
+                </div>
+                <div class="project-container">
+                  <div class="project-img-container" onclick="document.getElementById('modal-prm').style.display='block'">
+                    <img src="./images/PRM_with_shortest_path.PNG" alt="project image">
+                  </div>
+                  <p class="project-title">Robotics Motion Planning Playground</p>
+                </div>
               </div>
               <!-- Vslam project -->
               <div id="modal-vslam" class="modal">
@@ -449,17 +442,19 @@
                     <img src="images/OrbSlam.jpeg" alt="project" class="avatar">
                     <h1 class="project_details" style="text-align:center">Project Details</h1>
                   </div>
-
+                  
                   <div class="container">
-                    <input type="text" placeholder="Visual Slam in Urban Environments" name="Tyler Johnson" readonly>
-                    <textarea class="project_description" rows="4" placeholder="Project Description" readonly>
-                      This project was my Final project for my SLAM class at Carnegie Mellon during my Masters program. 
-                      We investigated the use of ORB-SLAM2 in urban environments, testing on the KITTI dataset for autonomous vehicles.
-                      We wanted to learn how robust the algorithm is to environmental interference such as motion blur and other aspects.
-                      We compared the performance of the baseline algorithm alongside modified inputs streams.
-                    </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/Visual-Slam-in-Urban-Environments" readonly>
-                    <input type="text" placeholder="C++, Python" readonly>
+                    <div style="color: white;">
+                      <input type="text" placeholder="Visual Slam in Urban Environments" name="Tyler Johnson" readonly style="color: white;">
+                      <textarea class="project_description" rows="4" placeholder="Project Description" readonly style="color: white;">
+                        This project was my Final project for my SLAM class at Carnegie Mellon during my Masters program. 
+                        We investigated the use of ORB-SLAM2 in urban environments, testing on the KITTI dataset for autonomous vehicles.
+                        We wanted to learn how robust the algorithm is to environmental interference such as motion blur and other aspects.
+                        We compared the performance of the baseline algorithm alongside modified inputs streams.
+                      </textarea>
+                      <input type="url" placeholder="https://github.com/johnsonTyler0511/Visual-Slam-in-Urban-Environments" readonly style="color: white;">
+                      <input type="text" placeholder="C++, Python" readonly style="color: white;">
+                    </div>
                   </div>
                 </form>
               </div>
@@ -473,16 +468,16 @@
                   </div>
 
                   <div class="container">
-                    <input type="text" placeholder="21 Magiks Video Game" name="Tyler Johnson" readonly>
-                    <textarea class="project_description" rows="5" placeholder="Project Description" readonly>
+                    <input type="text" placeholder="21 Magiks Video Game" name="Tyler Johnson" readonly style="color: white;">
+                    <textarea class="project_description" rows="5" placeholder="Project Description" readonly style="color: white;">
                       This project was my Software Engineering development project in my undergraduate program at University of Florida. 
                       I worked with a team of 4 to develop a Zelda-inspired adventure video game using Unity. I was responsible for many of the backend systems of the game: 
                       inventory management, items, abilities, shops, game state management, and UI elements. We used a scrum methodology to manage our development process.
                       We would present each sprint's accomplishments to our professors and class. We were able to fully complete the game with a full-length story, many dungeons, and bosses. 
                       Our professors were impressed with our work and showcased our game in a university showcase.  
                     </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/21-Magiks" readonly>
-                    <input type="text" placeholder="C#, Unity" readonly>
+                    <input type="url" placeholder="https://github.com/johnsonTyler0511/21-Magiks" readonly style="color: white;">
+                    <input type="text" placeholder="C#, Unity" readonly style="color: white;">
                   </div>
                 </form>
               </div>
@@ -494,10 +489,10 @@
                     <img src="images/ImpulseVR.jpeg" alt="project" class="avatar">
                     <h1 class="project_details" style="text-align:center">Project Details</h1>
                   </div>
-
+                  
                   <div class="container">
-                    <input type="text" placeholder="Impulse-VR" name="Tyler Johnson" readonly>
-                    <textarea class="project_description" rows="6" placeholder="Project Description" readonly>
+                    <input type="text" placeholder="Impulse-VR" name="Tyler Johnson" readonly style="color: white;">
+                    <textarea class="project_description" rows="6" placeholder="Project Description" readonly style="color: white;">
                       This project was my Final project for my Senior Design class at University of Florida. 
                       I worked in a group of 2 others to design software to use a BCI headset to control a VR game.
                       We used Unity to develop the VR game and integrated an OpenBCI headset into gameplay mechanics. We used LSL streaming to
@@ -505,33 +500,33 @@
                       The more you focused, the more powerful abilities you could use. We tested many different machine learning algorithms to classify the data with Python (SVM, DT, DNN). 
                       Ultimately, we implemented our focus-based gameplay to fight bosses and complete arenas in the game.  
                     </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/ImpulseVR" readonly>
-                    <input type="text" placeholder="C#, Python, Unity" readonly>
+                    <input type="url" placeholder="https://github.com/johnsonTyler0511/ImpulseVR" readonly style="color: white;">
+                    <input type="text" placeholder="C#, Python, Unity" readonly style="color: white;">
+                  </div>
+                </form>
+              </div>
+              <!-- Motion Planning Project -->
+              <div id="modal-prm" class="modal">
+                <form class="modal-content animate">
+                  <div class="imgcontainer">
+                    <span onclick="document.getElementById('modal-prm').style.display='none'" class="close" title="Close PopUp">&times;</span>
+                    <img src="images/PRM_with_shortest_path.PNG" alt="project" class="avatar">
+                    <h1 class="project_details" style="text-align:center">Project Details</h1>
+                  </div>
+                  
+                  <div class="container">
+                    <input type="text" placeholder="Robotics Motion Planning Playground" name="Tyler Johnson" readonly style="color: white;">
+                    <textarea class="project_description" rows="3" placeholder="Project Description" readonly style="color: white;">
+                      This project is my personal project to learn more about Motion Planning and Controls for robots.
+                      I am working on implementing and visualizing different motion planning algorithms in Python with Pygame and basic Python libraries.
+                      The goal is to make a multi-dof robot plan a valid motion path and execute it in a simulated environment.
+                    </textarea>
+                    <input type="url" placeholder="https://github.com/johnsonTyler0511/robot_motion_planning_playground" readonly style="color: white;">
+                    <input type="text" placeholder="Python" readonly style="color: white;">
                   </div>
                 </form>
               </div>
             </section>
-          </div>
-          <!-- Vslam project -->
-          <div id="modal-prm" class="modal">
-            <form class="modal-content animate">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('modal-prm').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                <img src="images/PRM_with_shortest_path.PNG" alt="project" class="avatar">
-                <h1 class="project_details" style="text-align:center">Project Details</h1>
-              </div>
-
-              <div class="container">
-                <input type="text" placeholder="Robotics Motion Planning Playground" name="Tyler Johnson" readonly>
-                <textarea class="project_description" rows="3" placeholder="Project Description" readonly>
-                  This project is my personal project to learn more about Motion Planning and Controls for robots.
-                  I am working on implementing and visualizing different motion planning algorithms in Python with Pygame and basic Python libraries.
-                  The goal is to make a multi-dof robot plan a valid motion path and execute it in a simulated environment.
-                </textarea>
-                <input type="url" placeholder="https://github.com/johnsonTyler0511/robot_motion_planning_playground" readonly>
-                <input type="text" placeholder="Python" readonly>
-              </div>
-            </form>
           </div>
           <!-- End Projects tab -->
           <!-- ----------------------------------------------------------------------------------- -->
