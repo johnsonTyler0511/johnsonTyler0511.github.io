@@ -4,7 +4,7 @@ Repo for my portfolio github pages site.
 
 ### About 
 This portfolio page covers most of the public projects I have worked on in my early career.
-I am currently working on a Drone project that I will put up soon. 
+I am currently working on a Robot motion planning and control project as well as exploring Isaac Sim and Omniverse. 
 I also am working on integrating more of my class/private projects learnings into a publicly releasable project. 
 Stay tuned!! ;)
 
