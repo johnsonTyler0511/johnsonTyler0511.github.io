@@ -1,578 +1,383 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en">
 
 <head>
-  <!-- Add Your Title -->
-  <title> Tyler Johnson Portfolio </title>
-
-  <!-- All Meta Tags -->
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- All Link tags -->
-  <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-72x72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-114x114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-144x144-precomposed.png">
-  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet'>
-  <link rel="stylesheet" href="css/normalize.min.css">
+  <title>Tyler Johnson — Senior Robotics Software Engineer</title>
+  <meta name="description"
+    content="Tyler Johnson is a senior robotics software engineer specializing in motion planning, manipulation, and control — currently building warehouse robotics at Locus Robotics.">
+  <link rel="canonical" href="https://johnsontyler0511.github.io/">
+  <meta name="theme-color" content="#0a0e12">
+
+  <meta property="og:title" content="Tyler Johnson — Senior Robotics Software Engineer">
+  <meta property="og:description"
+    content="Motion planning, manipulation, and control software for industrial robots. Currently building warehouse robotics at Locus Robotics.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://johnsontyler0511.github.io/">
+  <meta property="og:image" content="https://johnsontyler0511.github.io/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tyler Johnson — Senior Robotics Software Engineer">
+  <meta name="twitter:description"
+    content="Motion planning, manipulation, and control software for industrial robots.">
+  <meta name="twitter:image" content="https://johnsontyler0511.github.io/images/og-image.jpg">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/main.js" defer></script>
 
-  <!-- All script tags -->
-  <script>document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-  <script src="js/vendor/jquery.hashchange.min.js"></script>
-  <script src="js/vendor/jquery.easytabs.min.js"></script>
-  <script src="js/main.js"></script>
-
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Tyler Johnson",
+    "jobTitle": "Senior Robotics Software Engineer",
+    "worksFor": { "@type": "Organization", "name": "Locus Robotics" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Carnegie Mellon University" },
+      { "@type": "CollegeOrUniversity", "name": "University of Florida" }
+    ],
+    "url": "https://johnsontyler0511.github.io/",
+    "sameAs": [
+      "https://www.linkedin.com/in/tylergjohnson0511",
+      "https://github.com/johnsonTyler0511"
+    ]
+  }
+  </script>
 </head>
 
-<!-- Start of Body Tag -->
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<body class="bg-fixed bg-1">
-  <div class="main-container">
-    <div class="main wrapper clearfix">
+  <header class="site-header">
+    <nav class="container" aria-label="Primary">
+      <a class="brand" href="#top"><span class="brand-prompt">~$</span> tyler.johnson</a>
+      <ul class="nav-links">
+        <li><a href="#about">about</a></li>
+        <li><a href="#experience">experience</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-      <!-- Header Start -->
-      <header id="header">
-        <div id="logo">
-          <h6>
-            Tyler Johnson
-          </h6>
-          <h4>
-            Robotics / Computer Vision / Control Systems / Software Engineering
-          </h4>
-        </div>
-      </header>
+  <main id="main">
 
-      <!-- Text "hello world" -->
-      <header id="header">
-        <div id="welcome">
-          <h1>
-            Welcome to my Portfolio
-          </h1>
-        </div>
-      </header>
+    <!-- ============================== Hero ============================== -->
+    <section class="hero container" id="top">
+      <p class="mono eyebrow">// senior robotics software engineer</p>
+      <h1>Tyler Johnson</h1>
+      <p class="hero-tagline">
+        I build the software that makes industrial robots move — motion planning, manipulation,
+        control, and the interfaces that let the outside world drive them. Currently shipping
+        warehouse robotics at <strong>Locus Robotics</strong>.
+      </p>
+      <ul class="hero-chips mono" aria-label="Focus areas">
+        <li>motion planning</li>
+        <li>manipulation</li>
+        <li>control</li>
+        <li>robot os</li>
+      </ul>
+      <div class="hero-actions">
+        <a class="btn" href="#experience">View experience <span aria-hidden="true">&darr;</span></a>
+        <a class="icon-link" href="https://github.com/johnsonTyler0511" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          <span class="visually-hidden">GitHub</span>
+        </a>
+        <a class="icon-link" href="https://www.linkedin.com/in/tylergjohnson0511" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+          </svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+      </div>
+    </section>
 
-      <!-- Main Tab Container -->
-      <div id="tab-container" class="tab-container">
-
-        <!-- Tab List -->
-        <ul class='etabs'>
-
-          <li class='tab' id="tab-about">
-            <a href="#about">
-              <i class="icon-user"></i>
-              <span>
-                About Me
-              </span>
-            </a>
-          </li>
-
-          <li class='tab'>
-            <a href="#resume">
-              <i class="icon-file-text"></i>
-              <span>
-                Skills
-              </span>
-            </a>
-          </li>
-
-          <li class='tab'>
-            <a href="#portfolio">
-              <i class="icon-heart"></i>
-              <span>
-                Projects
-              </span>
-            </a>
-          </li>
-
-          <li class='tab'>
-            <a href="#contact">
-              <i class="icon-envelope"></i>
-              <span>
-                Contact
-              </span>
-            </a>
-          </li>
-
-        </ul>
-        <!-- End Tab List -->
-
-        <!-- ----------------------------------------------------------------------------------- -->
-        <!-- Code for differents Tabs strat from here. -->
-        <div id="tab-data-wrap">
-
-          <!-- About Tab Data -->
-          <div id="about">
-            <section class="clearfix">
-              <div class="g2">
-                <div class="photo">
-                  <img src="./images/handguide.jpeg" alt="Your alt text">
-                </div>
-                <div class="info">
-                  <h2>
-                    <p></p>
-                    Tyler Johnson
-                  </h2>
-                  <h4>
-                    Senior Robotics Software Engineer
-                  </h4>
-                  <p>
-                    I work at Kuka as a Senior Robotics Software Engineer. I work on developing core robot OS modules for motion and external control interfaces. 
-                    I also work on designing external control interfaces that focus on ease of use, comprehensive functionality, and scalable deployement of robot solutions. 
-                    I help develop a inverse kinematics and motion planning library leveraging saturation in nullspace (SNS) based algorithms. 
-                  </p>
-                  <p>
-                    A work project I am proud of designing and developing at Kuka was an external jogging interface leveraging the SNS library, a 3D space mouse, ROS2, and Kuka RTC interfaces.
-                    I utilized the velocity inverse kinematics functions developed by my team to convert twist commands from the 3D space mouse movements into end effector velocities. 
-                    I then integrated the velocities to create a joint position command to stream to the robot controller over ROS2 control and RTC driver interfaces. 
-                    This resulted in very smooth jogging even on large payload robots due to maintaining robot torque and acceleration constratins directly with our SNS solver. 
-                    The SNS solver allowed us to easily extend functionality to do constraint jogging, we could lock one linear axis or rotation axis and it would only take into account the other inputs. 
-                    We also extended the applications features to leverage relaxed axes functions of our algorithms such that the jogging solution could leverage the null space joint velocity solutions even with a non over-actuated robot. 
-                    The user could relax the RY orientation for instance and the velocity solution would not constrain that state which would allow the robot to more often smoothly pass through singularities or joint limit issues. 
-                  </p> 
-                  <p>
-                    At my previous position I worked at Kawasaki Robotics as a Robotics Software Engineer. I develop applications using the Kawasaki Real-Time Control (RTC) and Robot Network API.
-                    I also consult with many universities, startups and larger companies on how to use RTC on Kawasaki Robots. My work also includes developing and supporting
-                    applications that perform tasks such as automating robot configuration and purchase order checking/tracking, data logging and visualization, 
-                    QA testing robots for RTC and other applications, robot programming IDE, among others. I mainly used C++, Python, ROS2, and C# to solve my engineering tasks.  
-                    Additionally I worked with vision systems (3D/2D) and other new technologies to design applications and demo systems with Kawasaki Robots.
-                  </p>
-                  <p>
-                    A work project I am proud of designing and developing at Kawasaki was a live body tracking robot following/teaching application. This application used a Kinect to track a person's body and
-                    then use the robot's arm to follow the person's movements. The robot will also be able to record positions and motions similar to teaching with a teach pendant. 
-                    I used the RTC interface for Kawasaki robots, along side ROS to integrate packages easily. The ROS packages that I am leveraging are MoveIT, Azure Kinect ROS Driver, alongside ROS packages made to interface with the robot easily 
-                    and abstract behaviors written by my Kawasaki team and I. 
-                  </p>
-                  <p>
-                    I have been focusing on learning Motion Planning and Controls for robots. I have gained a strong attachment for these fields and they are the main part of my Robotics knowledge I want to improve and learn more about.
-                    I have been working on side projects in my free time as well as studying these topics to round out my knowledge. I have started a Drone project to learn more about the field of UAVs and how to control them.
-                    I am also working on learning and improving my skills with OpenSource robot libraries and simulators such as ROS2, Gazebo, Robotics Library, Drake, CoppeliaSim, and more. I am very passionate about learning everything I can about robotics. 
-                  </p>
-                  <p>
-                    I have a MS in Electrical and Computer Engineering from Carnegie Mellon University and a BS in Electrical and Computer Engineering from the University of Florida.
-                    I studied computer vision, artifical intelligence, robotics, computer systems, and computer security during my MS.
-                    In my BS I focused on computer engineering as a whole taking a wide breath of classes on hardware and software technologies and devleopment.  
-                  </p>
-                </div>
-              </div>
-
-              <div class="g1">
-                <div class="main-links sidebar">
-                  <ul>
-                    <li>
-                      <a href="#resume">
-                        View My Skills
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#portfolio">
-                        View My Projects
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#contact">
-                        Contact Me
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="break">
-              </div>
-              <div class="contact-info">
-                <div class="g1">
-                  <div class="item-box clearfix">
-                    <i class="icon-envelope"></i>
-                    <div class="item-data">
-                      <h3>
-                        <a href="mailto:tgjohnson0511@gmail.com">
-                          Email
-                        </a>
-                      </h3>
-                      <p>
-                        tgjohnson0511@gmail.com 
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="g1">
-                  <div class="item-box clearfix">
-                    <i class="icon-facebook"></i>
-                    <div class="item-data">
-                      <h3>
-                        <a href="mailto:tgj@alumni.cmu.edu">
-                          Other Email 
-                        </a>
-                      </h3>
-                      <p>
-                        tgj@alumni.cmu.edu
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="g1">
-                  <div class="item-box clearfix">
-                    <i class="icon-facebook"></i>
-                    <div class="item-data">
-                      <h3>
-                        <a href="https://www.linkedin.com/in/tylergjohnson0511">
-                          LinkedIn
-                        </a>
-                      </h3>
-                      <p>
-                        www.linkedin.com/in/tylergjohnson0511
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="g1">
-                  <div class="item-box clearfix">
-                    <i class="icon-facebook"></i>
-                    <div class="item-data">
-                      <h3>
-                        <a href="https://github.com/johnsonTyler0511">
-                          GitHub
-                        </a>
-                      </h3>
-                      <p>
-                        https://github.com/johnsonTyler0511
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <!-- End About Tab Data -->
-          <!-- ----------------------------------------------------------------------------------- -->
-          <!-- skills Tab Data -->
-          <div id="resume">
-            <section class="clearfix">
-              <div class="g2">
-                <h3>
-                  Programming
-                </h3>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      C,C++
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Python
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Robotics Programming
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Matlab
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      C#,.Net
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Rust
-                    </span>
-                  </span>
-                </div>
-                <div class="break"></div>
-              </div>
-
-              <div class="g1">
-                <h3>
-                  Skills
-                </h3>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      ROS, ROS2
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Computer Vision
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Software Engineering
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Computer Engineering
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Networking
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Machine Learning
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Motion Planning
-                    </span>
-                  </span>
-                </div>
-                <div class="meter emerald">
-                  <span style="width: 100%">
-                    <span>
-                      Control Systems
-                    </span>
-                  </span>
-                </div>
-              </div>
-
-              <div class="g2">
-                <h3>
-                  Hobbies
-                </h3>
-                <span class="label label-info">Video Games</span>
-                <span class="label label-info">Basketball</span>
-                <span class="label label-info">Cooking</span>
-                <span class="label label-info">Crafting</span>
-                <span class="label label-info">Hiking</span>
-                <span class="label label-info">Pilates and Yoga</span>
-                <span class="label label-info">Coffee</span>
-              </div>
-            </section>
-          </div>
-
-          <!-- End skills Tab Data -->
-          <!-- ----------------------------------------------------------------------------------- -->
-          <!-- Projects Tab Data -->
-          <div id="portfolio">
-            <section class="clearfix">
-              <div class="project-section">
-                <div class="project-container">
-                  <div class="project-img-container" onclick="document.getElementById('modal-vslam').style.display='block'">
-                    <img src="./images/OrbSlam.jpeg" alt="project image">
-                  </div>
-                  <p class="project-title">Visual Slam in Urban Environments</p>
-                </div>
-                <div class="project-container">
-                  <div class="project-img-container" onclick="document.getElementById('modal-magik').style.display='block'">
-                    <img src="./images/21Magik.jpeg" alt="project image">
-                  </div>
-                  <p class="project-title">21 Magiks Video Game</p>
-                </div>
-                <div class="project-container">
-                  <div class="project-img-container" onclick="document.getElementById('modal-impulse').style.display='block'">
-                    <img src="./images/ImpulseVR.jpeg" alt="project image">
-                  </div>
-                  <p class="project-title">Impulse-VR (BCI-VR Game)</p>
-                </div>
-                <div class="project-container">
-                  <div class="project-img-container" onclick="document.getElementById('modal-prm').style.display='block'">
-                    <img src="./images/PRM_with_shortest_path.PNG" alt="project image">
-                  </div>
-                  <p class="project-title"> Robotics Motion Planning Playground</p>
-                </div>
-              <!-- Vslam project -->
-              <div id="modal-vslam" class="modal">
-                <form class="modal-content animate">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal-vslam').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                    <img src="images/OrbSlam.jpeg" alt="project" class="avatar">
-                    <h1 class="project_details" style="text-align:center">Project Details</h1>
-                  </div>
-                  
-                  <div class="container">
-                    <input type="text" placeholder="Visual Slam in Urban Envornments" name="Tyler Johnson" readonly>
-                    <textarea class="project_description" rows="4" placeholder="Project Description" readonly>
-                      This project was my Final project for my SLAM class at Carnegie Mellon during my Masters program. 
-                      We investigated the use of ORB-SLAM2 in urban environments, testing on the KITTI dataset for autonomous vehicles.
-                      We wanted to learn how robust the algorithm is to environmental interference such as motion blur and other aspects.
-                      We compared the performance of the baseline algorithm alongside modified inputs streams.
-                    </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/Visual-Slam-in-Urban-Environments"readonly>
-                    <input type="text" placeholder="C++, Python" readonly>
-                  </div>
-                </form>
-              </div>
-              <!-- 21 Magiks -->
-              <div id="modal-magik" class="modal">
-                <form class="modal-content animate">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal-magik').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                    <img src="images/21Magik.jpeg" alt="project" class="avatar">
-                    <h1 class="project_details" style="text-align:center">Project Details</h1>
-                  </div>
-
-                  <div class="container">
-                    <input type="text" placeholder="21 Magiks Video Game" name="Tyler Johnson" readonly>
-                    <textarea class="project_description" rows="5" placeholder="Project Description" readonly>
-                      This project was my Software Engineering development project in my undergratuate program at University of Florida. 
-                      I worked with a team of 4 to develop a zelda inspired adventure video game using Unity. I was resposible for many of the backend systems of the game: 
-                      inventory management, items, abilities, shops, game state management, and UI elements. We used a scrum methodology to manage our development process.
-                      We would present each sprints acomplishments to our proffessors and class. We were able to fully complete the game with a full length story, many dungeons, and bosses. 
-                      Our proffessors were impressed with our work and showed our game in a university showcase.  
-                    </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/21-Magiks" readonly style="color: white;">
-                    <input type="text" placeholder="C#, Unity" readonly style="color: white;">
-                  </div>
-                </form>
-              </div>
-              <!-- Impulse-VR -->
-              <div id="modal-impulse" class="modal">
-                <form class="modal-content animate">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal-impulse').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                    <img src="images/ImpulseVR.jpeg" alt="project" class="avatar">
-                    <h1 class="project_details" style="text-align:center">Project Details</h1>
-                  </div>
-                  
-                  <div class="container">
-                    <input type="text" placeholder="Impulse-VR" name="Tyler Johnson" readonly style="color: white;">
-                    <textarea class="project_description" rows="6" placeholder="Project Description" readonly style="color: white;">
-                      This project was my Final project for my Senior Design class at University of Florida. 
-                      I worked in a group of 2 others to design software to use a BCI headset to control a VR game.
-                      We used Unity to develop the VR game and integrated an OpenBCI headset into gameplay mechanics. We used LSL streaming to
-                      send EEG data from the headset to the game. We developed a heuristic for focus using delta and theta waves which we linked to magic level in the game. 
-                      The more you focused the more powerful of abilities you could use. We tested many different machine learning algorithms to classify the date with Python (SVM, DT, DNN). 
-                      Ultimatley we implemented our focus based gameplay to fight bosses and complete arenas in the game.  
-                    </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/ImpulseVR" readonly style="color: white;">
-                    <input type="text" placeholder="C#, Python, Unity" readonly style="color: white;">
-                  </div>
-                </form>
-              </div>
-              <!-- Motion Planning Project -->
-              <div id="modal-prm" class="modal">
-                <form class="modal-content animate">
-                  <div class="imgcontainer">
-                    <span onclick="document.getElementById('modal-prm').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                    <img src="images/PRM_with_shortest_path.PNG" alt="project" class="avatar">
-                    <h1 class="project_details" style="text-align:center">Project Details</h1>
-                  </div>
-                  
-                  <div class="container">
-                    <input type="text" placeholder="Robotics Motion Planning Playground" name="Tyler Johnson" readonly style="color: white;">
-                    <textarea class="project_description" rows="3" placeholder="Project Description" readonly style="color: white;">
-                      This project is my personal project to learn more about Motion Planning and Controls for robots.
-                      I am working on implementing and visualizing different motion planning algorithms in Python with Pygame and basic Python libraries.
-                      The goal is to make a multi-dof robot plan a valid motion path and execute it in a simulated environment.
-                    </textarea>
-                    <input type="url" placeholder="https://github.com/johnsonTyler0511/robot_motion_planning_playground" readonly style="color: white;">
-                    <input type="text" placeholder="Python" readonly style="color: white;">
-                  </div>
-                </form>
-              </div>
-            </section>
-          </div>
-           <!-- Vslam project -->
-           <div id="modal-prm" class="modal">
-            <form class="modal-content animate">
-              <div class="imgcontainer">
-                <span onclick="document.getElementById('modal-prm').style.display='none'" class="close" title="Close PopUp">&times;</span>
-                <img src="images/PRM_with_shortest_path.PNG" alt="project" class="avatar">
-                <h1 class="project_details" style="text-align:center">Project Details</h1>
-              </div>
-
-              <div class="container">
-                <input type="text" placeholder="Robotics Motion Planning Playground" name="Tyler Johnson" readonly>
-                <textarea class="project_description" rows="3" placeholder="Project Description" readonly>
-                  This project is my personal project to learn more about Motion Planning and Controls for robots.
-                  I am working on implementing and visualizing different motion planning algorithms in Python with Pygame, and basic Python libs.
-                  The goal is to make a multi-dof robot plan a valid motion path and execute it in a simulated environment.
-                </textarea>
-                <input type="url" placeholder="https://github.com/johnsonTyler0511/robot_motion_planning_playground" readonly>
-                <input type="text" placeholder="Python" readonly>
-              </div>
-            </form>
-          </div>
-          <!-- End Projects tab -->
-          <!-- ----------------------------------------------------------------------------------- -->
-          <!-- Contact Tab Data -->
-          <div id="contact">
-            <section class="clearfix">
-              <div class="g1">
-                <div class="sny-icon-box">
-                  <div class="sny-icon">
-                    <i class="icon-phone"></i>
-                  </div>
-                  <div class="sny-icon-content">
-                    <h4>
-                      E-mail
-                    </h4>
-                    <p>
-                      tgjohnson0511@gmail.com<br />tgj@alumni.cmu.edu
-                    </p>
-                    <h4>
-                      GitHub
-                    </h4>
-                    <p>
-                      https://github.com/johnsonTyler0511
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="g1">
-                <div class="sny-icon-box">
-                  <div class="sny-icon">
-                    <i class="icon-user"></i>
-                  </div>
-                  <div class="sny-icon-content">
-                    <h4>
-                      Summary
-                    </h4>
-                    <ul>
-                      <li>I am a passionate Robotics Software engineer.</li> 
-                      <li>I am a quick learner and I am always looking for new challenges.</li>
-                      <li>I enjoy working on side projects and I am always tinkering with new ideas to learn and grow.</li>
-                      <li>Thanks for visiting my personal portfolio website.</li> 
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="break"></div>
-            </section>
-          </div>
-          <!-- End Contact Data -->
-          <!-- ----------------------------------------------------------------------------------- -->
+    <!-- ============================== About ============================== -->
+    <section class="container" id="about" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">01 / about</span>
+        <h2>About</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="about-grid">
+        <figure data-reveal>
+          <img src="images/handguide.jpeg" alt="Tyler hand-guiding a KUKA LBR collaborative robot arm"
+            width="900" height="695" loading="lazy" decoding="async">
+          <figcaption class="mono">hand-guiding a KUKA LBR</figcaption>
+        </figure>
+        <div class="about-text" data-reveal>
+          <p>
+            I'm a robotics software engineer who lives in the layer where math meets metal: kinematics,
+            motion planning, control, and the real-time interfaces that expose a robot to the world.
+            My career has run through the heart of industrial robotics — Kawasaki, KUKA, and now
+            Locus Robotics — building everything from core robot OS modules to the tooling and
+            applications that ship on top of them.
+          </p>
+          <p>
+            What keeps me up at night (happily) is motion: solvers that respect torque and acceleration
+            limits while staying smooth, planners that thread constrained spaces, and control interfaces
+            that make all of it feel effortless to the person using the robot. Outside of work I prototype
+            constantly — motion planning playgrounds, drones, VLA test benches — and stay deep in the
+            open-source stack: ROS 2, Gazebo, Drake, and whatever simulator is fastest this year.
+          </p>
+          <dl class="edu mono">
+            <div>
+              <dt>MS ECE</dt>
+              <dd>Carnegie Mellon University — computer vision, AI, robotics, systems, security</dd>
+            </div>
+            <div>
+              <dt>BS ECE</dt>
+              <dd>University of Florida — computer engineering, hardware through software</dd>
+            </div>
+          </dl>
         </div>
       </div>
+    </section>
+
+    <!-- ============================== Experience ============================== -->
+    <section class="container" id="experience" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">02 / experience</span>
+        <h2>Experience</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <ol class="timeline">
+
+        <li data-reveal>
+          <article>
+            <header class="entry-head">
+              <h3>Locus Robotics</h3>
+              <p class="role">Senior Robotics Software Engineer <span class="badge mono">current</span></p>
+            </header>
+            <p>
+              Building the software that keeps warehouse robot fleets moving — motion, autonomy, and the
+              systems that let hundreds of robots share a building with people and get product out the door.
+            </p>
+            <p class="mono tech-tags">C++ &middot; Python &middot; ROS 2</p>
+          </article>
+        </li>
+
+        <li data-reveal>
+          <article>
+            <header class="entry-head">
+              <h3>KUKA</h3>
+              <p class="role">Senior Robotics Software Engineer</p>
+            </header>
+            <p>
+              Developed core robot OS modules for motion and external control, and designed external
+              control interfaces focused on ease of use, comprehensive functionality, and scalable
+              deployment. Co-developed an inverse kinematics and motion library built on
+              saturation-in-the-nullspace (SNS) algorithms.
+            </p>
+            <div class="highlight">
+              <p class="mono highlight-label">&gt; flagship</p>
+              <p>
+                An external jogging interface that pairs a 3D space mouse with the SNS solver: twist input
+                becomes end-effector velocity through velocity IK, integrated into joint position commands
+                streamed over ROS 2 control and the RTC driver. Because torque and acceleration limits are
+                enforced inside the solver, jogging stays silky even on high-payload arms. Constraint modes
+                lock individual linear or rotational axes, and a relaxed-axis mode frees a chosen DOF — relax
+                tool RY and the solver exploits the resulting nullspace to glide through singularities and
+                joint limits instead of fighting them.
+              </p>
+            </div>
+            <p class="mono tech-tags">C++ &middot; ROS 2 &middot; SNS IK &middot; RTC</p>
+          </article>
+        </li>
+
+        <li data-reveal>
+          <article>
+            <header class="entry-head">
+              <h3>Kawasaki Robotics</h3>
+              <p class="role">Robotics Software Engineer</p>
+            </header>
+            <p>
+              Built applications on Kawasaki Real-Time Control (RTC) and the Robot Network API, and
+              consulted for universities, startups, and enterprises adopting RTC. Shipped internal tooling
+              in C++, Python, and C# — automated robot configuration, purchase-order tracking, data logging
+              and visualization, QA test suites, and a robot programming IDE — plus 2D/3D vision demo systems.
+            </p>
+            <div class="highlight">
+              <p class="mono highlight-label">&gt; flagship</p>
+              <p>
+                A live body-tracking follow/teach application: Azure Kinect skeleton tracking drives the arm
+                to mirror an operator's movements in real time, recording positions and motions the way a
+                teach pendant would. Built on RTC and ROS with MoveIt and the Azure Kinect ROS driver.
+              </p>
+            </div>
+            <p class="mono tech-tags">C++ &middot; Python &middot; C# &middot; ROS &middot; MoveIt</p>
+          </article>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- ============================== Projects ============================== -->
+    <section class="container" id="projects" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">03 / projects</span>
+        <h2>Projects</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <ul class="project-grid">
+
+        <li class="card" data-reveal>
+          <div class="card-media">
+            <img src="images/OrbSlam.jpeg" alt="ORB-SLAM2 feature tracking on a KITTI urban driving scene"
+              width="320" height="254" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3><a href="https://github.com/johnsonTyler0511/Visual-Slam-in-Urban-Environments"
+                target="_blank" rel="noopener">Visual SLAM in Urban Environments</a></h3>
+            <p>
+              Graduate SLAM course project at Carnegie Mellon evaluating ORB-SLAM2's robustness in urban
+              driving scenes. Benchmarked the stock pipeline on the KITTI dataset against degraded input
+              streams to quantify sensitivity to motion blur and other environmental interference.
+            </p>
+            <p class="mono tech-tags">C++ &middot; Python</p>
+          </div>
+        </li>
+
+        <li class="card" data-reveal>
+          <div class="card-media">
+            <img src="images/PRM_with_shortest_path.PNG"
+              alt="Probabilistic roadmap with shortest path highlighted through a 2D obstacle field"
+              width="813" height="634" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3><a href="https://github.com/johnsonTyler0511/robot_motion_planning_playground"
+                target="_blank" rel="noopener">Robot Motion Planning Playground</a></h3>
+            <p>
+              A from-scratch playground for motion planning algorithms, visualized in Python and Pygame.
+              Hosts PRM construction with shortest-path queries, with a roadmap toward A*, Hybrid A*, and
+              multi-DOF robots executing planned paths in simulation.
+            </p>
+            <p class="mono tech-tags">Python &middot; Pygame</p>
+          </div>
+        </li>
+
+        <li class="card" data-reveal>
+          <div class="card-media">
+            <img src="images/ImpulseVR.jpeg" alt="Impulse-VR gameplay with EEG-driven magic abilities"
+              width="320" height="125" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3>Impulse-VR <span class="mono card-note">private repo</span></h3>
+            <p>
+              Senior design project: a VR game you control with your brain. EEG from an OpenBCI headset
+              streams over LSL into Unity, where a focus heuristic built on delta and theta band power
+              drives in-game magic — with SVMs, decision trees, and DNNs evaluated for classification.
+            </p>
+            <p class="mono tech-tags">C# &middot; Python &middot; Unity</p>
+          </div>
+        </li>
+
+        <li class="card" data-reveal>
+          <div class="card-media">
+            <img src="images/21Magik.jpeg" alt="21 Magiks adventure game artwork"
+              width="128" height="128" loading="lazy" decoding="async">
+          </div>
+          <div class="card-body">
+            <h3><a href="https://github.com/johnsonTyler0511/21-Magiks"
+                target="_blank" rel="noopener">21 Magiks</a></h3>
+            <p>
+              A complete Zelda-inspired adventure game built in Unity with a four-person scrum team —
+              full-length story, dungeons, and bosses. Owned the backend systems: inventory, items,
+              abilities, shops, game state, and UI. Selected for the university showcase.
+            </p>
+            <p class="mono tech-tags">C# &middot; Unity</p>
+          </div>
+        </li>
+
+      </ul>
+    </section>
+
+    <!-- ============================== Skills ============================== -->
+    <section class="container" id="skills" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">04 / skills</span>
+        <h2>Skills</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="skills-grid">
+        <div data-reveal>
+          <h3 class="mono">languages</h3>
+          <ul class="chips">
+            <li>C / C++</li>
+            <li>Python</li>
+            <li>C#</li>
+            <li>Rust</li>
+            <li>MATLAB</li>
+          </ul>
+        </div>
+        <div data-reveal>
+          <h3 class="mono">robotics</h3>
+          <ul class="chips">
+            <li>ROS / ROS 2</li>
+            <li>Motion Planning</li>
+            <li>Controls</li>
+            <li>Kinematics</li>
+            <li>Computer Vision</li>
+            <li>Machine Learning</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== Contact ============================== -->
+    <section class="container" id="contact" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">05 / contact</span>
+        <h2>Contact</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <p class="contact-lede">
+        Want to talk robots, motion planning, or a problem that needs someone who can make
+        hardware move? My inbox is open.
+      </p>
+      <ul class="contact-list">
+        <li>
+          <span class="mono contact-label">email</span>
+          <a href="mailto:tgjohnson0511@gmail.com">tgjohnson0511@gmail.com</a>
+        </li>
+        <li>
+          <span class="mono contact-label">alt email</span>
+          <a href="mailto:tgj@alumni.cmu.edu">tgj@alumni.cmu.edu</a>
+        </li>
+        <li>
+          <span class="mono contact-label">linkedin</span>
+          <a href="https://www.linkedin.com/in/tylergjohnson0511" target="_blank"
+            rel="noopener">linkedin.com/in/tylergjohnson0511</a>
+        </li>
+        <li>
+          <span class="mono contact-label">github</span>
+          <a href="https://github.com/johnsonTyler0511" target="_blank"
+            rel="noopener">github.com/johnsonTyler0511</a>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mono">
+        &copy; <span id="year">2026</span> Tyler Johnson &middot; built with plain HTML, CSS &amp; JS &middot;
+        <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
+          rel="noopener">source</a>
+      </p>
+    </div>
+  </footer>
 </body>
 
 </html>

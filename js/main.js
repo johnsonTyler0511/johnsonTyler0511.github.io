@@ -1,50 +1,64 @@
-$(document).ready( function() {
+// tyler.johnson — portfolio. vanilla js, no dependencies.
+document.documentElement.classList.add("js");
 
-	// Logo
-	var $logo 	= $('#logo');
-    var $hellologo = $('#helloworld');
-	 if (location.href.indexOf("#") != -1) {
-        if(location.href.substr(location.href.indexOf("#"))!='#about'){
-        	$logo.show();
-        }
-        else{
-            $hellologo.show();
-        }
-    }
-    
-	// Show logo 
-	$('#tab-container .tab a').click(function() {
-	  
-      $logo.slideDown('slow');
-      $hellologo.slideUp('slow');
+(function () {
+  "use strict";
 
-	});
-	// Hide logo
-	$('#tab-about').click(function() {
-	  $logo.slideUp('slow');
-      $hellologo.slideDown('slow');
-	});	
-function animMeter(){
-    $(".meter > span").each(function() {
-                $(this)
-                    .data("origWidth", $(this).width())
-                    .width(0)
-                    .animate({
-                        width: $(this).data("origWidth")
-                    }, 1200);
-            });
-}
-animMeter();
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var revealTargets = document.querySelectorAll("[data-reveal]");
 
-      $('#tab-container').easytabs({
-        animate			: true,
-        updateHash		: true,
-        transitionIn	: 'slideDown',
-        transitionOut	: 'slideUp',
-        animationSpeed	: 800,
-        tabActiveClass	: 'active'}).bind('easytabs:midTransition', function(event, $clicked, $targetPanel){
-            if($targetPanel.selector=='#resume'){
-                    animMeter();
-            }
-        });
+  // --- reveal on scroll ---
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealTargets.forEach(function (el) {
+      el.classList.add("is-visible");
     });
+  } else {
+    var revealObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px" }
+    );
+    revealTargets.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  // --- scroll-spy nav ---
+  var navLinks = document.querySelectorAll(".nav-links a[href^='#']");
+  var sections = [];
+  navLinks.forEach(function (link) {
+    var section = document.querySelector(link.getAttribute("href"));
+    if (section) sections.push(section);
+  });
+
+  if ("IntersectionObserver" in window && sections.length) {
+    var spyObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          navLinks.forEach(function (link) {
+            if (link.getAttribute("href") === "#" + entry.target.id) {
+              link.setAttribute("aria-current", "true");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+    sections.forEach(function (section) {
+      spyObserver.observe(section);
+    });
+  }
+
+  // --- footer year ---
+  var year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
+})();

@@ -1,15 +1,31 @@
+# johnsonTyler0511.github.io
 
-# Tyler Starter Portfolio
-Repo for my portfolio github pages site. 
+Personal portfolio of **Tyler Johnson** — senior robotics software engineer.
 
-### About 
-This portfolio page covers most of the public projects I have worked on in my early career.
-I am currently working on a Robot motion planning and control project as well as exploring Isaac Sim and Omniverse. 
-I also am working on integrating more of my class/private projects learnings into a publicly releasable project. 
-Stay tuned!! ;)
+**Live:** https://johnsontyler0511.github.io
 
-### License
-**Portfolio-Template** is licence under [GPL v3.0 license](https://www.gnu.org/licenses/gpl-3.0.en.html)
+## Stack
 
-### Reference
-using template repository made by: [@prateekis1](https://twitter.com/prateekis1)
+Hand-written HTML, modern CSS, and a small vanilla JS file. No frameworks, no build
+step, no dependencies — `git push` to `main` is the deploy (GitHub Pages).
+
+```
+.
+├── index.html        single-page portfolio
+├── 404.html          not-found page
+├── css/main.css      all styles (design tokens, layout, reveal animations)
+├── js/main.js        reveal-on-scroll + scroll-spy (IntersectionObserver)
+└── images/           project images, og-image, favicon.svg
+```
+
+## Local preview
+
+```sh
+python3 -m http.server 8000
+# → http://localhost:8000
+```
+
+## License
+
+Code is [MIT](LICENSE). Site content — text and images — is © Tyler Johnson,
+all rights reserved.
