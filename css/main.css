@@ -520,6 +520,16 @@ section {
   font-size: var(--step-0);
 }
 
+.card-note {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.15em 0.7em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
 .card-body .tech-tags {
   margin-top: auto;
 }
