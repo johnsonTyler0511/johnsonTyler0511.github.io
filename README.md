@@ -1,6 +1,6 @@
 # johnsonTyler0511.github.io
 
-Personal portfolio of **Tyler Johnson** — senior robotics software engineer.
+Personal portfolio of **Tyler Johnson** — senior robotics engineer in Boston.
 
 **Live:** https://johnsontyler0511.github.io
 
