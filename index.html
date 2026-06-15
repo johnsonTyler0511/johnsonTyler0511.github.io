@@ -319,7 +319,15 @@
               idle economy with prestige-style gear multipliers, and versioned JSON save/load, with
               placeholder art keeping the focus on system design and engineering process.
             </p>
-            <p class="mono tech-tags">Godot 4 &middot; GDScript</p>
+            <p>
+              Each kitchen is a procedurally generated floor plan: a Voronoi tessellation with Lloyd
+              relaxation and jittered-grid seeding partitions the space into rooms, merges undersized
+              cells, then carves doorways and a front entrance before placing equipment — the winning
+              strategy out of a sandbox that benchmarked 13+ generation algorithms (BSP, cellular
+              automata, and several Voronoi distance metrics). A sous-chef then navigates the layout
+              via A* pathfinding over the walkable tiles.
+            </p>
+            <p class="mono tech-tags">Godot 4 &middot; GDScript &middot; Procedural Generation</p>
           </div>
         </li>
 
