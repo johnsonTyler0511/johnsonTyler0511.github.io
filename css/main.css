@@ -4,7 +4,7 @@
    1. tokens  2. reset  3. background texture  4. utilities
    5. header  6. section heads  7. hero  8. about  9. timeline
    10. projects  11. chips/skills  12. contact  13. footer
-   14. reveal animation  15. media queries
+   14. reveal animation  15. project detail page  16. media queries
    ============================================================ */
 
 /* ===== 1. tokens ===== */
@@ -619,7 +619,59 @@ html.js [data-reveal].is-visible {
   transform: none;
 }
 
-/* ===== 15. media queries ===== */
+/* ===== 15. project detail page ===== */
+.project-hero {
+  padding-block: clamp(3rem, 8vh, 5rem) 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.project-hero h1 {
+  font-size: var(--step-2);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.project-lede {
+  max-width: 46em;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.project-lede strong {
+  color: var(--text);
+}
+
+.prose {
+  max-width: 62em;
+  display: grid;
+  gap: 1rem;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--accent);
+}
+
+figure.diagram {
+  margin-block: 0.5rem 1rem;
+}
+
+figure.diagram img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+figure.diagram figcaption {
+  margin-top: 0.6rem;
+  color: var(--text-muted);
+}
+
+/* ===== 16. media queries ===== */
 @media (min-width: 768px) {
   .about-grid {
     grid-template-columns: 280px 1fr;

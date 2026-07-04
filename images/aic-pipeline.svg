@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img"
+  aria-label="Four-stage imitation learning pipeline: generate configs, oracle rollouts, filter and convert, fine-tune and evaluate, iterating in a loop">
+  <style>
+    .bg { fill: #0a0e12; }
+    .box { fill: #10161d; stroke: #1d2733; stroke-width: 1; rx: 8; }
+    .num { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #4ade80; letter-spacing: 0.08em; }
+    .title { font: 600 19px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #dce3ea; }
+    .sub { font: 400 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #8b9bab; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.08em; }
+    .arrow { stroke: #16a34a; stroke-width: 2; fill: none; }
+    .arrowhead { fill: #16a34a; }
+    .looplabel { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.06em; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="800" height="500"/>
+
+  <text class="head" x="40" y="44">IMITATION LEARNING DATA PIPELINE</text>
+
+  <!-- markers -->
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+  </defs>
+
+  <!-- Stage 1: top-left -->
+  <rect class="box" x="40" y="75" width="330" height="130" rx="8"/>
+  <text class="num" x="64" y="108">01 / GENERATE CONFIGS</text>
+  <text class="title" x="64" y="136">Randomized trials</text>
+  <text class="sub" x="64" y="161">pose noise · impedance · force</text>
+  <text class="sub" x="64" y="182">disturbances · SFP + SC archetypes</text>
+
+  <!-- Stage 2: top-right -->
+  <rect class="box" x="430" y="75" width="330" height="130" rx="8"/>
+  <text class="num" x="454" y="108">02 / ORACLE ROLLOUTS</text>
+  <text class="title" x="454" y="136">CheatCode in Gazebo</text>
+  <text class="sub" x="454" y="161">ground-truth TF policy drives</text>
+  <text class="sub" x="454" y="182">the UR5e &#8594; rosbags + scores</text>
+
+  <!-- Stage 3: bottom-right -->
+  <rect class="box" x="430" y="285" width="330" height="130" rx="8"/>
+  <text class="num" x="454" y="318">03 / FILTER + CONVERT</text>
+  <text class="title" x="454" y="346">LeRobot dataset</text>
+  <text class="sub" x="454" y="371">per-archetype tier-3 filter</text>
+  <text class="sub" x="454" y="392">(SC &#8805; 35, SFP &#8805; 75) &#8594; 6-DOF twists</text>
+
+  <!-- Stage 4: bottom-left -->
+  <rect class="box" x="40" y="285" width="330" height="130" rx="8"/>
+  <text class="num" x="64" y="318">04 / FINE-TUNE + EVAL</text>
+  <text class="title" x="64" y="346">SmolVLA policy</text>
+  <text class="sub" x="64" y="371">fine-tune VLA &#8594; evaluate via the</text>
+  <text class="sub" x="64" y="392">/insert_cable action &#8594; 110.3 best</text>
+
+  <!-- arrows: 1 -> 2 -> 3 -> 4 -> loop back to 1 -->
+  <line class="arrow" x1="370" y1="140" x2="422" y2="140" marker-end="url(#ah)"/>
+  <line class="arrow" x1="595" y1="205" x2="595" y2="277" marker-end="url(#ah)"/>
+  <line class="arrow" x1="430" y1="350" x2="378" y2="350" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 205 285 L 205 245 L 205 213" marker-end="url(#ah)"/>
+  <text class="looplabel" x="222" y="253">iterate</text>
+</svg>

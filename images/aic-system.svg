@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img"
+  aria-label="System architecture: the organizers' C++ evaluation stack (engine, controller, adapter, Gazebo) exchanges observations and twist commands with the team's Python participant model over the /insert_cable ROS 2 action">
+  <style>
+    .bg { fill: #0a0e12; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.08em; }
+    .container-eval { fill: none; stroke: #3b82f6; stroke-width: 1.5; }
+    .container-team { fill: none; stroke: #16a34a; stroke-width: 1.5; }
+    .grouplab-eval { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #3b82f6; letter-spacing: 0.08em; }
+    .grouplab-team { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #16a34a; letter-spacing: 0.08em; }
+    .box { fill: #10161d; stroke: #1d2733; stroke-width: 1; }
+    .title { font: 600 16px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; }
+    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #8b9bab; }
+    .arrow-eval { stroke: #3b82f6; stroke-width: 2; fill: none; }
+    .arrow-team { stroke: #16a34a; stroke-width: 2; fill: none; }
+    .flowlab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.04em; }
+    .action { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; letter-spacing: 0.04em; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="800" height="450"/>
+
+  <text class="head" x="40" y="40">SYSTEM ARCHITECTURE &#183; ROS 2 KILTED &#183; ZENOH RMW</text>
+
+  <defs>
+    <marker id="ah-eval" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="ah-team" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- evaluation stack (organizers, C++) -->
+  <rect class="container-eval" x="40" y="66" width="300" height="344" rx="10"/>
+  <text class="grouplab-eval" x="64" y="94">EVAL STACK &#183; C++ &#183; ORGANIZERS</text>
+
+  <rect class="box" x="64" y="110" width="252" height="58" rx="6"/>
+  <text class="title" x="80" y="134">aic_engine</text>
+  <text class="sub" x="80" y="154">trial orchestration &#183; scoring</text>
+
+  <rect class="box" x="64" y="178" width="252" height="58" rx="6"/>
+  <text class="title" x="80" y="202">aic_controller</text>
+  <text class="sub" x="80" y="222">impedance / force control</text>
+
+  <rect class="box" x="64" y="246" width="252" height="58" rx="6"/>
+  <text class="title" x="80" y="270">aic_adapter</text>
+  <text class="sub" x="80" y="290">sensor fusion</text>
+
+  <rect class="box" x="64" y="314" width="252" height="58" rx="6"/>
+  <text class="title" x="80" y="338">Gazebo</text>
+  <text class="sub" x="80" y="358">physics sim &#183; UR5e + task board</text>
+
+  <!-- participant model (team, Python) -->
+  <rect class="container-team" x="500" y="66" width="260" height="344" rx="10"/>
+  <text class="grouplab-team" x="524" y="94">PARTICIPANT MODEL &#183; PYTHON</text>
+
+  <rect class="box" x="524" y="118" width="212" height="94" rx="6"/>
+  <text class="title" x="540" y="146">aic_model</text>
+  <text class="sub" x="540" y="168">ROS 2 lifecycle node</text>
+  <text class="sub" x="540" y="188">dynamically loads a Policy</text>
+
+  <rect class="box" x="524" y="238" width="212" height="116" rx="6"/>
+  <text class="title" x="540" y="266">RunSmolVLA</text>
+  <text class="sub" x="540" y="288">fine-tuned SmolVLA policy</text>
+  <text class="sub" x="540" y="308">images + robot state in,</text>
+  <text class="sub" x="540" y="328">Cartesian twist out</text>
+
+  <!-- interface -->
+  <text class="action" x="420" y="130" text-anchor="middle">/insert_cable</text>
+  <text class="flowlab" x="420" y="150" text-anchor="middle">ROS 2 action</text>
+
+  <!-- observations: eval -> model -->
+  <line class="arrow-eval" x1="340" y1="205" x2="492" y2="205" marker-end="url(#ah-eval)"/>
+  <text class="flowlab" x="420" y="195" text-anchor="middle">camera &#183; wrench</text>
+  <text class="flowlab" x="420" y="225" text-anchor="middle">joint states</text>
+
+  <!-- commands: model -> eval -->
+  <line class="arrow-team" x1="500" y1="300" x2="348" y2="300" marker-end="url(#ah-team)"/>
+  <text class="flowlab" x="420" y="290" text-anchor="middle">6-DOF cartesian</text>
+  <text class="flowlab" x="420" y="320" text-anchor="middle">twist commands</text>
+</svg>
