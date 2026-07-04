@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>AIC Connector Insertion — Tyler Johnson</title>
+  <meta name="description"
+    content="Team entry to Intrinsic's AI for Industry Challenge: a fine-tuned SmolVLA vision-language-action policy for robotic fiber-optic connector insertion, nearly tripling the provided baseline.">
+  <link rel="canonical" href="https://johnsontyler0511.github.io/aic.html">
+  <meta name="theme-color" content="#0a0e12">
+
+  <meta property="og:title" content="AIC Connector Insertion — Tyler Johnson">
+  <meta property="og:description"
+    content="Fine-tuned SmolVLA for robotic fiber-optic connector insertion — imitation learning, ROS 2, and an honest experiment log.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://johnsontyler0511.github.io/aic.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container" aria-label="Primary">
+      <a class="brand" href="index.html"><span class="brand-prompt">~$</span> tyler.johnson</a>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">&larr; back to projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== Hero ============================== -->
+    <section class="project-hero container">
+      <p class="mono eyebrow">// project &middot; imitation learning &middot; robot manipulation</p>
+      <h1>AIC Connector Insertion <span class="mono card-note">private repo &mdash; code cannot be shared</span></h1>
+      <p class="project-lede">
+        Team entry to Intrinsic's <strong>AI for Industry Challenge</strong>: teaching a simulated
+        UR5e to plug fiber-optic connectors into a networking task board with a fine-tuned
+        vision-language-action model. Built with <strong>Abhijit Makhal</strong> and
+        <strong>Amrit Saini</strong>. The repo is private, so this page documents the system,
+        the experiments, and the results.
+      </p>
+      <p class="mono tech-tags">ROS 2 &middot; LeRobot &middot; SmolVLA &middot; Gazebo &middot; Python &middot; C++</p>
+    </section>
+
+    <!-- ============================== Overview ============================== -->
+    <section class="container" id="overview" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">01 / overview</span>
+        <h2>Overview</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          The challenge is dexterous cable insertion: a UR5e arm in Gazebo must pick up SFP and SC
+          fiber-optic connectors and seat them in ports on a task board &mdash; a peg-in-hole problem
+          that demands sub-centimeter precision under randomized start poses, impedance settings, and
+          force disturbances. The organizers run a fixed C++ evaluation stack; participants submit a
+          single Python policy that answers one ROS 2 action. Scoring rewards proximity, smoothness,
+          and above all insertion depth, and punishes collisions.
+        </p>
+        <p>
+          We went with a learned approach: collect demonstrations from a ground-truth oracle policy,
+          convert them into a LeRobot dataset, and fine-tune <strong>SmolVLA</strong> &mdash; a small
+          vision-language-action model &mdash; to imitate them. Over a documented experiment campaign
+          the policy went from the provided ACT baseline's <strong>38.2</strong> to
+          <strong>110.3</strong>, close to a 3&times; improvement.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== System ============================== -->
+    <section class="container" id="system" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">02 / system</span>
+        <h2>System</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <figure class="diagram" data-reveal>
+          <img src="images/aic-system.svg"
+            alt="System architecture: the organizers' C++ evaluation stack (aic_engine, aic_controller, aic_adapter, Gazebo) exchanges camera, wrench, and joint-state observations and 6-DOF twist commands with the team's Python participant model over the /insert_cable ROS 2 action"
+            width="800" height="450" loading="lazy" decoding="async">
+          <figcaption class="mono">two components, one action interface</figcaption>
+        </figure>
+        <p>
+          Everything meets at one boundary. The evaluation side owns the physics: an engine that
+          orchestrates and scores trials, an impedance controller, and a sensor-fusion adapter around
+          a Gazebo simulation of the arm and task board. Our side is a ROS 2 lifecycle node that
+          dynamically loads a <code>Policy</code> and answers the <code>/insert_cable</code> action
+          &mdash; consuming camera images, wrench readings, and joint states, and streaming back
+          6-DOF Cartesian twist commands. The stack runs on ROS 2 Kilted over the Zenoh RMW, with the
+          submission executing inside a resource-limited container (a 30-second model-discovery budget
+          included &mdash; heavy imports can silently kill a run).
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Pipeline ============================== -->
+    <section class="container" id="pipeline" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">03 / data pipeline</span>
+        <h2>Data &amp; Training Pipeline</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <figure class="diagram" data-reveal>
+          <img src="images/aic-pipeline.svg"
+            alt="Four-stage imitation learning loop: generate randomized trial configs, roll out the CheatCode oracle in Gazebo to produce rosbags and scores, filter and convert successes into a LeRobot dataset, fine-tune and evaluate SmolVLA, then iterate"
+            width="800" height="500" loading="lazy" decoding="async">
+          <figcaption class="mono">the imitation-learning loop</figcaption>
+        </figure>
+        <p>
+          Demonstrations come from <em>CheatCode</em>, an oracle policy that reads ground-truth
+          transforms the real submission never sees. Stage one generates randomized trial configs
+          &mdash; start-pose jitter, impedance randomization, injected force disturbances, scene
+          clutter &mdash; so the dataset covers the perturbations evaluation will throw at us. Stage
+          two rolls the oracle through Gazebo, recording rosbags and scores. Stage three filters for
+          successful episodes and converts them into a LeRobot dataset, finite-differencing the
+          oracle's pose commands into the same 6-DOF twist action space the policy will emit. Stage
+          four fine-tunes SmolVLA and sends it back through evaluation. Then iterate.
+        </p>
+        <div class="highlight">
+          <p class="mono highlight-label">&gt; key insight</p>
+          <p>
+            The SC connector trial scored near zero for every policy, and the reason turned out to be
+            the simulator itself: the SC plug's keying tabs collide with 3&nbsp;mm-wide interior port
+            geometry, so full insertion is physically impossible &mdash; even the ground-truth oracle
+            caps out around 40 points. A single &ldquo;full insertion&rdquo; filter threshold was
+            therefore discarding 100% of SC demonstrations. Switching to a per-archetype threshold
+            (SC&nbsp;&ge;&nbsp;35, SFP&nbsp;&ge;&nbsp;75) let partial-insertion SC demos into the
+            dataset &mdash; partial demos teach the policy to <em>engage</em> instead of hover &mdash;
+            and lifted the SC trial by 56% without hurting SFP.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== Results ============================== -->
+    <section class="container" id="results" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">04 / results</span>
+        <h2>Results</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <figure class="diagram" data-reveal>
+          <img src="images/aic-results.svg"
+            alt="Bar chart: total score rises from 38.2 for the ACT baseline through 69.8 and 95.3 for SmolVLA v3.1 and v4 to 110.3 for v6, against a dashed CheatCode oracle ceiling of 244.3"
+            width="800" height="460" loading="lazy" decoding="async">
+          <figcaption class="mono">each version is a dataset or training change, scanned across checkpoints</figcaption>
+        </figure>
+        <p>
+          The final dataset was 203 episodes (53,611 frames): SFP demonstrations, a slice targeting
+          the hardest port, and 20 partial-insertion SC demos admitted by the per-archetype filter.
+          Every model was scanned across training checkpoints before judging &mdash; the best run
+          peaked at 50k steps and measurably overtrained by 60k. The negative results were kept on
+          the books too: default image augmentation regressed every checkpoint (too aggressive for a
+          sub-centimeter task), and three attempts at hand-coded descent overrides all scored worse
+          than the pure learned policy &mdash; the remaining gap is lateral precision, not descent
+          timing. Along the way: compressed-camera republishing cut per-trial bags from 7.4&nbsp;GB
+          to 0.75&nbsp;GB, and a host/container launch fix took SC data collection from zero usable
+          episodes to 18 in one sweep.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Team ============================== -->
+    <section class="container" id="team" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">05 / team</span>
+        <h2>Team</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <dl class="edu mono">
+          <div>
+            <dt>Tyler Johnson</dt>
+            <dd>lead &mdash; trial randomization framework, C++ engine fixes, evaluation orchestration,
+              and the fine-tuning experiment campaign from baseline to the 110.3 best</dd>
+          </div>
+          <div>
+            <dt>Abhijit Makhal</dt>
+            <dd>the four-stage data-collection pipeline (config generation, rollout orchestration,
+              LeRobot conversion) and the host&harr;container integration debugging</dd>
+          </div>
+          <div>
+            <dt>Amrit Saini</dt>
+            <dd>SmolVLA and Pi0 inference policies and the model training workflow the fine-tuning
+              campaign was built on</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mono">
+        &copy; <span id="year">2026</span> Tyler Johnson &middot;
+        <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
+          rel="noopener">source</a>
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>

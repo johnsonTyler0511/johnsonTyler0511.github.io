@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img"
+  aria-label="Bar chart of policy score progression: ACT baseline 38.2, SmolVLA v3.1 69.8, v4 95.3, v6 110.3, against a CheatCode oracle ceiling of 244.3">
+  <style>
+    .bg { fill: #0a0e12; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.08em; }
+    .subtitle { font: 400 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #8b9bab; }
+    .grid { stroke: #1d2733; stroke-width: 1; }
+    .tick { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
+    .bar { fill: #16a34a; }
+    .val { font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
+    .val-hero { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; }
+    .xlab { font: 600 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #dce3ea; }
+    .xsub { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
+    .ref { stroke: #8b9bab; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .reflab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.04em; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="800" height="460"/>
+
+  <text class="head" x="40" y="36">POLICY SCORE PROGRESSION</text>
+  <text class="subtitle" x="40" y="58">Total score on the 3-trial eval config (SFP &#215;2, SC &#215;1) &#8212; higher is better</text>
+
+  <!-- gridlines + y ticks (0..250) -->
+  <line class="grid" x1="70" y1="390" x2="760" y2="390"/>
+  <line class="grid" x1="70" y1="328" x2="760" y2="328"/>
+  <line class="grid" x1="70" y1="266" x2="760" y2="266"/>
+  <line class="grid" x1="70" y1="204" x2="760" y2="204"/>
+  <line class="grid" x1="70" y1="142" x2="760" y2="142"/>
+  <line class="grid" x1="70" y1="80" x2="760" y2="80"/>
+  <text class="tick" x="58" y="394" text-anchor="end">0</text>
+  <text class="tick" x="58" y="332" text-anchor="end">50</text>
+  <text class="tick" x="58" y="270" text-anchor="end">100</text>
+  <text class="tick" x="58" y="208" text-anchor="end">150</text>
+  <text class="tick" x="58" y="146" text-anchor="end">200</text>
+  <text class="tick" x="58" y="84" text-anchor="end">250</text>
+
+  <!-- oracle reference line: 244.27 -->
+  <line class="ref" x1="70" y1="87" x2="760" y2="87"/>
+  <text class="reflab" x="760" y="103" text-anchor="end">cheatcode oracle &#183; 244.3</text>
+
+  <!-- bars: 24px wide, 4px rounded data-end, square baseline -->
+  <path class="bar" d="M 144 390 L 144 346.6 Q 144 342.6 148 342.6 L 164 342.6 Q 168 342.6 168 346.6 L 168 390 Z"/>
+  <path class="bar" d="M 317 390 L 317 307.5 Q 317 303.5 321 303.5 L 337 303.5 Q 341 303.5 341 307.5 L 341 390 Z"/>
+  <path class="bar" d="M 489 390 L 489 275.8 Q 489 271.8 493 271.8 L 509 271.8 Q 513 271.8 513 275.8 L 513 390 Z"/>
+  <path class="bar" d="M 662 390 L 662 257.2 Q 662 253.2 666 253.2 L 682 253.2 Q 686 253.2 686 257.2 L 686 390 Z"/>
+
+  <!-- value labels at bar caps -->
+  <text class="val" x="156" y="332" text-anchor="middle">38.2</text>
+  <text class="val" x="329" y="293" text-anchor="middle">69.8</text>
+  <text class="val" x="501" y="261" text-anchor="middle">95.3</text>
+  <text class="val-hero" x="674" y="242" text-anchor="middle">110.3</text>
+
+  <!-- x category labels -->
+  <text class="xlab" x="156" y="416" text-anchor="middle">ACT</text>
+  <text class="xsub" x="156" y="436" text-anchor="middle">baseline</text>
+  <text class="xlab" x="329" y="416" text-anchor="middle">SmolVLA v3.1</text>
+  <text class="xsub" x="329" y="436" text-anchor="middle">SFP-only data</text>
+  <text class="xlab" x="501" y="416" text-anchor="middle">SmolVLA v4</text>
+  <text class="xsub" x="501" y="436" text-anchor="middle">@40k steps</text>
+  <text class="xlab" x="674" y="416" text-anchor="middle">SmolVLA v6</text>
+  <text class="xsub" x="674" y="436" text-anchor="middle">@50k &#183; +SC demos</text>
+</svg>
