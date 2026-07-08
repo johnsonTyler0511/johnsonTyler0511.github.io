@@ -1,19 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450" role="img"
   aria-label="System architecture: the organizers' C++ evaluation stack (engine, controller, adapter, Gazebo) exchanges observations and twist commands with the team's Python participant model over the /insert_cable ROS 2 action">
   <style>
-    .bg { fill: #0a0e12; }
-    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.08em; }
-    .container-eval { fill: none; stroke: #3b82f6; stroke-width: 1.5; }
-    .container-team { fill: none; stroke: #16a34a; stroke-width: 1.5; }
-    .grouplab-eval { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #3b82f6; letter-spacing: 0.08em; }
-    .grouplab-team { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #16a34a; letter-spacing: 0.08em; }
-    .box { fill: #10161d; stroke: #1d2733; stroke-width: 1; }
-    .title { font: 600 16px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; }
-    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #8b9bab; }
-    .arrow-eval { stroke: #3b82f6; stroke-width: 2; fill: none; }
-    .arrow-team { stroke: #16a34a; stroke-width: 2; fill: none; }
-    .flowlab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.04em; }
-    .action { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; letter-spacing: 0.04em; }
+    .bg { fill: #1e262b; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; letter-spacing: 0.08em; }
+    .container-eval { fill: none; stroke: #7fbbb3; stroke-width: 1.5; }
+    .container-team { fill: none; stroke: #dbbc7f; stroke-width: 1.5; }
+    .grouplab-eval { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #7fbbb3; letter-spacing: 0.08em; }
+    .grouplab-team { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dbbc7f; letter-spacing: 0.08em; }
+    .box { fill: #2b3639; stroke: #3a464a; stroke-width: 1; }
+    .title { font: 600 16px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #d8cdb8; }
+    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9aa79d; }
+    .arrow-eval { stroke: #7fbbb3; stroke-width: 2; fill: none; }
+    .arrow-team { stroke: #dbbc7f; stroke-width: 2; fill: none; }
+    .flowlab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; letter-spacing: 0.04em; }
+    .action { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #d8cdb8; letter-spacing: 0.04em; }
   </style>
 
   <rect class="bg" x="0" y="0" width="800" height="450"/>
@@ -22,10 +22,10 @@
 
   <defs>
     <marker id="ah-eval" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b82f6"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7fbbb3"/>
     </marker>
     <marker id="ah-team" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dbbc7f"/>
     </marker>
   </defs>
 

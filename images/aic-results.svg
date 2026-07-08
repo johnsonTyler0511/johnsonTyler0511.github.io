@@ -1,18 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img"
   aria-label="Bar chart of policy score progression: ACT baseline 38.2, SmolVLA v3.1 69.8, v4 95.3, v6 110.3, against a CheatCode oracle ceiling of 244.3">
   <style>
-    .bg { fill: #0a0e12; }
-    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.08em; }
-    .subtitle { font: 400 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #8b9bab; }
-    .grid { stroke: #1d2733; stroke-width: 1; }
-    .tick { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
-    .bar { fill: #16a34a; }
-    .val { font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
-    .val-hero { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #dce3ea; }
-    .xlab { font: 600 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #dce3ea; }
-    .xsub { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; }
-    .ref { stroke: #8b9bab; stroke-width: 1.5; stroke-dasharray: 6 5; }
-    .reflab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8b9bab; letter-spacing: 0.04em; }
+    .bg { fill: #1e262b; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; letter-spacing: 0.08em; }
+    .subtitle { font: 400 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9aa79d; }
+    .grid { stroke: #3a464a; stroke-width: 1; }
+    .tick { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; }
+    .bar { fill: #7fbbb3; }
+    .val { font: 400 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; }
+    .val-hero { font: 600 14px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #d8cdb8; }
+    .xlab { font: 600 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #d8cdb8; }
+    .xsub { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; }
+    .ref { stroke: #9aa79d; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .reflab { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9aa79d; letter-spacing: 0.04em; }
   </style>
 
   <rect class="bg" x="0" y="0" width="800" height="460"/>
