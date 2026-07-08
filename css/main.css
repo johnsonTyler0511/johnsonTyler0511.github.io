@@ -1,22 +1,33 @@
 /* ============================================================
    tyler.johnson — portfolio
    hand-written css, no dependencies. layers:
-   1. tokens  2. reset  3. background texture  4. utilities
+   1. tokens  2. reset  3. topo/horizon texture  4. utilities
    5. header  6. section heads  7. hero  8. about  9. timeline
    10. projects  11. chips/skills  12. contact  13. footer
    14. reveal animation  15. project detail page  16. media queries
+
+   palette: "forest lake at dusk" — everforest terminal colors
+   meeting an alpine-lake-at-sunset wallpaper. deep blue-green
+   water, parchment text, teal / amber / coral accents.
    ============================================================ */
 
 /* ===== 1. tokens ===== */
 :root {
-  --bg: #0a0e12;
-  --bg-raised: #10161d;
-  --border: #1d2733;
-  --text: #dce3ea;
-  --text-muted: #8b9bab;
-  --accent: #4ade80;
-  --accent-glow: rgba(74, 222, 128, 0.08);
-  --grid-line: rgba(74, 222, 128, 0.05);
+  --bg: #1e262b;
+  /* deep lake blue-green */
+  --bg-raised: #2b3639;
+  --border: #3a464a;
+  --text: #d8cdb8;
+  /* warm parchment */
+  --text-muted: #9aa79d;
+  --accent: #7fbbb3;
+  /* teal — links, buttons, focus */
+  --accent-2: #dbbc7f;
+  /* amber — labels, eyebrows */
+  --pop: #e08f80;
+  /* coral — badges, highlights */
+  --accent-glow: rgba(127, 187, 179, 0.08);
+  --pop-glow: rgba(224, 143, 128, 0.07);
 
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
@@ -90,28 +101,32 @@ ol {
   padding: 0;
 }
 
-/* ===== 3. background texture ===== */
+/* ===== 3. topo/horizon texture ===== */
+/* faint elevation contours — half trail map, half costmap.
+   stroke color is baked into the data uri (css vars can't reach it). */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -2;
   pointer-events: none;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 56px 56px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640'%3E%3Cg fill='none' stroke='%237fbbb3' stroke-opacity='.07' stroke-width='1.2'%3E%3Cpath d='M245 190C245 215 228 232 200 234 172 236 156 214 158 188 160 164 176 148 202 148 226 148 245 166 245 190Z'/%3E%3Cpath d='M285 188C288 232 252 272 202 274 152 276 116 238 114 190 112 144 148 106 200 104 250 102 282 146 285 188Z'/%3E%3Cpath d='M325 185C332 248 288 310 204 314 122 318 76 262 74 192 72 124 124 68 202 64 278 60 318 124 325 185Z'/%3E%3Cpath d='M365 182C376 264 330 350 206 356 90 362 36 286 34 194 32 104 100 30 204 24 306 18 354 102 365 182Z'/%3E%3Cpath d='M515 470C515 490 501 504 480 505 459 506 445 491 446 469 447 449 461 436 481 436 500 436 515 451 515 470Z'/%3E%3Cpath d='M550 468C552 504 523 538 481 540 439 542 411 510 410 470 409 432 438 402 480 400 520 398 548 432 550 468Z'/%3E%3Cpath d='M585 466C590 518 552 572 483 575 415 578 376 532 375 472 374 414 416 368 481 365 544 362 580 414 585 466Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 640px 640px;
   -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
   mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
 }
 
+/* dusk horizon — warm sunset band fading into the lake */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -3;
   pointer-events: none;
-  background: radial-gradient(ellipse 60% 45% at 70% 0%, var(--accent-glow), transparent 70%);
+  background: linear-gradient(to bottom,
+      var(--pop-glow),
+      rgba(219, 188, 127, 0.04) 16%,
+      transparent 42%);
 }
 
 /* ===== 4. utilities ===== */
@@ -125,8 +140,7 @@ body::after {
   font-family: var(--font-mono);
   font-size: var(--step--1);
   letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-2);
 }
 
 .visually-hidden {
@@ -161,7 +175,7 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 14, 18, 0.85);
+  background: rgba(30, 38, 43, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -189,8 +203,11 @@ body::after {
   color: var(--accent);
 }
 
-.brand-prompt {
-  color: var(--accent);
+.brand-mark {
+  color: var(--pop);
+  display: inline-flex;
+  align-self: center;
+  margin-right: 0.15em;
 }
 
 .nav-links {
@@ -293,7 +310,7 @@ section {
 
 .hero-chips li::before {
   content: "·";
-  color: var(--accent);
+  color: var(--accent-2);
   margin-right: 0.6em;
 }
 
@@ -312,7 +329,6 @@ section {
   font-family: var(--font-mono);
   font-size: var(--step--1);
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   transition: background-color 0.2s, box-shadow 0.2s;
 }
 
@@ -367,8 +383,7 @@ section {
 }
 
 .edu dt {
-  color: var(--accent);
-  text-transform: uppercase;
+  color: var(--accent-2);
   letter-spacing: 0.08em;
 }
 
@@ -415,10 +430,10 @@ section {
   display: inline-block;
   margin-left: 0.5em;
   padding: 0.1em 0.6em;
-  border: 1px solid var(--accent);
+  border: 1px solid var(--pop);
   border-radius: 999px;
   font-size: 0.72rem;
-  color: var(--accent);
+  color: var(--pop);
 }
 
 .timeline article > p {
@@ -428,8 +443,8 @@ section {
 .highlight {
   margin-block: 1rem;
   padding: 1rem 1.25rem;
-  background: var(--accent-glow);
-  border-left: 2px solid var(--accent);
+  background: rgba(224, 143, 128, 0.06);
+  border-left: 2px solid var(--pop);
   border-radius: 0 6px 6px 0;
   max-width: 62em;
 }
@@ -712,7 +727,7 @@ figure.diagram figcaption {
 .error-page h1 {
   font-family: var(--font-mono);
   font-size: var(--step-2);
-  color: var(--accent);
+  color: var(--pop);
   letter-spacing: 0.05em;
 }
 
