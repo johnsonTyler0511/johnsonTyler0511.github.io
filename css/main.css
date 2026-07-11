@@ -765,6 +765,14 @@ figure.diagram img {
   background: var(--bg);
 }
 
+figure.diagram video {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  display: block;
+}
+
 figure.diagram figcaption {
   margin-top: 0.6rem;
   color: var(--text-muted);
