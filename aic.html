@@ -81,6 +81,13 @@
           the policy went from the provided ACT baseline's <strong>38.2</strong> to
           <strong>110.3</strong>, close to a 3&times; improvement.
         </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/oracle-insert.jpg"
+            width="1280" height="720">
+            <source src="videos/aic/oracle-insert.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The task at the ceiling: a full SFP insertion on a randomized board (93 of ~100)</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -108,6 +115,14 @@
           submission executing inside a resource-limited container (a 30-second model-discovery budget
           included &mdash; heavy imports can silently kill a run).
         </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/policy-view.jpg"
+            width="1728" height="512">
+            <source src="videos/aic/policy-view.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Everything the policy sees: left / center / right wrist cameras, consumed at
+            288&times;256 &mdash; no third-person view, no object poses</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -135,6 +150,22 @@
           oracle's pose commands into the same 6-DOF twist action space the policy will emit. Stage
           four fine-tunes SmolVLA and sends it back through evaluation. Then iterate.
         </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/training-variation.jpg"
+            width="864" height="768">
+            <source src="videos/aic/training-variation.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Nine training episodes at once &mdash; the randomization the dataset actually
+            contains: varying targets, board pose, clutter, grasp jitter</figcaption>
+        </figure>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/oracle-collection.jpg"
+            width="1280" height="720">
+            <source src="videos/aic/oracle-collection.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Stage two in action: the oracle collecting a demonstration on a randomized,
+            cluttered board</figcaption>
+        </figure>
         <div class="highlight">
           <p class="mono highlight-label">Key Insight</p>
           <p>
@@ -148,6 +179,14 @@
             and lifted the SC trial by 56% without hurting SFP.
           </p>
         </div>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/sfp-vs-sc-oracle.jpg"
+            width="1440" height="854">
+            <source src="videos/aic/sfp-vs-sc-oracle.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The decisive experiment: the same oracle seats SFP fully (top) while SC aligns
+            to 0.6&nbsp;mm and stops at the port wall (bottom)</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -177,6 +216,14 @@
           to 0.75&nbsp;GB, and a host/container launch fix took SC data collection from zero usable
           episodes to 18 in one sweep.
         </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/aic/best-model-eval.jpg"
+            width="1280" height="720">
+            <source src="videos/aic/best-model-eval.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The best model's complete three-trial evaluation, re-run fresh eight weeks
+            later: 110.8 vs the original 110.3 &mdash; the result reproduces</figcaption>
+        </figure>
       </div>
     </section>
 
