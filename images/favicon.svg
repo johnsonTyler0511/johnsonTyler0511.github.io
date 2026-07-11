@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#1e262b"/>
-  <rect x="1.5" y="1.5" width="61" height="61" rx="10.5" fill="none" stroke="#3a464a" stroke-width="3"/>
-  <g fill="none" stroke="#7fbbb3" stroke-opacity="0.22">
+  <rect width="64" height="64" rx="12" fill="#062940"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="10.5" fill="none" stroke="#1f4d68" stroke-width="3"/>
+  <g fill="none" stroke="#6fd6c3" stroke-opacity="0.22">
     <circle cx="47" cy="15" r="9" stroke-width="1.6"/>
     <circle cx="47" cy="15" r="16" stroke-width="1.4"/>
     <circle cx="47" cy="15" r="23" stroke-width="1.2"/>
   </g>
-  <line x1="10" y1="53" x2="54" y2="53" stroke="#e08f80" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="10" y1="53" x2="54" y2="53" stroke="#ff9b85" stroke-width="2.5" stroke-linecap="round"/>
   <text x="32" y="44" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace"
-    font-size="34" font-weight="700" fill="#7fbbb3">tj</text>
+    font-size="34" font-weight="700" fill="#6fd6c3">tj</text>
 </svg>

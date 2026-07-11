@@ -1,33 +1,34 @@
 /* ============================================================
    tyler.johnson — portfolio
    hand-written css, no dependencies. layers:
-   1. tokens  2. reset  3. topo/horizon texture  4. utilities
+   1. tokens  2. reset  3. ocean layers  4. utilities
    5. header  6. section heads  7. hero  8. about  9. timeline
    10. projects  11. chips/skills  12. contact  13. footer
    14. reveal animation  15. project detail page  16. media queries
 
-   palette: "forest lake at dusk" — everforest terminal colors
-   meeting an alpine-lake-at-sunset wallpaper. deep blue-green
-   water, parchment text, teal / amber / coral accents.
+   palette: "ocean descent" — sunlit surface water at the top of
+   the page fading to a bioluminescent abyss at the bottom.
+   sea-foam text, seafoam / cyan / coral accents.
    ============================================================ */
 
 /* ===== 1. tokens ===== */
 :root {
-  --bg: #1e262b;
-  /* deep lake blue-green */
-  --bg-raised: #2b3639;
-  --border: #3a464a;
-  --text: #d8cdb8;
-  /* warm parchment */
-  --text-muted: #9aa79d;
-  --accent: #7fbbb3;
-  /* teal — links, buttons, focus */
-  --accent-2: #dbbc7f;
-  /* amber — labels, eyebrows */
-  --pop: #e08f80;
-  /* coral — badges, highlights */
-  --accent-glow: rgba(127, 187, 179, 0.08);
-  --pop-glow: rgba(224, 143, 128, 0.07);
+  --bg: #062940;
+  /* solid deep-water fallback (media wells, fills) */
+  --bg-raised: rgba(9, 43, 66, 0.55);
+  /* translucent so the depth gradient shows through cards */
+  --border: #1f4d68;
+  --text: #e6f1ec;
+  /* sea-foam white */
+  --text-muted: #9fc3cd;
+  --accent: #6fd6c3;
+  /* seafoam — links, buttons, focus */
+  --accent-2: #8fd3f4;
+  /* sunlit-water cyan — labels, eyebrows */
+  --pop: #ff9b85;
+  /* bright coral — badges, highlights */
+  --accent-glow: rgba(111, 214, 195, 0.10);
+  --pop-glow: rgba(255, 155, 133, 0.08);
 
   --font-body: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
@@ -52,6 +53,10 @@
 
 html {
   color-scheme: dark;
+  /* anchors the abyss particle layer and clips the wave drift overdraw */
+  position: relative;
+  min-height: 100%;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -65,7 +70,19 @@ section[id] {
 }
 
 body {
-  background: var(--bg);
+  /* the descent: % stops span the document, so every page runs
+     surface → abyss regardless of its height. html stays
+     background-less so this propagates to the canvas and the
+     negative-z decorative layers paint above it. */
+  background: linear-gradient(to bottom,
+      #0d4f6e 0%,
+      #0a3f5c 18%,
+      #072f49 45%,
+      #041f34 70%,
+      #020f1c 90%,
+      #01070e 100%) #01070e;
+  position: relative;
+  min-height: 100vh;
   color: var(--text);
   font-family: var(--font-body);
   font-size: var(--step-0);
@@ -101,32 +118,98 @@ ol {
   padding: 0;
 }
 
-/* ===== 3. topo/horizon texture ===== */
-/* faint elevation contours — half trail map, half costmap.
-   stroke color is baked into the data uri (css vars can't reach it). */
+/* ===== 3. ocean layers ===== */
+/* all layers are document-anchored (absolute, not fixed) so the
+   surface scrolls away as you dive. stroke color is baked into the
+   wave data uri (css vars can't reach it). */
+
+/* surface waves — drift slowly sideways; the -640px left overdraw
+   is one tile width so the translateX loop never shows a gap */
 body::before {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: -640px;
+  right: 0;
+  height: min(70vh, 34rem);
   z-index: -2;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640'%3E%3Cg fill='none' stroke='%237fbbb3' stroke-opacity='.07' stroke-width='1.2'%3E%3Cpath d='M245 190C245 215 228 232 200 234 172 236 156 214 158 188 160 164 176 148 202 148 226 148 245 166 245 190Z'/%3E%3Cpath d='M285 188C288 232 252 272 202 274 152 276 116 238 114 190 112 144 148 106 200 104 250 102 282 146 285 188Z'/%3E%3Cpath d='M325 185C332 248 288 310 204 314 122 318 76 262 74 192 72 124 124 68 202 64 278 60 318 124 325 185Z'/%3E%3Cpath d='M365 182C376 264 330 350 206 356 90 362 36 286 34 194 32 104 100 30 204 24 306 18 354 102 365 182Z'/%3E%3Cpath d='M515 470C515 490 501 504 480 505 459 506 445 491 446 469 447 449 461 436 481 436 500 436 515 451 515 470Z'/%3E%3Cpath d='M550 468C552 504 523 538 481 540 439 542 411 510 410 470 409 432 438 402 480 400 520 398 548 432 550 468Z'/%3E%3Cpath d='M585 466C590 518 552 572 483 575 415 578 376 532 375 472 374 414 416 368 481 365 544 362 580 414 585 466Z'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 640px 640px;
-  -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 90% 70% at 50% 0%, black 30%, transparent 75%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='200' viewBox='0 0 640 200'%3E%3Cg fill='none' stroke='%236fd6c3' stroke-width='1.4'%3E%3Cpath stroke-opacity='.14' d='M0 40q40 -12 80 0t80 0t80 0t80 0t80 0t80 0t80 0'/%3E%3Cpath stroke-opacity='.10' d='M0 105q64 -16 128 0t128 0t128 0t128 0'/%3E%3Cpath stroke-opacity='.07' d='M0 165q80 -18 160 0t160 0t160 0'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 640px 200px;
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  animation: wave-drift 80s linear infinite;
 }
 
-/* dusk horizon — warm sunset band fading into the lake */
+/* sunlight — a soft glow at the surface and faint diagonal god-rays
+   shafting down into the upper water */
 body::after {
   content: "";
-  position: fixed;
-  inset: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120vh;
   z-index: -3;
   pointer-events: none;
-  background: linear-gradient(to bottom,
-      var(--pop-glow),
-      rgba(219, 188, 127, 0.04) 16%,
-      transparent 42%);
+  background:
+    radial-gradient(110% 55% at 50% -12%, rgba(125, 216, 255, 0.12), transparent 62%),
+    repeating-linear-gradient(101deg,
+      transparent 0 140px,
+      rgba(140, 225, 255, 0.05) 170px 210px,
+      transparent 240px 380px);
+  -webkit-mask-image: linear-gradient(to bottom, black 25%, transparent 95%);
+  mask-image: linear-gradient(to bottom, black 25%, transparent 95%);
+  animation: ray-shimmer 14s ease-in-out infinite alternate;
+}
+
+/* bioluminescence — tiny drifting motes that only live in the deep;
+   bottom-anchored so they sit in the abyss on any page length */
+html::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: min(160vh, 100%);
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(139, 241, 255, 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 70% 65%, rgba(150, 255, 216, 0.40), transparent 60%),
+    radial-gradient(2.5px 2.5px at 45% 85%, rgba(172, 160, 255, 0.35), transparent 60%),
+    radial-gradient(1.5px 1.5px at 85% 20%, rgba(139, 241, 255, 0.40), transparent 60%),
+    radial-gradient(2px 2px at 10% 70%, rgba(150, 255, 216, 0.35), transparent 60%);
+  background-size: 520px 520px, 460px 460px, 610px 610px, 380px 380px, 550px 550px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 55%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 55%);
+  animation: plankton-bob 20s ease-in-out infinite alternate;
+}
+
+@keyframes wave-drift {
+  to {
+    transform: translateX(640px);
+  }
+}
+
+@keyframes ray-shimmer {
+  from {
+    opacity: 0.55;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes plankton-bob {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-14px);
+  }
 }
 
 /* ===== 4. utilities ===== */
@@ -175,7 +258,7 @@ body::after {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(30, 38, 43, 0.85);
+  background: rgba(3, 21, 34, 0.72);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -443,7 +526,7 @@ section {
 .highlight {
   margin-block: 1rem;
   padding: 1rem 1.25rem;
-  background: rgba(224, 143, 128, 0.06);
+  background: rgba(255, 155, 133, 0.06);
   border-left: 2px solid var(--pop);
   border-radius: 0 6px 6px 0;
   max-width: 62em;
@@ -475,6 +558,8 @@ section {
   display: flex;
   flex-direction: column;
   background: var(--bg-raised);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
@@ -618,7 +703,6 @@ section {
 
 .site-footer .mono {
   color: var(--text-muted);
-  text-transform: none;
   letter-spacing: 0.03em;
 }
 
