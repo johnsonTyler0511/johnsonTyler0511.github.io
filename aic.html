@@ -9,7 +9,7 @@
   <meta name="description"
     content="Team entry to Intrinsic's AI for Industry Challenge: a fine-tuned SmolVLA vision-language-action policy for robotic fiber-optic connector insertion, nearly tripling the provided baseline.">
   <link rel="canonical" href="https://johnsontyler0511.github.io/aic.html">
-  <meta name="theme-color" content="#1e262b">
+  <meta name="theme-color" content="#0d4f6e">
 
   <meta property="og:title" content="AIC Connector Insertion — Tyler Johnson">
   <meta property="og:description"
@@ -33,11 +33,11 @@
       <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 16 16" width="14" height="14"
             fill="none" stroke-linecap="round" aria-hidden="true">
             <circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4" />
-            <circle cx="8" cy="8" r="4.8" stroke="#7fbbb3" stroke-width="1.1" opacity="0.8" />
-            <circle cx="8" cy="8" r="7.2" stroke="#7fbbb3" stroke-width="1" opacity="0.45" />
+            <circle cx="8" cy="8" r="4.8" stroke="#6fd6c3" stroke-width="1.1" opacity="0.8" />
+            <circle cx="8" cy="8" r="7.2" stroke="#6fd6c3" stroke-width="1" opacity="0.45" />
           </svg></span> tyler.johnson</a>
       <ul class="nav-links">
-        <li><a href="index.html#projects">&larr; back to projects</a></li>
+        <li><a href="index.html#projects">&larr; Back to projects</a></li>
       </ul>
     </nav>
   </header>
@@ -46,8 +46,8 @@
 
     <!-- ============================== Hero ============================== -->
     <section class="project-hero container">
-      <p class="mono eyebrow">project &middot; imitation learning &middot; robot manipulation</p>
-      <h1>AIC Connector Insertion <span class="mono card-note">private repo &mdash; code cannot be shared</span></h1>
+      <p class="mono eyebrow">Project &middot; Imitation Learning &middot; Robot Manipulation</p>
+      <h1>AIC Connector Insertion <span class="mono card-note">Private repo &mdash; code cannot be shared</span></h1>
       <p class="project-lede">
         Team entry to Intrinsic's <strong>AI for Industry Challenge</strong>: teaching a simulated
         UR5e to plug fiber-optic connectors into a networking task board with a fine-tuned
@@ -61,7 +61,7 @@
     <!-- ============================== Overview ============================== -->
     <section class="container" id="overview" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">01 / overview</span>
+        <span class="mono section-num">01 / Overview</span>
         <h2>Overview</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -87,7 +87,7 @@
     <!-- ============================== System ============================== -->
     <section class="container" id="system" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">02 / system</span>
+        <span class="mono section-num">02 / System</span>
         <h2>System</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -96,7 +96,7 @@
           <img src="images/aic-system.svg"
             alt="System architecture: the organizers' C++ evaluation stack (aic_engine, aic_controller, aic_adapter, Gazebo) exchanges camera, wrench, and joint-state observations and 6-DOF twist commands with the team's Python participant model over the /insert_cable ROS 2 action"
             width="800" height="450" loading="lazy" decoding="async">
-          <figcaption class="mono">two components, one action interface</figcaption>
+          <figcaption class="mono">Two components, one action interface</figcaption>
         </figure>
         <p>
           Everything meets at one boundary. The evaluation side owns the physics: an engine that
@@ -114,7 +114,7 @@
     <!-- ============================== Pipeline ============================== -->
     <section class="container" id="pipeline" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">03 / data pipeline</span>
+        <span class="mono section-num">03 / Data Pipeline</span>
         <h2>Data &amp; Training Pipeline</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -123,7 +123,7 @@
           <img src="images/aic-pipeline.svg"
             alt="Four-stage imitation learning loop: generate randomized trial configs, roll out the CheatCode oracle in Gazebo to produce rosbags and scores, filter and convert successes into a LeRobot dataset, fine-tune and evaluate SmolVLA, then iterate"
             width="800" height="500" loading="lazy" decoding="async">
-          <figcaption class="mono">the imitation-learning loop</figcaption>
+          <figcaption class="mono">The imitation-learning loop</figcaption>
         </figure>
         <p>
           Demonstrations come from <em>CheatCode</em>, an oracle policy that reads ground-truth
@@ -136,7 +136,7 @@
           four fine-tunes SmolVLA and sends it back through evaluation. Then iterate.
         </p>
         <div class="highlight">
-          <p class="mono highlight-label">key insight</p>
+          <p class="mono highlight-label">Key Insight</p>
           <p>
             The SC connector trial scored near zero for every policy, and the reason turned out to be
             the simulator itself: the SC plug's keying tabs collide with 3&nbsp;mm-wide interior port
@@ -154,7 +154,7 @@
     <!-- ============================== Results ============================== -->
     <section class="container" id="results" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">04 / results</span>
+        <span class="mono section-num">04 / Results</span>
         <h2>Results</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -163,7 +163,7 @@
           <img src="images/aic-results.svg"
             alt="Bar chart: total score rises from 38.2 for the ACT baseline through 69.8 and 95.3 for SmolVLA v3.1 and v4 to 110.3 for v6, against a dashed CheatCode oracle ceiling of 244.3"
             width="800" height="460" loading="lazy" decoding="async">
-          <figcaption class="mono">each version is a dataset or training change, scanned across checkpoints</figcaption>
+          <figcaption class="mono">Each version is a dataset or training change, scanned across checkpoints</figcaption>
         </figure>
         <p>
           The final dataset was 203 episodes (53,611 frames): SFP demonstrations, a slice targeting
@@ -183,7 +183,7 @@
     <!-- ============================== Team ============================== -->
     <section class="container" id="team" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">05 / team</span>
+        <span class="mono section-num">05 / Team</span>
         <h2>Team</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -191,12 +191,12 @@
         <dl class="edu mono">
           <div>
             <dt>Tyler Johnson</dt>
-            <dd>lead &mdash; trial randomization framework, C++ engine fixes, evaluation orchestration,
+            <dd>Lead &mdash; trial randomization framework, C++ engine fixes, evaluation orchestration,
               and the fine-tuning experiment campaign from baseline to the 110.3 best</dd>
           </div>
           <div>
             <dt>Abhijit Makhal</dt>
-            <dd>the four-stage data-collection pipeline (config generation, rollout orchestration,
+            <dd>The four-stage data-collection pipeline (config generation, rollout orchestration,
               LeRobot conversion) and the host&harr;container integration debugging</dd>
           </div>
           <div>
@@ -215,7 +215,7 @@
       <p class="mono">
         &copy; <span id="year">2026</span> Tyler Johnson &middot;
         <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
-          rel="noopener">source</a>
+          rel="noopener">Source</a>
       </p>
     </div>
   </footer>
