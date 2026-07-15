@@ -150,6 +150,35 @@
           oracle's pose commands into the same 6-DOF twist action space the policy will emit. Stage
           four fine-tunes SmolVLA and sends it back through evaluation. Then iterate.
         </p>
+        <p>
+          &ldquo;Randomized&rdquo; carries a lot of weight in that description, so here is the full
+          inventory. Each form of variation is an independent, seeded block in the config generator,
+          switchable per collection run:
+        </p>
+        <ul>
+          <li><strong>Board &amp; rail placement</strong> &mdash; task-board pose shifted
+            &plusmn;1&ndash;2&nbsp;cm; the target rail slid and yawed &plusmn;0.03&ndash;0.12&nbsp;rad
+            along its channel.</li>
+          <li><strong>Scene clutter</strong> &mdash; each of the board's 13 rail slots
+            probabilistically populated with distractor cards, ports, and fixtures, so the target is
+            never the only object in view.</li>
+          <li><strong>Grasp jitter</strong> &mdash; the plug's pose in the gripper perturbed
+            &plusmn;2&nbsp;mm / &plusmn;0.04&nbsp;rad, matching the documented evaluation envelope.</li>
+          <li><strong>Start pose</strong> &mdash; per-joint Gaussian offsets on the arm's home
+            configuration (&plusmn;5&deg; &sigma;, clipped at &plusmn;10&deg;).</li>
+          <li><strong>Correlated action noise</strong> &mdash; DART-style temporally correlated noise
+            on the oracle's commands during the approach phase (2&nbsp;mm / 0.005&nbsp;rad &sigma;,
+            &tau;&nbsp;=&nbsp;0.5&nbsp;s), disabled near contact so demonstrations stay clean where
+            precision matters. The expert's recoveries become training data.</li>
+          <li><strong>Force disturbances</strong> &mdash; one to three random ~5&nbsp;N shoves applied
+            to the wrist mid-approach through the physics engine.</li>
+          <li><strong>Impedance randomization</strong> &mdash; controller stiffness scaled
+            &times;[0.7&ndash;1.3] and damping &times;[0.8&ndash;1.2] per trial, so recovery behavior
+            is learned under a range of contact dynamics.</li>
+          <li><strong>Language</strong> &mdash; every episode carries a minimal task-only prompt
+            matched to its scene, never a verbose scene description: scene-rich prompts measurably
+            hurt precision, and the evaluator prompts minimally anyway.</li>
+        </ul>
         <figure class="diagram" data-reveal>
           <video controls muted playsinline preload="metadata" poster="videos/aic/training-variation.jpg"
             width="864" height="768">
@@ -190,10 +219,46 @@
       </div>
     </section>
 
+    <!-- ============================== Workflow ============================== -->
+    <section class="container" id="workflow" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">04 / Workflow</span>
+        <h2>Engineering Workflow</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Fourteen dataset&rarr;train&rarr;eval loops in eleven days came from a deliberate working
+          method: pair-engineering with an AI coding agent (Claude Code). The agent operated the
+          experimental apparatus &mdash; simulator bring-up, batch collection runs, training
+          launches, checkpoint evaluations &mdash; and monitored the logs in real time. I set the
+          hypotheses, reviewed the same evidence (scoring files, force traces, evaluation videos),
+          and made the calls. Not code generation on faith: run it, watch it, measure it, write it
+          down.
+        </p>
+        <p>
+          The standing rule that made the pairing work: any procedure worth doing twice was promoted
+          into a deterministic, seeded, one-command tool &mdash; config generation, the evaluation
+          harness, checkpoint scans, the recording rig behind the videos on this page. Determinism is
+          also what let the agent iterate at a cadence humans don't sustain. Starting, interrogating,
+          and tearing down the simulator dozens of times an hour surfaced the startup races and
+          stale-state quirks that slow manual cycles hide &mdash; zombie transport nodes surviving
+          between runs, silently cached policy files, a randomization block that turned out to be a
+          silent no-op &mdash; and each diagnosis landed back in the tooling as a permanent guard.
+        </p>
+        <p>
+          Collection and training batches were resumable and ran unattended overnight, with the agent
+          analyzing results as they arrived. Mornings began with a completed analysis and a decision
+          about the next experiment, not a pile of raw logs &mdash; the rhythm that made roughly one
+          full experimental loop per day sustainable on a single consumer GPU.
+        </p>
+      </div>
+    </section>
+
     <!-- ============================== Results ============================== -->
     <section class="container" id="results" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">04 / Results</span>
+        <span class="mono section-num">05 / Results</span>
         <h2>Results</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
@@ -230,7 +295,7 @@
     <!-- ============================== Team ============================== -->
     <section class="container" id="team" data-reveal>
       <div class="section-head">
-        <span class="mono section-num">05 / Team</span>
+        <span class="mono section-num">06 / Team</span>
         <h2>Team</h2>
         <span class="rule" aria-hidden="true"></span>
       </div>
