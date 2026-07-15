@@ -762,7 +762,7 @@ html.js [data-reveal].is-visible {
 }
 
 .prose ul strong {
-  color: var(--text);
+  color: var(--accent);
 }
 
 figure.diagram {
