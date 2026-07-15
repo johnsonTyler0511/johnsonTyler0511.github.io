@@ -754,6 +754,17 @@ html.js [data-reveal].is-visible {
   color: var(--accent);
 }
 
+.prose ul {
+  list-style: disc;
+  padding-left: 1.4em;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.prose ul strong {
+  color: var(--text);
+}
+
 figure.diagram {
   margin-block: 0.5rem 1rem;
 }
