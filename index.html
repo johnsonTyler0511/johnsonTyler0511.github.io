@@ -81,7 +81,7 @@
       <p class="mono eyebrow">Senior Robotics Engineer · Boston, MA</p>
       <h1>Tyler Johnson</h1>
       <p class="hero-tagline">
-        I build the software that makes industrial robots move — motion planning, manipulation,
+        I build the software that makes industrial robots move: motion planning, manipulation,
         control, and the interfaces that let the outside world drive them. Currently building
         <strong>Locus Array</strong>, a new class of fully autonomous fulfillment robots, at
         <strong>Locus Robotics</strong>.
@@ -124,18 +124,22 @@
         </figure>
         <div class="about-text" data-reveal>
           <p>
-            I'm a robotics software engineer who lives in the layer where math meets metal: kinematics,
-            motion planning, control, and the real-time interfaces that expose a robot to the world.
-            My career has run through the heart of industrial robotics — Kawasaki, KUKA, and now
-            Locus Robotics — building everything from core robot OS modules to the tooling and
-            applications that ship on top of them.
+            I'm a robotics software engineer focused on kinematics, motion planning, control, and the
+            real-time interfaces that expose a robot to the world.
           </p>
           <p>
-            What keeps me up at night (happily) is motion: solvers that respect torque and acceleration
-            limits while staying smooth, planners that thread constrained spaces, and control interfaces
-            that make all of it feel effortless to the person using the robot. Outside of work I prototype
-            constantly — motion planning playgrounds, drones, VLA test benches — and stay deep in the
-            open-source stack: ROS 2, Gazebo, Drake, and whatever simulator is fastest this year.
+            I've worked across industrial robotics at Kawasaki, KUKA, and now Locus Robotics, building
+            everything from core robot OS modules to the tooling and applications that ship on top of them.
+          </p>
+          <p>
+            My favorite problems are in motion: solvers that respect torque and acceleration limits
+            while staying smooth, planners that thread constrained spaces, and control interfaces that
+            make the robot easy to drive.
+          </p>
+          <p>
+            Outside of work I prototype constantly: motion planning playgrounds, drones, VLA test
+            benches. I stay deep in the open-source stack: ROS 2, Gazebo, Drake, and whatever
+            simulator is fastest this year.
           </p>
           <dl class="edu mono">
             <div>
@@ -168,11 +172,14 @@
             </header>
             <p>
               I develop the software that runs the <a href="https://locusrobotics.com/array"
-                target="_blank" rel="noopener">Locus Array</a> robot — Locus's new Robots-to-Goods
-              platform, a fully autonomous fulfillment robot that drives to inventory and picks, puts
-              away, and replenishes on its own. A machine like that is a lot of software working in
-              concert, and my work tends to run through all of it, wherever the robot needs it that
-              week. Beyond that, I can't say much — most of what makes Array tick stays in the building.
+                target="_blank" rel="noopener">Locus Array</a> robot, Locus's new Robots-to-Goods
+              platform: a fully autonomous fulfillment robot that drives to inventory and picks, puts
+              away, and replenishes on its own.
+            </p>
+            <p>
+              A machine like that is a lot of software working in concert, and my work runs through
+              all of it, wherever the robot needs it that week. Beyond that I can't say much: most of
+              what makes Array tick stays in the building.
             </p>
             <p class="mono tech-tags">C++ &middot; Python &middot; ROS 2</p>
           </article>
@@ -195,11 +202,13 @@
               <p>
                 An external jogging interface that pairs a 3D space mouse with the SNS solver: twist input
                 becomes end-effector velocity through velocity IK, integrated into joint position commands
-                streamed over ROS 2 control and the RTC driver. Because torque and acceleration limits are
-                enforced inside the solver, jogging stays silky even on high-payload arms. Constraint modes
-                lock individual linear or rotational axes, and a relaxed-axis mode frees a chosen DOF — relax
-                tool RY and the solver exploits the resulting nullspace to glide through singularities and
-                joint limits instead of fighting them.
+                streamed over ROS 2 control and the RTC driver. The solver enforces torque and acceleration
+                limits internally, so jogging stays smooth even on high-payload arms.
+              </p>
+              <p>
+                Constraint modes lock individual linear or rotational axes, and a relaxed-axis mode frees
+                a chosen DOF. Relax tool RY, for example, and the solver uses the resulting nullspace to
+                pass cleanly through singularities and joint limits.
               </p>
             </div>
             <p class="mono tech-tags">C++ &middot; ROS 2 &middot; SNS IK &middot; RTC</p>
@@ -214,9 +223,12 @@
             </header>
             <p>
               Built applications on Kawasaki Real-Time Control (RTC) and the Robot Network API, and
-              consulted for universities, startups, and enterprises adopting RTC. Shipped internal tooling
-              in C++, Python, and C# — automated robot configuration, purchase-order tracking, data logging
-              and visualization, QA test suites, and a robot programming IDE — plus 2D/3D vision demo systems.
+              consulted for universities, startups, and enterprises adopting RTC.
+            </p>
+            <p>
+              Shipped internal tooling in C++, Python, and C#: automated robot configuration,
+              purchase-order tracking, data logging and visualization, QA test suites, and a robot
+              programming IDE. Also built 2D/3D vision demo systems.
             </p>
             <div class="highlight">
               <p class="mono highlight-label">Flagship</p>
@@ -253,8 +265,8 @@
             <p>
               Team entry to Intrinsic's AI for Industry Challenge: a fine-tuned SmolVLA
               vision-language-action policy teaching a simulated UR5e to insert fiber-optic
-              connectors — nearly 3&times; the provided baseline (38.2 &rarr; 110.3). Built with
-              Abhijit Makhal and Amrit Saini; full write-up inside.
+              connectors, scoring 110.3 against the provided baseline of 38.2, nearly 3 times
+              better. Built with Abhijit Makhal and Amrit Saini; full write-up inside.
             </p>
             <p class="mono tech-tags">ROS 2 &middot; LeRobot &middot; SmolVLA &middot; Gazebo &middot; Python &middot; C++</p>
           </div>
@@ -305,7 +317,10 @@
             <p>
               Senior design project: a VR game you control with your brain. EEG from an OpenBCI headset
               streams over LSL into Unity, where a focus heuristic built on delta and theta band power
-              drives in-game magic — with SVMs, decision trees, and DNNs evaluated for classification.
+              drives in-game magic.
+            </p>
+            <p>
+              SVMs, decision trees, and DNNs were evaluated for classification.
             </p>
             <p class="mono tech-tags">C# &middot; Python &middot; Unity</p>
           </div>
@@ -320,9 +335,12 @@
             <h3><a href="https://github.com/johnsonTyler0511/21-Magiks"
                 target="_blank" rel="noopener">21 Magiks</a></h3>
             <p>
-              A complete Zelda-inspired adventure game built in Unity with a four-person scrum team —
-              full-length story, dungeons, and bosses. Owned the backend systems: inventory, items,
-              abilities, shops, game state, and UI. Selected for the university showcase.
+              A complete Zelda-inspired adventure game built in Unity with a four-person scrum team:
+              full-length story, dungeons, and bosses.
+            </p>
+            <p>
+              I owned the backend systems: inventory, items, abilities, shops, game state, and UI.
+              The game was selected for the university showcase.
             </p>
             <p class="mono tech-tags">C# &middot; Unity</p>
           </div>
@@ -338,9 +356,12 @@
             <h3>Munch Mayhem <span class="mono card-note">Godot prototype</span></h3>
             <p>
               An idle/tycoon game built in Godot 4 as a deliberate agentic software engineering case
-              study — taking a project from an empty editor to a playable build through an AI-assisted
-              workflow. Each kitchen is a procedurally generated floor plan, built with a Voronoi
-              tessellation and Lloyd relaxation chosen from a sandbox that benchmarked 13+ generation
+              study: taking a project from an empty editor to a playable build through an AI-assisted
+              workflow.
+            </p>
+            <p>
+              Each kitchen is a procedurally generated floor plan, built with a Voronoi tessellation
+              and Lloyd relaxation chosen from a sandbox that benchmarked at least 13 generation
               algorithms.
             </p>
             <p class="mono tech-tags">Godot 4 &middot; GDScript &middot; Procedural Generation</p>
@@ -390,7 +411,7 @@
         <span class="rule" aria-hidden="true"></span>
       </div>
       <p class="contact-lede">
-        Elsewhere on the internet — the professional record is on LinkedIn, the code is on GitHub.
+        The professional record is on LinkedIn; the code is on GitHub.
       </p>
       <ul class="contact-list">
         <li>
