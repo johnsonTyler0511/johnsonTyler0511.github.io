@@ -51,9 +51,11 @@
       <p class="project-lede">
         Team entry to Intrinsic's <strong>AI for Industry Challenge</strong>: teaching a simulated
         UR5e to plug fiber-optic connectors into a networking task board with a fine-tuned
-        vision-language-action model. Built with <strong>Abhijit Makhal</strong> and
-        <strong>Amrit Saini</strong>. The repo is private, so this page documents the system,
-        the experiments, and the results.
+        vision-language-action model.
+      </p>
+      <p class="project-lede">
+        Built with <strong>Abhijit Makhal</strong> and <strong>Amrit Saini</strong>. The repo is
+        private, so this page documents the system, the experiments, and the results.
       </p>
       <p class="mono tech-tags">ROS 2 &middot; LeRobot &middot; SmolVLA &middot; Gazebo &middot; Python &middot; C++</p>
     </section>
@@ -67,26 +69,29 @@
       </div>
       <div class="prose">
         <p>
-          The challenge is dexterous cable insertion: a UR5e arm in Gazebo must pick up SFP and SC
-          fiber-optic connectors and seat them in ports on a task board &mdash; a peg-in-hole problem
-          that demands sub-centimeter precision under randomized start poses, impedance settings, and
-          force disturbances. The organizers run a fixed C++ evaluation stack; participants submit a
-          single Python policy that answers one ROS 2 action. Scoring rewards proximity, smoothness,
-          and above all insertion depth, and punishes collisions.
+          The challenge is dexterous cable insertion: a UR5e arm in Gazebo picks up SFP and SC
+          fiber-optic connectors and seats them in ports on a task board. It is a peg-in-hole
+          problem that demands sub-centimeter precision under randomized start poses, impedance
+          settings, and force disturbances.
         </p>
         <p>
-          We went with a learned approach: collect demonstrations from a ground-truth oracle policy,
-          convert them into a LeRobot dataset, and fine-tune <strong>SmolVLA</strong> &mdash; a small
-          vision-language-action model &mdash; to imitate them. Over a documented experiment campaign
+          The organizers run a fixed C++ evaluation stack, and participants submit a single Python
+          policy that answers one ROS 2 action. Scoring rewards proximity, smoothness, and above
+          all insertion depth, and punishes collisions.
+        </p>
+        <p>
+          We took a learned approach: collect demonstrations from a ground-truth oracle policy,
+          convert them into a LeRobot dataset, and fine-tune <strong>SmolVLA</strong>, a small
+          vision-language-action model, to imitate them. Over a documented experiment campaign
           the policy went from the provided ACT baseline's <strong>38.2</strong> to
-          <strong>110.3</strong>, close to a 3&times; improvement.
+          <strong>110.3</strong>, close to three times the baseline.
         </p>
         <figure class="diagram" data-reveal>
           <video controls muted playsinline preload="metadata" poster="videos/aic/oracle-insert.jpg"
             width="1280" height="720">
             <source src="videos/aic/oracle-insert.mp4" type="video/mp4">
           </video>
-          <figcaption class="mono">The task at the ceiling: a full SFP insertion on a randomized board (93 of ~100)</figcaption>
+          <figcaption class="mono">The task at the ceiling: a full SFP insertion on a randomized board (93 of about 100)</figcaption>
         </figure>
       </div>
     </section>
@@ -108,12 +113,17 @@
         <p>
           Everything meets at one boundary. The evaluation side owns the physics: an engine that
           orchestrates and scores trials, an impedance controller, and a sensor-fusion adapter around
-          a Gazebo simulation of the arm and task board. Our side is a ROS 2 lifecycle node that
-          dynamically loads a <code>Policy</code> and answers the <code>/insert_cable</code> action
-          &mdash; consuming camera images, wrench readings, and joint states, and streaming back
-          6-DOF Cartesian twist commands. The stack runs on ROS 2 Kilted over the Zenoh RMW, with the
-          submission executing inside a resource-limited container (a 30-second model-discovery budget
-          included &mdash; heavy imports can silently kill a run).
+          a Gazebo simulation of the arm and task board.
+        </p>
+        <p>
+          Our side is a ROS 2 lifecycle node that dynamically loads a <code>Policy</code> and
+          answers the <code>/insert_cable</code> action. It consumes camera images, wrench
+          readings, and joint states, and streams back 6-DOF Cartesian twist commands.
+        </p>
+        <p>
+          The stack runs on ROS 2 Kilted over the Zenoh RMW, and the submission executes inside a
+          resource-limited container with a 30-second model-discovery budget. Heavy imports can
+          silently kill a run.
         </p>
         <figure class="diagram" data-reveal>
           <video controls muted playsinline preload="metadata" poster="videos/aic/policy-view.jpg"
@@ -121,7 +131,7 @@
             <source src="videos/aic/policy-view.mp4" type="video/mp4">
           </video>
           <figcaption class="mono">Everything the policy sees: left / center / right wrist cameras, consumed at
-            288&times;256 &mdash; no third-person view, no object poses</figcaption>
+            288 by 256 pixels. The policy gets no third-person view and no object poses</figcaption>
         </figure>
       </div>
     </section>
@@ -142,49 +152,56 @@
         </figure>
         <p>
           Demonstrations come from <em>CheatCode</em>, an oracle policy that reads ground-truth
-          transforms the real submission never sees. Stage one generates randomized trial configs
-          &mdash; start-pose jitter, impedance randomization, injected force disturbances, scene
-          clutter &mdash; so the dataset covers the perturbations evaluation will throw at us. Stage
-          two rolls the oracle through Gazebo, recording rosbags and scores. Stage three filters for
-          successful episodes and converts them into a LeRobot dataset, finite-differencing the
-          oracle's pose commands into the same 6-DOF twist action space the policy will emit. Stage
-          four fine-tunes SmolVLA and sends it back through evaluation. Then iterate.
+          transforms the real submission never sees.
         </p>
         <p>
-          &ldquo;Randomized&rdquo; carries a lot of weight in that description, so here is the full
-          inventory. Each form of variation is an independent, seeded block in the config generator,
-          switchable per collection run:
+          Stage one generates randomized trial configs covering start-pose jitter, impedance
+          randomization, injected force disturbances, and scene clutter, so the dataset covers the
+          perturbations evaluation will throw at us. Stage two rolls the oracle through Gazebo,
+          recording rosbags and scores.
+        </p>
+        <p>
+          Stage three filters for successful episodes and converts them into a LeRobot dataset,
+          finite-differencing the oracle's pose commands into the same 6-DOF twist action space the
+          policy will emit. Stage four fine-tunes SmolVLA, sends it back through evaluation, and
+          the loop repeats.
+        </p>
+        <p>
+          &ldquo;Randomized&rdquo; covers a lot, so here is the full inventory. Each form of
+          variation is an independent, seeded block in the config generator, switchable per
+          collection run:
         </p>
         <ul>
-          <li><strong>Board &amp; rail placement</strong> &mdash; task-board pose shifted
-            &plusmn;1&ndash;2&nbsp;cm; the target rail slid and yawed &plusmn;0.03&ndash;0.12&nbsp;rad
-            along its channel.</li>
+          <li><strong>Board &amp; rail placement</strong> &mdash; task-board pose shifted plus or
+            minus 1 to 2 centimeters; the target rail slid and yawed plus or minus 0.03 to
+            0.12 radians along its channel.</li>
           <li><strong>Scene clutter</strong> &mdash; each of the board's 13 rail slots
-            probabilistically populated with distractor cards, ports, and fixtures, so the target is
-            never the only object in view.</li>
-          <li><strong>Grasp jitter</strong> &mdash; the plug's pose in the gripper perturbed
-            &plusmn;2&nbsp;mm / &plusmn;0.04&nbsp;rad, matching the documented evaluation envelope.</li>
+            probabilistically populated with distractor cards, ports, and fixtures, so the target
+            always shares the view with other objects.</li>
+          <li><strong>Grasp jitter</strong> &mdash; the plug's pose in the gripper perturbed plus or
+            minus 2 millimeters and plus or minus 0.04 radians, matching the documented evaluation
+            envelope.</li>
           <li><strong>Start pose</strong> &mdash; per-joint Gaussian offsets on the arm's home
-            configuration (&plusmn;5&deg; &sigma;, clipped at &plusmn;10&deg;).</li>
+            configuration (sigma of 5 degrees, clipped at plus or minus 10 degrees).</li>
           <li><strong>Correlated action noise</strong> &mdash; DART-style temporally correlated noise
-            on the oracle's commands during the approach phase (2&nbsp;mm / 0.005&nbsp;rad &sigma;,
-            &tau;&nbsp;=&nbsp;0.5&nbsp;s), disabled near contact so demonstrations stay clean where
-            precision matters. The expert's recoveries become training data.</li>
-          <li><strong>Force disturbances</strong> &mdash; one to three random ~5&nbsp;N shoves applied
-            to the wrist mid-approach through the physics engine.</li>
-          <li><strong>Impedance randomization</strong> &mdash; controller stiffness scaled
-            &times;[0.7&ndash;1.3] and damping &times;[0.8&ndash;1.2] per trial, so recovery behavior
-            is learned under a range of contact dynamics.</li>
+            on the oracle's commands during the approach phase (sigma of 2 millimeters and
+            0.005 radians, with a 0.5 second time constant), disabled near contact so demonstrations
+            stay clean where precision matters. The expert's recoveries become training data.</li>
+          <li><strong>Force disturbances</strong> &mdash; one to three random shoves of about
+            5 newtons applied to the wrist mid-approach through the physics engine.</li>
+          <li><strong>Impedance randomization</strong> &mdash; controller stiffness scaled by 0.7 to
+            1.3 times and damping by 0.8 to 1.2 times per trial, so recovery behavior is learned
+            under a range of contact dynamics.</li>
           <li><strong>Language</strong> &mdash; every episode carries a minimal task-only prompt
-            matched to its scene, never a verbose scene description: scene-rich prompts measurably
-            hurt precision, and the evaluator prompts minimally anyway.</li>
+            matched to its scene. Scene-rich prompts measurably hurt precision, and the evaluator
+            prompts minimally anyway.</li>
         </ul>
         <figure class="diagram" data-reveal>
           <video controls muted playsinline preload="metadata" poster="videos/aic/training-variation.jpg"
             width="864" height="768">
             <source src="videos/aic/training-variation.mp4" type="video/mp4">
           </video>
-          <figcaption class="mono">Nine training episodes at once &mdash; the randomization the dataset actually
+          <figcaption class="mono">Nine training episodes at once, showing the randomization the dataset actually
             contains: varying targets, board pose, clutter, grasp jitter</figcaption>
         </figure>
         <figure class="diagram" data-reveal>
@@ -198,14 +215,16 @@
         <div class="highlight">
           <p class="mono highlight-label">Key Insight</p>
           <p>
-            The SC connector trial scored near zero for every policy, and the reason turned out to be
-            the simulator itself: the SC plug's keying tabs collide with 3&nbsp;mm-wide interior port
-            geometry, so full insertion is physically impossible &mdash; even the ground-truth oracle
-            caps out around 40 points. A single &ldquo;full insertion&rdquo; filter threshold was
-            therefore discarding 100% of SC demonstrations. Switching to a per-archetype threshold
-            (SC&nbsp;&ge;&nbsp;35, SFP&nbsp;&ge;&nbsp;75) let partial-insertion SC demos into the
-            dataset &mdash; partial demos teach the policy to <em>engage</em> instead of hover &mdash;
-            and lifted the SC trial by 56% without hurting SFP.
+            The SC connector trial scored near zero for every policy, and the reason turned out to
+            be the simulator itself: the SC plug's keying tabs collide with interior port geometry
+            3 millimeters wide, so full insertion is physically impossible. Even the ground-truth
+            oracle caps out around 40 points, and a single &ldquo;full insertion&rdquo; filter
+            threshold was discarding 100% of SC demonstrations.
+          </p>
+          <p>
+            Switching to per-archetype thresholds, 35 for SC and 75 for SFP, let partial-insertion
+            SC demos into the dataset, and partial demos teach the policy to <em>engage</em>
+            instead of hover. The change lifted the SC trial by 56% without hurting SFP.
           </p>
         </div>
         <figure class="diagram" data-reveal>
@@ -214,7 +233,7 @@
             <source src="videos/aic/sfp-vs-sc-oracle.mp4" type="video/mp4">
           </video>
           <figcaption class="mono">The decisive experiment: the same oracle seats SFP fully (top) while SC aligns
-            to 0.6&nbsp;mm and stops at the port wall (bottom)</figcaption>
+            to 0.6 millimeters and stops at the port wall (bottom)</figcaption>
         </figure>
       </div>
     </section>
@@ -230,27 +249,35 @@
         <p>
           Fourteen dataset&rarr;train&rarr;eval loops in eleven days came from a deliberate working
           method: pair-engineering with an AI coding agent (Claude Code). The agent operated the
-          experimental apparatus &mdash; simulator bring-up, batch collection runs, training
-          launches, checkpoint evaluations &mdash; and monitored the logs in real time. I set the
-          hypotheses, reviewed the same evidence (scoring files, force traces, evaluation videos),
-          and made the calls. Not code generation on faith: run it, watch it, measure it, write it
-          down.
+          experimental apparatus, covering simulator bring-up, batch collection runs, training
+          launches, and checkpoint evaluations, and monitored the logs in real time.
         </p>
         <p>
-          The standing rule that made the pairing work: any procedure worth doing twice was promoted
-          into a deterministic, seeded, one-command tool &mdash; config generation, the evaluation
-          harness, checkpoint scans, the recording rig behind the videos on this page. Determinism is
-          also what let the agent iterate at a cadence humans don't sustain. Starting, interrogating,
-          and tearing down the simulator dozens of times an hour surfaced the startup races and
-          stale-state quirks that slow manual cycles hide &mdash; zombie transport nodes surviving
-          between runs, silently cached policy files, a randomization block that turned out to be a
-          silent no-op &mdash; and each diagnosis landed back in the tooling as a permanent guard.
+          I set the hypotheses, reviewed the same evidence (scoring files, force traces, evaluation
+          videos), and made the calls. Every change got run, watched, and measured before it was
+          written down.
+        </p>
+        <p>
+          One standing rule made the pairing work: any procedure worth doing twice was promoted
+          into a deterministic, seeded, one-command tool. That covered config generation, the
+          evaluation harness, checkpoint scans, and the recording rig behind the videos on this
+          page.
+        </p>
+        <p>
+          Determinism also let the agent iterate at a cadence humans don't sustain. Starting,
+          interrogating, and tearing down the simulator dozens of times an hour surfaced the
+          startup races and stale-state quirks that slow manual cycles hide.
+        </p>
+        <p>
+          Those included zombie transport nodes surviving between runs, silently cached policy
+          files, and a randomization block that turned out to be a silent no-op. Each diagnosis
+          landed back in the tooling as a permanent guard.
         </p>
         <p>
           Collection and training batches were resumable and ran unattended overnight, with the agent
           analyzing results as they arrived. Mornings began with a completed analysis and a decision
-          about the next experiment, not a pile of raw logs &mdash; the rhythm that made roughly one
-          full experimental loop per day sustainable on a single consumer GPU.
+          about the next experiment, which kept roughly one full experimental loop per day
+          sustainable on a single consumer GPU.
         </p>
       </div>
     </section>
@@ -272,13 +299,18 @@
         <p>
           The final dataset was 203 episodes (53,611 frames): SFP demonstrations, a slice targeting
           the hardest port, and 20 partial-insertion SC demos admitted by the per-archetype filter.
-          Every model was scanned across training checkpoints before judging &mdash; the best run
-          peaked at 50k steps and measurably overtrained by 60k. The negative results were kept on
-          the books too: default image augmentation regressed every checkpoint (too aggressive for a
-          sub-centimeter task), and three attempts at hand-coded descent overrides all scored worse
-          than the pure learned policy &mdash; the remaining gap is lateral precision, not descent
-          timing. Along the way: compressed-camera republishing cut per-trial bags from 7.4&nbsp;GB
-          to 0.75&nbsp;GB, and a host/container launch fix took SC data collection from zero usable
+          Every model was scanned across training checkpoints before judging; the best run peaked
+          at 50k steps and measurably overtrained by 60k.
+        </p>
+        <p>
+          The negative results were kept on the books too. Default image augmentation regressed
+          every checkpoint (too aggressive for a sub-centimeter task), and three attempts at
+          hand-coded descent overrides all scored worse than the pure learned policy: the remaining
+          gap is lateral precision, not descent timing.
+        </p>
+        <p>
+          Along the way, compressed-camera republishing cut per-trial bags from 7.4 gigabytes to
+          0.75 gigabytes, and a host/container launch fix took SC data collection from zero usable
           episodes to 18 in one sweep.
         </p>
         <figure class="diagram" data-reveal>
@@ -287,7 +319,7 @@
             <source src="videos/aic/best-model-eval.mp4" type="video/mp4">
           </video>
           <figcaption class="mono">The best model's complete three-trial evaluation, re-run fresh eight weeks
-            later: 110.8 vs the original 110.3 &mdash; the result reproduces</figcaption>
+            later: 110.8 vs the original 110.3. The result reproduces</figcaption>
         </figure>
       </div>
     </section>
