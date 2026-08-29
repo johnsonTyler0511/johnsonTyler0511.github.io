@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500" role="img"
+  aria-label="Agentic development cycle: plan in the vault, the coding agent implements in Godot, a headless smoke test verifies the build boots, a human playtest judges feel, and findings are written back to the plan before the next loop">
+  <style>
+    .bg { fill: #062940; }
+    .box { fill: #0a3450; stroke: #1f4d68; stroke-width: 1; }
+    .num { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8fd3f4; letter-spacing: 0.08em; }
+    .title { font: 600 19px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #e6f1ec; }
+    .sub { font: 400 14px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9fc3cd; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.08em; }
+    .arrow { stroke: #6fd6c3; stroke-width: 2; fill: none; }
+    .arrowhead { fill: #6fd6c3; }
+    .looplabel { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.06em; }
+    .human { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #ff9b85; letter-spacing: 0.08em; }
+  </style>
+  <rect class="bg" x="0" y="0" width="800" height="500"/>
+  <text class="head" x="40" y="44">AGENTIC DEVELOPMENT CYCLE</text>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+  </defs>
+
+  <rect class="box" x="40" y="75" width="330" height="130" rx="8"/>
+  <text class="num" x="64" y="108">01 / PLAN</text>
+  <text class="human" x="300" y="108">HUMAN</text>
+  <text class="title" x="64" y="136">Design note in the vault</text>
+  <text class="sub" x="64" y="161">goal, constraints, phases, and the</text>
+  <text class="sub" x="64" y="182">"done" test written before any code</text>
+
+  <rect class="box" x="430" y="75" width="330" height="130" rx="8"/>
+  <text class="num" x="454" y="108">02 / IMPLEMENT</text>
+  <text class="human" x="690" y="108">AGENT</text>
+  <text class="title" x="454" y="136">Claude Code in Godot 4</text>
+  <text class="sub" x="454" y="161">reads docs/ first, edits GDScript,</text>
+  <text class="sub" x="454" y="182">updates docs/ alongside the code</text>
+
+  <rect class="box" x="430" y="285" width="330" height="130" rx="8"/>
+  <text class="num" x="454" y="318">03 / VERIFY</text>
+  <text class="human" x="690" y="318">AGENT</text>
+  <text class="title" x="454" y="346">Headless smoke test</text>
+  <text class="sub" x="454" y="371">godot4 --headless --quit-after 3000</text>
+  <text class="sub" x="454" y="392">boots clean, earns $, writes save.json</text>
+
+  <rect class="box" x="40" y="285" width="330" height="130" rx="8"/>
+  <text class="num" x="64" y="318">04 / PLAYTEST</text>
+  <text class="human" x="300" y="318">HUMAN</text>
+  <text class="title" x="64" y="346">Play it, judge the feel</text>
+  <text class="sub" x="64" y="371">side-by-side seeds, fixed questions,</text>
+  <text class="sub" x="64" y="392">findings written back to the plan</text>
+
+  <path class="arrow" d="M 370 140 L 428 140" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 595 205 L 595 283" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 430 350 L 372 350" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 205 285 L 205 207" marker-end="url(#ah)"/>
+  <text class="looplabel" x="215" y="250">next phase</text>
+  <text class="looplabel" x="605" y="250">every change</text>
+  <text class="looplabel" x="300" y="460">Vault holds the plans and decisions &#183; repo holds the code and its docs/</text>
+</svg>
