@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Munch Mayhem — Tyler Johnson</title>
+  <meta name="description"
+    content="Munch Mayhem: an in-progress Godot 4 idle game built as an agentic software engineering case study, with procedurally generated kitchens from a Voronoi floor-plan generator.">
+  <link rel="canonical" href="https://johnsontyler0511.github.io/munch-mayhem.html">
+  <meta name="theme-color" content="#0d4f6e">
+
+  <meta property="og:title" content="Munch Mayhem — Tyler Johnson">
+  <meta property="og:description"
+    content="An in-progress Godot 4 idle game built through an agentic development cycle, with Voronoi-generated kitchens.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://johnsontyler0511.github.io/munch-mayhem.html">
+  <meta property="og:image" content="https://johnsontyler0511.github.io/images/munch-mayhem.png">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container" aria-label="Primary">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 16 16" width="14" height="14"
+            fill="none" stroke-linecap="round" aria-hidden="true">
+            <circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4" />
+            <circle cx="8" cy="8" r="4.8" stroke="#6fd6c3" stroke-width="1.1" opacity="0.8" />
+            <circle cx="8" cy="8" r="7.2" stroke="#6fd6c3" stroke-width="1" opacity="0.45" />
+          </svg></span> tyler.johnson</a>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">&larr; Back to projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== Hero ============================== -->
+    <section class="project-hero container">
+      <p class="mono eyebrow">Project &middot; Game Development &middot; Agentic Engineering</p>
+      <h1>Munch Mayhem <span class="mono card-note">In progress &mdash; playable prototype</span></h1>
+      <p class="project-lede">
+        An idle/tycoon game in <strong>Godot 4</strong>, built as a deliberate case study in
+        agentic software engineering: how far an AI-assisted workflow can carry a project from an
+        empty editor to a shipped game.
+      </p>
+      <p class="project-lede">
+        The game is <strong>still in development</strong>. What exists today is a playable
+        prototype: three upgradeable stations, staff hiring, a gear system, customers and servers,
+        and a procedurally generated kitchen on every launch. This page covers the working method
+        and the tech underneath it.
+      </p>
+      <p class="mono tech-tags">Godot 4 &middot; GDScript &middot; Voronoi Procgen &middot; A* Pathfinding &middot; Claude Code</p>
+    </section>
+
+    <!-- ============================== Overview ============================== -->
+    <section class="container" id="overview" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">01 / Overview</span>
+        <h2>Overview</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Munch Mayhem is an Eatventure-style idle game. Stations cook on a timer and pay out,
+          upgrades raise the payout and shorten the cycle, sous chefs double a station's speed, and
+          a gear crate stacks a global earnings multiplier. Customers walk in the front door, order
+          at the register, sit at a table, and pay when a hired server delivers their plate. No
+          server, and they leave hungry.
+        </p>
+        <p>
+          The project has three goals, in priority order: test how far pure "vibe coding" can go,
+          test whether a vibe-coded game can be cleaned up and released, and build Godot fluency.
+          The standing rule is that <em>ships faster, teaches more</em> beats <em>more impressive
+          but won't get finished</em>. Target: a playable, released game by the end of 2026.
+        </p>
+        <figure class="diagram" data-reveal>
+          <img src="images/munch-mayhem.png"
+            alt="Munch Mayhem running in Godot: a procedurally generated kitchen with chibi chefs, servers, and customers on the left; money, staff, gear, and station upgrade panels on the right"
+            width="1400" height="1000" loading="lazy" decoding="async">
+          <figcaption class="mono">The current build. Every character, tile, and icon is drawn in code; there are zero art assets in the repo</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================== Workflow ============================== -->
+    <section class="container" id="workflow" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">02 / Workflow</span>
+        <h2>Agentic Development Cycle</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <figure class="diagram" data-reveal>
+          <img src="images/munch-workflow.svg"
+            alt="Four-stage loop: a human writes the plan in the design vault, the coding agent implements in Godot and updates the docs, a headless smoke test verifies the build, and a human playtest feeds findings back into the next plan"
+            width="800" height="500" loading="lazy" decoding="async">
+          <figcaption class="mono">Plan, implement, verify, playtest. Humans own the two ends; the agent owns the middle</figcaption>
+        </figure>
+        <p>
+          The game is pair-engineered with an AI coding agent (Claude Code). I write the design
+          notes, set the phases, and make the calls; the agent writes the GDScript, keeps the
+          documentation current, and runs the verification. A few rules keep that loop honest.
+        </p>
+        <p>
+          <strong>Plans and code live in different places.</strong> Design notes, roadmaps, and
+          decisions live in a notes vault; the repo holds only code and a <code>docs/</code> folder
+          that describes what is actually built. The agent reads <code>docs/</code> before touching
+          anything and updates it in the same change, so the docs never drift from the code.
+        </p>
+        <p>
+          <strong>Every change gets a machine-checkable smoke test.</strong> A headless Godot run
+          plays 3,000 frames and must exit clean: scripts parse, the main scene boots, the first
+          station earns money, and a save file lands on disk. It takes about ten seconds and runs
+          after every edit, which catches the class of bug the editor would only reveal on the next
+          manual launch.
+        </p>
+        <p>
+          <strong>The first MVP was a one-shot.</strong> Rather than a phased fundamentals
+          prototype, the first build went from empty editor to three stations, a gear crate, and
+          JSON save/load in a single session. The phased plan stayed in the vault as a reference
+          and the MVP became the test rig for everything since.
+        </p>
+        <p>
+          <strong>Playtests answer fixed questions.</strong> Each build ships with a written list
+          of what to evaluate, and the findings go back into the plan before the next phase
+          starts. The procedural generation work below was selected exactly this way, by playing
+          candidates side by side on the same seed.
+        </p>
+        <div class="highlight">
+          <p class="mono highlight-label">Why this counts as engineering</p>
+          <p>
+            The interesting question is not whether the agent can write GDScript, but whether the
+            surrounding process produces a codebase a person can still reason about. The
+            architecture that fell out is deliberately small: one state singleton, pure-function
+            economy tuning, signal-driven UI that re-reads state instead of caching it, and UI
+            built in code so the code is the spec. Those choices were made to keep the whole game
+            readable in one pass, by a human or an agent.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== Procgen ============================== -->
+    <section class="container" id="procgen" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">03 / Procgen</span>
+        <h2>Voronoi Floor-Plan Generation</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Every launch generates a new 28&times;28-tile kitchen. The generator started as a
+          standalone sandbox project built around the Strategy pattern: a
+          <code>LevelGenerator</code> base class with one shared tile vocabulary, and a dropdown
+          to swap the algorithm behind it. Thirteen strategies were built and compared on the same
+          seeds: binary space partitioning, cellular automata with three different "boxify"
+          post-processes, a BSP+CA hybrid, and a family of Voronoi variants differing in distance
+          metric (Euclidean, Manhattan, Chebyshev) and seeding (random, jittered grid, Poisson
+          disk, role-based).
+        </p>
+        <figure class="diagram" data-reveal>
+          <img src="images/munch-seeds.png"
+            alt="Three generated kitchens side by side, each with a different arrangement of the mint kitchen zone, peach dining rooms, rose cashier carpet, and lavender host area, with walls, doorways, tables, and stations placed by the generator"
+            width="1420" height="460" loading="lazy" decoding="async">
+          <figcaption class="mono">Three launches, three layouts. Same rules, different seeds</figcaption>
+        </figure>
+        <p>
+          The winner was <strong>Voronoi with role-based seeds on a jittered grid</strong>. BSP
+          produced rooms that were tidy but samey; cellular automata produced organic caves that
+          never read as a restaurant. Voronoi cells gave irregular, believable rooms, and assigning
+          roles to specific seeds (kitchen in a corner, host stand in the opposite corner, register
+          near the front) gave every layout a sensible flow from door to table to kitchen.
+        </p>
+        <figure class="diagram" data-reveal>
+          <img src="images/munch-procgen.svg"
+            alt="Six-stage pipeline: place role-tagged seeds, tag tiles by nearest seed with Lloyd relaxation, merge small cells, build one-tile walls on cell boundaries, punch doorways and a front entrance, place equipment and build an A-star grid"
+            width="800" height="460" loading="lazy" decoding="async">
+          <figcaption class="mono">The production generator, ported from the sandbox into the game</figcaption>
+        </figure>
+        <p>
+          The pipeline places seeds, tags each tile with its nearest seed, and optionally runs
+          <strong>Lloyd relaxation</strong>, nudging each seed toward its cell's centroid so cell
+          sizes even out. The role-based variant switches relaxation off, because moving the seeds
+          would undo the deliberate corner placement; the jittered grid supplies the even spacing
+          instead. Cells under ten tiles are folded into their largest neighbour, one-tile walls go
+          up along every cell boundary, a centred doorway is punched through each shared edge
+          (two tiles wide between kitchen and dining), and a front entrance opens in the cell with
+          the most outer-wall tiles.
+        </p>
+        <p>
+          Equipment placement guarantees one of each station type, then scatters tables, barrels,
+          a register, and a host stand. Generation retries if a layout has no entrance, no
+          register, or fewer than three reachable tables. The result feeds an
+          <code>AStarGrid2D</code> over the walkable tiles, which is what the chef, servers, and
+          customers all path on.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Systems ============================== -->
+    <section class="container" id="systems" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">04 / Systems</span>
+        <h2>Game Systems</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          The runtime is four Godot autoloads with one responsibility each, load-ordered by
+          dependency:
+        </p>
+        <ul>
+          <li><strong>Economy</strong> &mdash; pure functions only. Cost curves, cycle times,
+            payouts, and number formatting with K / M / B / T suffixes so late-game balances stay
+            readable. All balance tuning lives in this one file.</li>
+          <li><strong>GameState</strong> &mdash; the single source of truth for money, stations,
+            gear, servers, and customers served. Mutator methods (<code>try_upgrade_station</code>,
+            <code>try_hire_server</code>, <code>try_open_crate</code>, &hellip;) change state and
+            emit signals; nothing else owns mutable game state.</li>
+          <li><strong>SaveManager</strong> &mdash; listens to those signals, debounces half a second,
+            and writes JSON to <code>user://save.json</code>. Also flushes on window close. The
+            schema is versioned, with migrations from v1 to v2 already exercised when servers were
+            added.</li>
+          <li><strong>Location</strong> &mdash; runs the generator at boot, builds the A* grid, and
+            derives the front-of-house layout: entrance, register, order spot, server home, and
+            table/seat pairs.</li>
+        </ul>
+        <p>
+          Station progress is ticked centrally in <code>GameState</code> rather than in per-widget
+          timers, so save data is always the source of truth and a reload resumes mid-cycle with no
+          per-widget restore logic. The UI never caches derived state; every widget re-reads on
+          every signal, which is wasteful in CPU terms and correct by construction.
+        </p>
+        <p>
+          The front-of-house simulation is the one exception to "everything lives in GameState."
+          Customers and servers are transient agents with two small state machines
+          (<code>ENTER &rarr; ORDER &rarr; SEAT &rarr; WAIT &rarr; EAT &rarr; LEAVE</code> and
+          <code>IDLE &rarr; TO_KITCHEN &rarr; PICKUP &rarr; TO_TABLE &rarr; DELIVER &rarr; RETURN</code>),
+          positioned in tile space and converted to pixels only at draw time. They write back to
+          the persistent state through a single <code>complete_order()</code> call. Customers who
+          wait longer than their patience turn angry, pay nothing, and leave; that pressure is the
+          entire incentive to hire servers.
+        </p>
+        <p>
+          All art is procedural. One <code>CharacterSprite</code> class draws chefs, sous chefs,
+          servers, and customers as chibi figures from vector primitives, varying hat, outfit, hair,
+          and skin per role. Tiles and furniture are drawn the same way. Keeping everything behind a
+          single <code>_draw()</code> means swapping in real sprite art later is a mechanical change,
+          which is the plan if the game gets to release.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Status ============================== -->
+    <section class="container" id="status" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">05 / Status</span>
+        <h2>Where It Stands</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          <strong>In progress.</strong> The prototype is playable end to end: buy and upgrade
+          stations, hire staff, open crates, serve customers, and come back to a saved game. It is
+          not yet a released game.
+        </p>
+        <p>
+          Done so far: the one-shot MVP (stations, gear, save/load), the procgen sandbox and its
+          playtest, porting the winning generator into the game with A* movement, the customer
+          and server layer, and the code-drawn character and tile art pass.
+        </p>
+        <p>
+          Next up, roughly in order: sound and particles (the "juice" pass), a mobile-portrait
+          layout, offline earnings, more stations, and locations with prestige, which is where the
+          procgen work pays off, since each new location becomes a fresh generated kitchen.
+          Beyond that, the release test: cleaning up a vibe-coded game far enough to ship it.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mono">
+        &copy; <span id="year">2026</span> Tyler Johnson &middot;
+        <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
+          rel="noopener">Source</a>
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>
