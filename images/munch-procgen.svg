@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 460" width="800" height="460" role="img"
+  aria-label="Voronoi floor-plan pipeline: place seeds with roles on a jittered grid, tag each tile with its nearest seed, merge small cells, build one-tile walls along cell boundaries, punch doorways and a front entrance, then place equipment and furniture; an A-star grid is built over the walkable tiles">
+  <style>
+    .bg { fill: #062940; }
+    .box { fill: #0a3450; stroke: #1f4d68; stroke-width: 1; }
+    .num { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8fd3f4; letter-spacing: 0.08em; }
+    .title { font: 600 17px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #e6f1ec; }
+    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9fc3cd; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.08em; }
+    .arrow { stroke: #6fd6c3; stroke-width: 2; fill: none; }
+    .arrowhead { fill: #6fd6c3; }
+    .looplabel { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.06em; }
+    .cell { stroke: #1f4d68; stroke-width: 1; }
+  </style>
+  <rect class="bg" x="0" y="0" width="800" height="460"/>
+  <text class="head" x="40" y="44">VORONOI FLOOR-PLAN PIPELINE  (28 &#215; 28 tiles, seeded)</text>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+  </defs>
+
+  <!-- row 1 -->
+  <rect class="box" x="40" y="75" width="225" height="120" rx="8"/>
+  <text class="num" x="60" y="104">01 / SEED</text>
+  <text class="title" x="60" y="130">Seeds with roles</text>
+  <text class="sub" x="60" y="153">kitchen in a corner, host stand</text>
+  <text class="sub" x="60" y="172">opposite, dining on a jittered grid</text>
+
+  <rect class="box" x="287" y="75" width="225" height="120" rx="8"/>
+  <text class="num" x="307" y="104">02 / TESSELLATE</text>
+  <text class="title" x="307" y="130">Nearest-seed tagging</text>
+  <text class="sub" x="307" y="153">each tile joins its closest seed;</text>
+  <text class="sub" x="307" y="172">Lloyd relaxation evens cell sizes</text>
+
+  <rect class="box" x="534" y="75" width="225" height="120" rx="8"/>
+  <text class="num" x="554" y="104">03 / MERGE</text>
+  <text class="title" x="554" y="130">Absorb small cells</text>
+  <text class="sub" x="554" y="153">cells under 10 tiles fold into</text>
+  <text class="sub" x="554" y="172">their largest neighbour</text>
+
+  <!-- row 2 -->
+  <rect class="box" x="534" y="250" width="225" height="120" rx="8"/>
+  <text class="num" x="554" y="279">04 / WALLS</text>
+  <text class="title" x="554" y="305">Boundary walls</text>
+  <text class="sub" x="554" y="328">one tile thick along every</text>
+  <text class="sub" x="554" y="347">cell-to-cell edge</text>
+
+  <rect class="box" x="287" y="250" width="225" height="120" rx="8"/>
+  <text class="num" x="307" y="279">05 / DOORS</text>
+  <text class="title" x="307" y="305">Doorways + entrance</text>
+  <text class="sub" x="307" y="328">centred door per shared edge, a</text>
+  <text class="sub" x="307" y="347">front door on the outer wall</text>
+
+  <rect class="box" x="40" y="250" width="225" height="120" rx="8"/>
+  <text class="num" x="60" y="279">06 / FURNISH</text>
+  <text class="title" x="60" y="305">Equipment + A*</text>
+  <text class="sub" x="60" y="328">one of each station, tables,</text>
+  <text class="sub" x="60" y="347">register; AStarGrid2D over floor</text>
+
+  <path class="arrow" d="M 265 135 L 285 135" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 512 135 L 532 135" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 646 195 L 646 248" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 534 310 L 514 310" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 287 310 L 267 310" marker-end="url(#ah)"/>
+  <text class="looplabel" x="40" y="420">Retries automatically if a layout has no entrance, no register, or fewer than 3 reachable tables</text>
+</svg>
