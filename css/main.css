@@ -837,3 +837,98 @@ figure.diagram figcaption {
 .error-page p {
   color: var(--text-muted);
 }
+
+/* ===== 17. equations + pseudocode (swarm page) ===== */
+.prose pre {
+  margin: 0;
+  padding: 0.9rem 1.1rem;
+  max-width: 62em;
+  overflow-x: auto;
+  background: rgba(3, 20, 34, 0.55);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 4;
+}
+
+.prose pre code {
+  font-size: inherit;
+  color: inherit;
+}
+
+.prose pre .cm {
+  color: var(--text-muted);
+}
+
+.prose pre .kw {
+  color: var(--accent-2);
+}
+
+.prose .eq {
+  margin: 0;
+  padding: 0.6rem 1.1rem;
+  max-width: 62em;
+  overflow-x: auto;
+  border-left: 2px solid var(--accent);
+  background: var(--accent-glow);
+  border-radius: 0 6px 6px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.prose .eq .katex-display {
+  margin: 0.35rem 0;
+  text-align: left;
+}
+
+.prose .eq .katex-display > .katex {
+  text-align: left;
+}
+
+.prose .eq .katex {
+  font-size: 1.18em;
+  color: var(--text);
+}
+
+.prose .eq .note {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  white-space: normal;
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+}
+
+.prose .block-label {
+  margin-bottom: -0.5rem;
+}
+
+.prose table.spec {
+  border-collapse: collapse;
+  max-width: 62em;
+  font-size: 0.92rem;
+}
+
+.prose table.spec th,
+.prose table.spec td {
+  text-align: left;
+  padding: 0.4rem 0.9rem 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.prose table.spec th {
+  color: var(--text-muted);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.prose .table-wrap {
+  overflow-x: auto;
+  max-width: 62em;
+}
