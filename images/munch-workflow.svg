@@ -54,5 +54,5 @@
   <path class="arrow" d="M 205 285 L 205 207" marker-end="url(#ah)"/>
   <text class="looplabel" x="215" y="250">next phase</text>
   <text class="looplabel" x="605" y="250">every change</text>
-  <text class="looplabel" x="300" y="460">Vault holds the plans and decisions &#183; repo holds the code and its docs/</text>
+  <text class="looplabel" x="400" y="460" text-anchor="middle">Vault holds the plans and decisions &#183; repo holds the code and its docs/</text>
 </svg>
