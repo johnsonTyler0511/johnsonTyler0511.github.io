@@ -952,13 +952,23 @@ html:has(body.personal)::after {
   content: none;
 }
 
+/* the image url is set inline on the div in personal.html so it resolves
+   relative to the page, not to this stylesheet */
 .collage-bg {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background:
-    linear-gradient(to bottom, rgba(10, 8, 8, 0.35), rgba(10, 8, 8, 0.15) 40%, rgba(10, 8, 8, 0.55)),
-    url("../images/personal/collage-4.jpg") center / cover no-repeat #121010;
+  background-color: #121010;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.collage-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 8, 8, 0.35), rgba(10, 8, 8, 0.15) 40%, rgba(10, 8, 8, 0.55));
 }
 
 body.personal .site-header {
