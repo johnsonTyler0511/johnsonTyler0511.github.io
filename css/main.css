@@ -933,3 +933,114 @@ figure.diagram figcaption {
   overflow-x: auto;
   max-width: 62em;
 }
+
+/* ===== 18. personal page ===== */
+/* this page leaves the ocean behind: one of the collages is the page
+   background, and the text sits in dark glass panels on top of it. */
+body.personal {
+  background: #121010;
+  color: #f1ede6;
+}
+
+/* switch off the surface waves, sun rays and plankton for this page */
+body.personal::before,
+body.personal::after {
+  content: none;
+}
+
+html:has(body.personal)::after {
+  content: none;
+}
+
+.collage-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to bottom, rgba(10, 8, 8, 0.35), rgba(10, 8, 8, 0.15) 40%, rgba(10, 8, 8, 0.55)),
+    url("../images/personal/collage-4.jpg") center / cover no-repeat #121010;
+}
+
+body.personal .site-header {
+  background: rgba(12, 10, 10, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+body.personal .brand,
+body.personal .nav-links a {
+  color: #e9e3da;
+}
+
+body.personal .nav-links a:hover,
+body.personal .nav-links a:focus-visible,
+body.personal .nav-links a[aria-current] {
+  color: #ffb79f;
+}
+
+.personal-main {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: clamp(2.5rem, 8vh, 5rem);
+  max-width: 52rem;
+}
+
+.panel {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: rgba(12, 10, 10, 0.68);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  display: grid;
+  gap: 1rem;
+}
+
+.panel h1 {
+  font-size: var(--step-3);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.panel h2 {
+  font-size: var(--step-2);
+  line-height: 1.15;
+}
+
+.readme-list {
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.readme-list li {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+}
+
+.readme-list .emoji {
+  flex: none;
+  width: 1.5em;
+  text-align: center;
+}
+
+.readme-list.plain {
+  font-size: var(--step-0);
+  color: #d9d2c7;
+}
+
+.readme-list.plain li {
+  display: list-item;
+  list-style: disc;
+  margin-left: 1.2em;
+}
+
+body.personal .site-footer {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+body.personal .site-footer .mono {
+  color: #bdb5aa;
+}
