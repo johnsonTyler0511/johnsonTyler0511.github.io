@@ -7,20 +7,19 @@
 
   <title>Off the Clock — Tyler Johnson</title>
   <meta name="description"
-    content="Tyler Johnson outside of work: hiking around Boston, photographing herons and ferns, turning those photos into scripted collages, tennis, basketball, and video games.">
+    content="Tyler Johnson outside of work: robotics at Locus, learning world models and VLAs for dexterous grasping, hiking, art, tennis, basketball, and video games.">
   <link rel="canonical" href="https://johnsontyler0511.github.io/personal.html">
-  <meta name="theme-color" content="#0d4f6e">
+  <meta name="theme-color" content="#121010">
 
   <meta property="og:title" content="Off the Clock — Tyler Johnson">
-  <meta property="og:description"
-    content="Hiking, nature photos, scripted collage art, tennis, basketball, and video games.">
+  <meta property="og:description" content="Robotics by day. Hiking, art, tennis, basketball, and video games the rest of the time.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://johnsontyler0511.github.io/personal.html">
-  <meta property="og:image" content="https://johnsontyler0511.github.io/images/personal/collage-3.jpg">
+  <meta property="og:image" content="https://johnsontyler0511.github.io/images/personal/collage-4.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Off the Clock — Tyler Johnson">
-  <meta name="twitter:description" content="Hiking, nature photos, scripted collage art, tennis, basketball, and video games.">
-  <meta name="twitter:image" content="https://johnsontyler0511.github.io/images/personal/collage-3.jpg">
+  <meta name="twitter:description" content="Robotics by day. Hiking, art, tennis, basketball, and video games the rest of the time.">
+  <meta name="twitter:image" content="https://johnsontyler0511.github.io/images/personal/collage-4.jpg">
 
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
@@ -30,8 +29,9 @@
   <script src="js/main.js" defer></script>
 </head>
 
-<body>
+<body class="personal">
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="collage-bg" aria-hidden="true"></div>
 
   <header class="site-header">
     <nav class="container" aria-label="Primary">
@@ -45,255 +45,73 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="index.html#projects">Projects</a></li>
         <li><a href="personal.html" aria-current="page">Personal</a></li>
-        <li><a href="#outside">Outside</a></li>
-        <li><a href="#art">Art</a></li>
-        <li><a href="#sports">Sports</a></li>
-        <li><a href="#games">Games</a></li>
       </ul>
     </nav>
   </header>
 
-  <main id="main">
+  <main id="main" class="container personal-main">
 
-    <!-- ============================== Profile + README ============================== -->
-    <section class="profile-hero container" id="top">
-      <p class="mono eyebrow eyebrow-moss">Off the clock · Boston, MA</p>
-      <div class="profile-grid">
-
-        <aside class="profile-card" data-reveal>
-          <img class="avatar" src="images/personal/avatar.jpg"
-            alt="A great blue heron standing in still water, cropped from one of Tyler's collages"
-            width="480" height="480" decoding="async">
-          <h1>Tyler Johnson</h1>
-          <p class="mono handle"><a href="https://github.com/johnsonTyler0511" target="_blank" rel="noopener">@johnsonTyler0511</a></p>
-          <p class="profile-bio">Senior Robotics Engineer at Locus Robotics. Motion planning, control, and the interfaces that drive robots.</p>
-          <ul class="profile-meta mono">
-            <li><span class="meta-label">Location</span>Boston, MA</li>
-            <li><span class="meta-label">Pronouns</span>He/Him</li>
-            <li><span class="meta-label">Org</span><a href="https://github.com/locusrobotics" target="_blank" rel="noopener">@locusrobotics</a></li>
-            <li><span class="meta-label">Site</span><a href="index.html">johnsontyler0511.github.io</a></li>
-            <li><span class="meta-label">LinkedIn</span><a href="https://www.linkedin.com/in/tylergjohnson0511" target="_blank" rel="noopener">in/tylergjohnson0511</a></li>
-          </ul>
-          <ul class="chips achievements" aria-label="GitHub achievements">
-            <li>Pair Extraordinaire ×4</li>
-            <li>Pull Shark ×3</li>
-            <li>YOLO</li>
-          </ul>
-        </aside>
-
-        <article class="readme" data-reveal>
-          <p class="mono readme-path">README.md</p>
-          <h2>Hi there 👋</h2>
-          <dl class="readme-list">
-            <div>
-              <dt aria-label="Working on">🔭</dt>
-              <dd>I'm working on a robot motion planning and controls project in ROS 2, and on this site.</dd>
-            </div>
-            <div>
-              <dt aria-label="Learning">🌱</dt>
-              <dd>I'm learning control theory and motion planning for manipulators and mobile robots.</dd>
-            </div>
-            <div>
-              <dt aria-label="Reach me">📫</dt>
-              <dd>Reach me on <a href="https://www.linkedin.com/in/tylergjohnson0511" target="_blank" rel="noopener">LinkedIn</a>.</dd>
-            </div>
-            <div>
-              <dt aria-label="Pronouns">😄</dt>
-              <dd>Pronouns: He/Him.</dd>
-            </div>
-            <div>
-              <dt aria-label="Fun fact">⚡</dt>
-              <dd>Fun fact: I love sushi 🍣.</dd>
-            </div>
-          </dl>
-          <h3 class="readme-h">Fun</h3>
-          <p>
-            In my free time I hike, take photos of whatever is growing or wading around Boston, and make art
-            out of those photos with code. I play tennis and basketball with friends, and I play video games 🏀👾.
-          </p>
-          <p class="readme-note">
-            The work side of the story is on the <a href="index.html">home page</a>. This page is the rest.
-          </p>
-        </article>
-
-      </div>
-    </section>
-
-    <!-- ============================== 01 Outside ============================== -->
-    <section class="container" id="outside" data-reveal>
-      <div class="section-head">
-        <span class="mono section-num">01 / Outside</span>
-        <h2>Hiking and nature</h2>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div class="prose">
-        <p>
-          Most weekends I am on a trail or walking the river. I shoot what I find with my phone:
-          herons in the shallows, ferns on the forest floor, moss on granite, a rabbit on the sidewalk.
-          The old mill buildings along the water sneak into the frame too.
-        </p>
-        <p>
-          These photos are the raw material for the art below.
-        </p>
-      </div>
-      <ul class="photo-strip" aria-label="Photos from hikes around Boston">
-        <li data-reveal>
-          <img src="images/personal/heron.jpg" alt="Great blue heron standing in a shallow pond" width="1200" height="900" loading="lazy" decoding="async">
-          <span class="mono">Heron, still water</span>
+    <section class="panel intro" id="top" data-reveal>
+      <h1>Hi there 👋</h1>
+      <ul class="readme-list">
+        <li>
+          <span class="emoji" aria-label="Working on">🔭</span>
+          <span>I'm currently working on world models and VLA policies for dexterous grasping, and improving this portfolio page.</span>
         </li>
-        <li data-reveal>
-          <img src="images/personal/ferns.jpg" alt="Ferns covering a forest floor" width="900" height="1200" loading="lazy" decoding="async">
-          <span class="mono">Ferns</span>
+        <li>
+          <span class="emoji" aria-label="Learning">🌱</span>
+          <span>I'm currently learning how world models and vision-language-action models can perform dexterous grasping.</span>
         </li>
-        <li data-reveal>
-          <img src="images/personal/yellow-flower.jpg" alt="Yellow evening primrose flower against blue sky" width="900" height="1200" loading="lazy" decoding="async">
-          <span class="mono">Evening primrose</span>
+        <li>
+          <span class="emoji" aria-label="Pronouns">😄</span>
+          <span>Pronouns: He/Him</span>
         </li>
-        <li data-reveal>
-          <img src="images/personal/rabbit.jpg" alt="Cottontail rabbit sitting on a sidewalk" width="1200" height="900" loading="lazy" decoding="async">
-          <span class="mono">Sidewalk rabbit</span>
-        </li>
-        <li data-reveal>
-          <img src="images/personal/forest-path.jpg" alt="Dirt trail through ferns and young trees" width="900" height="1200" loading="lazy" decoding="async">
-          <span class="mono">Trail</span>
-        </li>
-        <li data-reveal>
-          <img src="images/personal/mill.jpg" alt="Brick mill building reflected in a river under a clear sky" width="1200" height="900" loading="lazy" decoding="async">
-          <span class="mono">Mill on the river</span>
+        <li>
+          <span class="emoji" aria-label="Fun fact">⚡</span>
+          <span>Fun fact: I love sushi 🍣</span>
         </li>
       </ul>
     </section>
 
-    <!-- ============================== 02 Art ============================== -->
-    <section class="container" id="art" data-reveal>
-      <div class="section-head">
-        <span class="mono section-num">02 / Art</span>
-        <h2>Collages from code</h2>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div class="prose">
-        <p>
-          I like making art with scripts. A piece can be rerun, tuned, and rerun again, and the same
-          seed always gives the same picture. This series starts from the hiking photos above.
-        </p>
-        <p>
-          A Python script picks ten photos. It splits the page into organic regions and pins a subject,
-          a heron or a flower or the rabbit, on a rule of thirds point. Nature shots fill in around the
-          subject. Buildings and the pianos go to the edges, and some of those edge regions turn into a
-          circuit board. Then the page gets burnt edges, and ferns and leaves grow over the front.
-        </p>
-      </div>
+    <section class="panel" id="work" data-reveal>
+      <h2>Work</h2>
+      <ul class="readme-list plain">
+        <li>I currently work at Locus Robotics as a Senior Robotics Integration Engineer on the R&amp;D team.</li>
+        <li>I am working on cool new robotic systems to improve logistics fulfillment automation.</li>
+        <li>Previously I worked at KUKA as a Senior Robotics Software Engineer. My main focus was robot OS module development and external control interfaces for KUKA robots.</li>
+        <li>I also worked at Kawasaki Robotics as a Robotics Software Engineer 🤖. My main focus was Real-Time Control (RTC) software for Kawasaki robots and supporting RTC projects.</li>
+        <li>I frequently use ROS, C++, and Python to solve problems, debug, and make applications for robots.</li>
+        <li>I also do a little robot programming and hardware setup for developing new robot applications.</li>
+      </ul>
+    </section>
 
-      <ul class="art-gallery" aria-label="Collage series">
+    <section class="panel" id="fun" data-reveal>
+      <h2>Fun</h2>
+      <ul class="readme-list plain">
+        <li>In my free time I like to play video games and basketball with friends 🏀👾.</li>
+        <li>I also like hiking, being out in nature, tennis, and making art.</li>
+      </ul>
+      <ul class="art-strip" aria-label="Some of my art">
         <li data-reveal>
           <a href="images/personal/collage-3.jpg" target="_blank" rel="noopener">
-            <img src="images/personal/collage-3-thumb.jpg" alt="Collage: a rabbit, duck decoys and a yellow flower on burnt paper with blue circuit board regions and ferns in front" width="800" height="533" loading="lazy" decoding="async">
+            <img src="images/personal/collage-3-thumb.jpg" alt="Collage with a rabbit, duck decoys and a yellow flower on burnt paper" width="800" height="533" loading="lazy" decoding="async">
           </a>
-          <figure><figcaption class="mono">03 · rabbit, decoys, primrose</figcaption></figure>
-        </li>
-        <li data-reveal>
-          <a href="images/personal/collage-4.jpg" target="_blank" rel="noopener">
-            <img src="images/personal/collage-4-thumb.jpg" alt="Collage: a heron and a white flower framed by ferns, moss and a mill building, with burnt edges" width="800" height="533" loading="lazy" decoding="async">
-          </a>
-          <figure><figcaption class="mono">04 · heron, moonflower</figcaption></figure>
         </li>
         <li data-reveal>
           <a href="images/personal/collage-1.jpg" target="_blank" rel="noopener">
-            <img src="images/personal/collage-1-thumb.jpg" alt="Collage: duck decoys and a white flower with pond plants, rocks and a green circuit board region" width="800" height="533" loading="lazy" decoding="async">
+            <img src="images/personal/collage-1-thumb.jpg" alt="Collage with duck decoys and a white flower among pond plants and rocks" width="800" height="533" loading="lazy" decoding="async">
           </a>
-          <figure><figcaption class="mono">01 · decoys, moonflower</figcaption></figure>
         </li>
         <li data-reveal>
           <a href="images/personal/collage-2.jpg" target="_blank" rel="noopener">
-            <img src="images/personal/collage-2-thumb.jpg" alt="Collage: a yellow and a white flower over rocks, ferns and a foggy river, leaves in the foreground" width="800" height="533" loading="lazy" decoding="async">
+            <img src="images/personal/collage-2-thumb.jpg" alt="Collage with a yellow and a white flower over rocks, ferns and a foggy river" width="800" height="533" loading="lazy" decoding="async">
           </a>
-          <figure><figcaption class="mono">02 · primrose, moonflower</figcaption></figure>
         </li>
         <li data-reveal>
           <a href="images/personal/collage-5.jpg" target="_blank" rel="noopener">
-            <img src="images/personal/collage-5-thumb.jpg" alt="Collage: a heron, a white flower and a yellow flower between brick mills and circuit board regions, ferns in front" width="800" height="533" loading="lazy" decoding="async">
+            <img src="images/personal/collage-5-thumb.jpg" alt="Collage with a heron and two flowers between brick mills, ferns in front" width="800" height="533" loading="lazy" decoding="async">
           </a>
-          <figure><figcaption class="mono">05 · heron, two flowers</figcaption></figure>
         </li>
-      </ul>
-
-      <div class="prose">
-        <p class="mono block-label">How a region is chosen</p>
-        <p class="eq">
-          score<sub>i</sub>(p) = &minus;|p &minus; s<sub>i</sub>| / R<sub>i</sub> + a &middot; noise<sub>i</sub>(p)
-          <span class="note">Every site s<sub>i</sub> gets its own smooth noise field. A pixel p belongs to the site with the highest score. The noise bends every border into a lobed, torn outline instead of a straight wall.</span>
-        </p>
-        <p class="mono block-label">The whole piece</p>
-<pre><code><span class="cm"># one collage, one seed</span>
-<span class="kw">pick</span> 10 photos with replacement
-<span class="kw">place</span> 1 to 3 subjects on rule-of-thirds points
-<span class="kw">for each</span> pixel p:
-    region(p) = argmax_i  -|p - s_i| / R_i + a * noise_i(p)
-<span class="kw">fill</span> each region with a crop of its photo
-    subject regions last, on top, never upscaled
-<span class="kw">turn</span> about 45% of backdrop regions into circuit board
-<span class="kw">burn</span> the edges: char band, brown scorch, a few holes
-<span class="kw">draw</span> ferns and leaves in front, near plane blurred</code></pre>
-        <p class="readme-note">Python with numpy, scipy and Pillow. No models, no prompts. Change the seed and you get a new piece.</p>
-      </div>
-    </section>
-
-    <!-- ============================== 03 Sports ============================== -->
-    <section class="container" id="sports" data-reveal>
-      <div class="section-head">
-        <span class="mono section-num">03 / Sports</span>
-        <h2>Tennis and basketball</h2>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <ul class="sport-list">
-        <li data-reveal>
-          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <circle cx="24" cy="24" r="18" />
-            <path d="M10 12c8 4 8 20 0 24M38 12c-8 4-8 20 0 24" />
-          </svg>
-          <div>
-            <h3>Basketball</h3>
-            <p>Pickup with friends is the standing plan. It is the one thing on the calendar that never moves.</p>
-          </div>
-        </li>
-        <li data-reveal>
-          <svg viewBox="0 0 48 48" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-            <circle cx="24" cy="24" r="18" />
-            <path d="M12 10c10 6 10 22 0 28M36 10c-10 6-10 22 0 28" />
-          </svg>
-          <div>
-            <h3>Tennis</h3>
-            <p>The sport I am actively trying to get better at. Mostly doubles, mostly working on the serve.</p>
-          </div>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ============================== 04 Games ============================== -->
-    <section class="container" id="games" data-reveal>
-      <div class="section-head">
-        <span class="mono section-num">04 / Games</span>
-        <h2>Video games</h2>
-        <span class="rule" aria-hidden="true"></span>
-      </div>
-      <div class="prose">
-        <p>
-          Playing games is how I unwind. Building them is how I learned to care about systems: inventory,
-          state, save files, and the UI that holds it all together.
-        </p>
-        <p>
-          A few I have built are on the projects page:
-          <a href="index.html#projects">21 Magiks</a>, a Zelda-inspired adventure in Unity,
-          <a href="munch-mayhem.html">Munch Mayhem</a>, an idle kitchen game in Godot, and
-          <a href="index.html#projects">Impulse-VR</a>, a VR game you control with your brain.
-        </p>
-      </div>
-      <ul class="chips games-chips" aria-label="Game things">
-        <li>Unity</li>
-        <li>Godot 4</li>
-        <li>Roblox Luau</li>
-        <li>Procedural generation</li>
-        <li>Couch co-op</li>
       </ul>
     </section>
 
@@ -301,11 +119,7 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p class="mono">
-        &copy; <span id="year">2026</span> Tyler Johnson &middot;
-        <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
-          rel="noopener">Source</a>
-      </p>
+      <p class="mono">&copy; <span id="year">2026</span> Tyler Johnson</p>
     </div>
   </footer>
 </body>
