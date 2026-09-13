@@ -933,3 +933,248 @@ figure.diagram figcaption {
   overflow-x: auto;
   max-width: 62em;
 }
+
+/* ===== 18. personal page ===== */
+/* one extra token: a fern green pulled from the collage series. used only
+   for this page's eyebrow and photo captions so the ocean palette still leads. */
+:root {
+  --moss: #b6d98c;
+}
+
+.eyebrow-moss {
+  color: var(--moss);
+}
+
+.profile-hero {
+  padding-block: clamp(2.5rem, 7vh, 4.5rem) 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.profile-card {
+  display: grid;
+  justify-items: start;
+  gap: 0.85rem;
+  padding: 1.5rem;
+  background: var(--bg-raised);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.avatar {
+  width: 8.5rem;
+  height: 8.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 6px var(--accent-glow);
+}
+
+.profile-card h1 {
+  font-size: var(--step-2);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.handle {
+  margin-top: -0.5rem;
+  color: var(--text-muted);
+}
+
+.profile-bio {
+  color: var(--text-muted);
+}
+
+.profile-meta {
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.profile-meta .meta-label {
+  display: inline-block;
+  min-width: 5.5rem;
+  color: var(--accent-2);
+  letter-spacing: 0.08em;
+}
+
+.achievements li {
+  border-color: var(--pop);
+  color: var(--pop);
+}
+
+.readme {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.readme-path {
+  color: var(--text-muted);
+}
+
+.readme h2 {
+  font-size: var(--step-2);
+  line-height: 1.15;
+}
+
+.readme-list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.readme-list div {
+  display: flex;
+  gap: 0.85rem;
+  align-items: baseline;
+}
+
+.readme-list dt {
+  flex: none;
+  width: 1.6em;
+  text-align: center;
+  font-size: 1.15em;
+}
+
+.readme-list dd {
+  margin: 0;
+}
+
+.readme-h {
+  font-size: var(--step-1);
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.readme-note {
+  color: var(--text-muted);
+}
+
+.photo-strip {
+  margin-top: 2rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: 1rem;
+}
+
+.photo-strip li {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.photo-strip img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.photo-strip .mono {
+  color: var(--moss);
+}
+
+.art-gallery {
+  margin-block: 2rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+
+.art-gallery li {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.art-gallery a {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0b0908;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.art-gallery a:hover,
+.art-gallery a:focus-visible {
+  border-color: var(--pop);
+  transform: translateY(-3px);
+  outline-offset: 4px;
+}
+
+.art-gallery img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.art-gallery figure {
+  margin: 0;
+}
+
+.art-gallery figcaption {
+  color: var(--text-muted);
+}
+
+.prose .eq sub {
+  font-size: 0.7em;
+}
+
+.sport-list {
+  list-style: none;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.sport-list li {
+  display: flex;
+  gap: 1.1rem;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+}
+
+.sport-list svg {
+  flex: none;
+  color: var(--accent);
+}
+
+.sport-list h3 {
+  font-size: var(--step-1);
+  line-height: 1.2;
+  margin-bottom: 0.35rem;
+}
+
+.sport-list p {
+  color: var(--text-muted);
+}
+
+.games-chips {
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+  }
+
+  .profile-card {
+    position: sticky;
+    top: 5rem;
+  }
+}
