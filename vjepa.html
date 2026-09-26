@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>V-JEPA Pick and Place — Tyler Johnson</title>
+  <meta name="description"
+    content="Getting Meta's V-JEPA 2-AC world model to pick up an object and place it on a plate in MuJoCo and Isaac Sim, with no task training: how the model works, what broke, and what fixed it.">
+  <link rel="canonical" href="https://johnsontyler0511.github.io/vjepa.html">
+  <meta name="theme-color" content="#0d4f6e">
+
+  <meta property="og:title" content="V-JEPA Pick and Place — Tyler Johnson">
+  <meta property="og:description"
+    content="A video world model that plans by imagining arm moves: from 0 of 6 to 28 of 40 pick-and-place in simulation.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://johnsontyler0511.github.io/vjepa.html">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="container" aria-label="Primary">
+      <a class="brand" href="index.html"><span class="brand-mark"><svg viewBox="0 0 16 16" width="14" height="14"
+            fill="none" stroke-linecap="round" aria-hidden="true">
+            <circle cx="8" cy="8" r="2.2" stroke="currentColor" stroke-width="1.4" />
+            <circle cx="8" cy="8" r="4.8" stroke="#6fd6c3" stroke-width="1.1" opacity="0.8" />
+            <circle cx="8" cy="8" r="7.2" stroke="#6fd6c3" stroke-width="1" opacity="0.45" />
+          </svg></span> tyler.johnson</a>
+      <ul class="nav-links">
+        <li><a href="index.html#projects">&larr; Back to projects</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============================== Hero ============================== -->
+    <section class="project-hero container">
+      <p class="mono eyebrow">Project &middot; World Models &middot; Robot Manipulation</p>
+      <h1>V-JEPA Pick and Place</h1>
+      <p class="project-lede">
+        Meta's <strong>V-JEPA 2-AC</strong> is a world model that learned from video. I got it to
+        pick up an object and set it on a plate in simulation, with no training on the task.
+      </p>
+      <p class="project-lede">
+        The robot never learns a policy. It imagines a few hundred moves, keeps the one that looks
+        most like a goal photo, and repeats.
+      </p>
+      <p class="mono tech-tags">PyTorch &middot; V-JEPA 2 &middot; MuJoCo &middot; Isaac Sim 6.1 &middot; Python</p>
+    </section>
+
+    <!-- ============================== Overview ============================== -->
+    <section class="container" id="overview" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">01 / Overview</span>
+        <h2>Overview</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Most robot learning needs demos of the exact task. V-JEPA 2-AC skips that. It watched
+          internet video, then 62 hours of robot video, and learned how scenes change when an arm
+          moves.
+        </p>
+        <p>
+          Meta showed it picking objects on a real Franka arm. I rebuilt that setup in simulation
+          so I could run hundreds of trials, see why it fails, and fix it.
+        </p>
+        <p>
+          The paper's recipe got <strong>0 of 6</strong> pick-and-place runs in my sim. After the
+          fixes on this page it gets <strong>28 of 40</strong> in MuJoCo and
+          <strong>12 of 20</strong> in Isaac Sim.
+        </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/isaac-pick-place.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/isaac-pick-place.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">A full pick-and-place in Isaac Sim. Left: the planner's camera. Right: the goal
+            photo it is chasing right now</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================== Model ============================== -->
+    <section class="container" id="model" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">02 / The Model</span>
+        <h2>How V-JEPA Sees</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Picture a movie with patches of the screen covered. You can't paint the missing pixels.
+          You can still say &ldquo;there's a hand there, moving left.&rdquo; V-JEPA learns that
+          kind of guess.
+        </p>
+        <p>
+          An <strong>encoder</strong> turns each video frame into features: short number lists that
+          describe what is where. A <strong>predictor</strong> sees the uncovered features and
+          guesses the covered ones.
+        </p>
+        <p>
+          The key choice is guessing features, not pixels. Pixels waste effort on things nobody can
+          predict, like carpet texture or light flicker. Features keep what matters: objects, the
+          arm, and where they are going.
+        </p>
+        <figure class="diagram" data-reveal>
+          <img src="images/vjepa-network.svg"
+            alt="Two-step diagram. Step 1: an encoder watches internet video with patches hidden and a predictor guesses the hidden features. Step 2: with the encoder frozen, a predictor takes the current frame's features, a 7-number arm move, and the arm state, and predicts the features after the move. The average gap between that prediction and the goal image's features is the energy."
+            width="800" height="600" loading="lazy" decoding="async">
+          <figcaption class="mono">Step 1 learns to see. Step 2 learns what arm moves do</figcaption>
+        </figure>
+        <p>
+          The <strong>AC</strong> stands for action-conditioned. Meta froze the encoder and trained
+          a second predictor on robot video. It answers one question: &ldquo;If the arm moves like
+          this, what will the scene look like next?&rdquo;
+        </p>
+        <p>
+          It is like closing your eyes and picturing your hand reaching for a cup before you move.
+          The model does that in feature space, for any move you hand it.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Planning ============================== -->
+    <section class="container" id="planning" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">03 / Planning</span>
+        <h2>How It Picks a Move</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          Planning is a game of hot and cold. The goal is a photo of where the arm should end up.
+          The <strong>energy</strong> is how different the imagined scene looks from that photo.
+          Lower is warmer.
+        </p>
+        <p>
+          The planner uses the cross-entropy method (CEM). It throws out 200 random moves, imagines
+          each one, and scores them. It keeps the best 10, samples new moves near them, and repeats
+          five times.
+        </p>
+        <p>
+          The arm runs the winner for 0.4 seconds. Then it takes a new photo and plans again. One
+          move takes about 3 seconds on an RTX 5080.
+        </p>
+        <figure class="diagram" data-reveal>
+          <img src="images/vjepa-planning.svg"
+            alt="Top: six goal photos in order, pregrasp, grasp, retract, mid, place, final. Bottom: a loop of guess 200 moves, imagine each with the predictor, score each against the goal, keep the best 10 and resample, five rounds. Then run the best move for 0.4 seconds and start over."
+            width="800" height="520" loading="lazy" decoding="async">
+          <figcaption class="mono">One goal photo per leg of the task, and the loop that picks each move</figcaption>
+        </figure>
+        <p>
+          One photo can't describe a whole pick-and-place, so the task is split into legs. Each leg
+          has its own goal photo. When the planned step stays under 1 centimeter, the arm has
+          arrived and the next photo takes over.
+        </p>
+        <p>
+          The goal photos come from a scripted expert on the same scene. That is a shortcut. Removing
+          it is the next big step (see Future Work).
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Sim ============================== -->
+    <section class="container" id="sim" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">04 / The Sim</span>
+        <h2>Building a Sim the Model Believes</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          The model only ever saw real lab video from the DROID dataset. A sim that looks different
+          is a foreign country to it. So I copied DROID closely: a Franka arm with a Robotiq
+          gripper, the same camera spots, the same control rate, and the same 7-number action.
+        </p>
+        <p>
+          I built it first in MuJoCo, then ported it to Isaac Sim 6.1 for better rendering. The two
+          sims match to 1.5 millimeters on the scripted expert, so I can compare them fairly.
+        </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/mujoco-vs-isaac.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/mujoco-vs-isaac.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The same scripted expert in MuJoCo and Isaac Sim, side by side</figcaption>
+        </figure>
+        <figure class="diagram" data-reveal>
+          <img src="images/vjepa-look-gap.jpg"
+            alt="Three frames: a real DROID lab frame with a wooden table and black curtain, the first Isaac Sim scene with a purple room and striped table, and the tuned Isaac scene with a black backdrop and wood table"
+            width="1920" height="360" loading="lazy" decoding="async">
+          <figcaption class="mono">Left: real DROID video. Middle: my first sim scene. Right: the tuned look, with a
+            dark backdrop like the real lab and a brighter gripper</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================== Challenges ============================== -->
+    <section class="container" id="challenges" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">05 / Challenges</span>
+        <h2>What Broke and What Fixed It</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <p>
+          The first run failed every task. The arm drifted 37 to 63 centimeters from the goal. Each
+          fix below came from measuring first, then changing one thing.
+        </p>
+        <ul>
+          <li><strong>A mirrored world.</strong> DROID video is flipped left to right, so the model's
+            y axis pointed the wrong way. Mirroring the sim image and action took y from 15% correct
+            to 85%.</li>
+          <li><strong>Camera angle beats looks.</strong> With the camera placed where DROID's was, the true
+            move beat standing still up to 91% of the time. With the camera slightly off, 3%.
+            Textures mattered far less.</li>
+          <li><strong>A noisy renderer.</strong> Isaac's real-time ray tracer added speckle noise.
+            The noise moved the features as much as a 5 centimeter arm move. Switching to path tracing dropped
+            the noise to zero.</li>
+          <li><strong>The gripper slams shut.</strong> The planner closed the gripper within three
+            moves in 14 of 18 runs. I scripted the gripper to open and close on arrival and let the
+            planner steer x, y, and z only.</li>
+          <li><strong>The arm leaves the frame.</strong> Out of view, the model is blind. A view
+            guard keeps the hand on screen: 17 of 18 runs then ended within 3.6 centimeters.</li>
+          <li><strong>Dragging the object.</strong> With the paper's three photos, the arm slid the
+            object along the table. A retract photo lifts it first: carry height went from 6 to 19
+            centimeters.</li>
+          <li><strong>Far goals feel flat.</strong> From far away, every move scores about the same.
+            A pregrasp photo turns one long jump into two short hops.</li>
+        </ul>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/gripper-shuts.jpg"
+            width="640" height="180">
+            <source src="videos/vjepa/gripper-shuts.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Before the fix: the planner shuts the gripper early and arrives with nothing to
+            grab</figcaption>
+        </figure>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/paper-schedule-drag.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/paper-schedule-drag.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The paper's three-photo schedule: the object gets dragged, not carried</figcaption>
+        </figure>
+        <div class="highlight">
+          <p class="mono highlight-label">Key Insight</p>
+          <p>
+            Short hops beat long jumps. Legs that start under 30 centimeters from their goal arrive
+            within 3 centimeters 90% of the time. Past 40 centimeters, only 9% do.
+          </p>
+          <p>
+            So the fix was not a better planner. It was better goals: more photos, each closer to the
+            last.
+          </p>
+        </div>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/far-goal-miss.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/far-goal-miss.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">A far first goal: the energy is flat, the arm guesses, and it closes on air</figcaption>
+        </figure>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/pregrasp-fix.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/pregrasp-fix.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">The same scene with a pregrasp photo added: two short hops, then a clean grasp</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============================== Results ============================== -->
+    <section class="container" id="results" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">06 / Results</span>
+        <h2>Results</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <figure class="diagram" data-reveal>
+          <img src="images/vjepa-results.svg"
+            alt="Bar chart of pick-and-place success. Paper's 3 goal photos: MuJoCo 0 of 6, Isaac 1 of 6. Adding retract and place photos: MuJoCo 20 of 40, Isaac 7 of 20. Adding a pregrasp photo: MuJoCo 28 of 40, Isaac 12 of 20."
+            width="800" height="470" loading="lazy" decoding="async">
+          <figcaption class="mono">Same model, same planner. Only the goal photos changed</figcaption>
+        </figure>
+        <p>
+          Reaching is nearly solved: 19 of 20 in both sims. Pick-and-place climbed from 0 of 6 to
+          28 of 40 in MuJoCo and 12 of 20 in Isaac Sim.
+        </p>
+        <p>
+          Isaac trails MuJoCo on grasping. Its gripper renders darker and its contacts are stiffer,
+          which likely explains why the grip holds less often.
+        </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/mujoco-pick-place.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/mujoco-pick-place.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">A six-photo pick-and-place in MuJoCo</figcaption>
+        </figure>
+        <p>
+          I also tried fixing the flat energy directly. A small learned <strong>distance head</strong>
+          (1.6 million weights, 10 minutes of training) reads the model's features and guesses how
+          far the arm is from the goal.
+        </p>
+        <p>
+          Without the pregrasp photo, it took pick-and-place from <strong>6 of 20</strong> to
+          <strong>14 of 20</strong> on the same scenes. It never wanders. Its misses all happen at
+          contact, about 3 centimeters off the grasp.
+        </p>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/l1-wander.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/l1-wander.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Raw energy, far start: the arm wanders and never reaches the object</figcaption>
+        </figure>
+        <figure class="diagram" data-reveal>
+          <video controls muted playsinline preload="metadata" poster="videos/vjepa/distance-head-success.jpg"
+            width="1280" height="360">
+            <source src="videos/vjepa/distance-head-success.mp4" type="video/mp4">
+          </video>
+          <figcaption class="mono">Same scene with the learned distance head: straight to the object, then placed</figcaption>
+        </figure>
+        <p>
+          One blind spot remains. The model reads roll and pitch of the gripper well. It can't see
+          yaw, the twist around the vertical axis: 0 of 36 test pairs. So the planner leaves rotation
+          alone for now.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== Future ============================== -->
+    <section class="container" id="future" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">07 / Future Work</span>
+        <h2>Future Work</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <ul>
+          <li><strong>Drop the expert photos.</strong> The end goal is a prompt like &ldquo;pick 3 red
+            squares and place them in the bowl.&rdquo; First step: render goal photos from a sim twin
+            instead of running an expert.</li>
+          <li><strong>Tighter grasps.</strong> Fine-tune the predictor on close-up contact data to
+            close the last 3 centimeters.</li>
+          <li><strong>See yaw.</strong> Try a closer camera and asymmetric gripper markers so the
+            twist shows up in the image.</li>
+          <li><strong>Real frames.</strong> Test the distance head on real DROID video, then in Isaac
+            Sim, then on a real arm.</li>
+          <li><strong>A second camera.</strong> Add a view only if it reads x and y at least 85% of the
+            time. The one I tried did not.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================== Glossary ============================== -->
+    <section class="container" id="glossary" data-reveal>
+      <div class="section-head">
+        <span class="mono section-num">08 / Glossary</span>
+        <h2>Glossary</h2>
+        <span class="rule" aria-hidden="true"></span>
+      </div>
+      <div class="prose">
+        <dl class="edu mono">
+          <div>
+            <dt>V-JEPA</dt>
+            <dd>Video Joint-Embedding Predictive Architecture: learns by predicting hidden video
+              features (<a href="https://arxiv.org/abs/2506.09985" target="_blank" rel="noopener">V-JEPA 2 paper</a>)</dd>
+          </div>
+          <div>
+            <dt>AC</dt>
+            <dd>Action-conditioned: the predictor also takes the arm's move as input</dd>
+          </div>
+          <div>
+            <dt>Energy</dt>
+            <dd>Average gap between predicted features and goal features; the planner drives it down</dd>
+          </div>
+          <div>
+            <dt>CEM</dt>
+            <dd>Cross-entropy method: sample many moves, keep the best, resample near them</dd>
+          </div>
+          <div>
+            <dt>DROID</dt>
+            <dd>A large dataset of real Franka arm video from many labs; the model's robot training data</dd>
+          </div>
+          <div>
+            <dt>Leg</dt>
+            <dd>One piece of the task with its own goal photo, like grasp or place</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mono">
+        &copy; <span id="year">2026</span> Tyler Johnson &middot;
+        <a href="https://github.com/johnsonTyler0511/johnsonTyler0511.github.io" target="_blank"
+          rel="noopener">Source</a>
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>

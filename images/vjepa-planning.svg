@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img"
+  aria-label="How the planner picks each move. Top: six goal images in order: pregrasp, grasp, retract, mid, place, final. Bottom: a loop that samples 200 candidate moves, imagines each with the predictor, scores each against the current goal, and keeps the best 10 to resample, five times. The arm then runs the best move for 0.4 seconds, takes a new photo, and repeats.">
+  <style>
+    .bg { fill: #062940; }
+    .box { fill: #0a3450; stroke: #1f4d68; stroke-width: 1; }
+    .chip { fill: #0a3450; stroke: #6fd6c3; stroke-width: 1.2; }
+    .act { fill: #0a3450; stroke: #ff9b85; stroke-width: 1.5; }
+    .num { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8fd3f4; letter-spacing: 0.08em; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.08em; }
+    .title { font: 600 17px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #e6f1ec; }
+    .chiplab { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #e6f1ec; }
+    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9fc3cd; }
+    .note { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.04em; }
+    .arrow { stroke: #6fd6c3; stroke-width: 2; fill: none; }
+    .arrowhead { fill: #6fd6c3; }
+    .warm { stroke: #ff9b85; stroke-width: 2; fill: none; }
+    .warmhead { fill: #ff9b85; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+    <marker id="wh" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="warmhead"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="800" height="520"/>
+
+  <!-- goal schedule -->
+  <text class="head" x="40" y="36">THE GOAL SCHEDULE: ONE PHOTO PER LEG</text>
+  <g>
+    <rect class="chip" x="40" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="90" y="78" text-anchor="middle">pregrasp</text>
+    <rect class="chip" x="164" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="214" y="78" text-anchor="middle">grasp</text>
+    <rect class="chip" x="288" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="338" y="78" text-anchor="middle">retract</text>
+    <rect class="chip" x="412" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="462" y="78" text-anchor="middle">mid</text>
+    <rect class="chip" x="536" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="586" y="78" text-anchor="middle">place</text>
+    <rect class="chip" x="660" y="54" width="100" height="38" rx="19"/>
+    <text class="chiplab" x="710" y="78" text-anchor="middle">final</text>
+    <line class="arrow" x1="142" y1="73" x2="158" y2="73" marker-end="url(#ah)"/>
+    <line class="arrow" x1="266" y1="73" x2="282" y2="73" marker-end="url(#ah)"/>
+    <line class="arrow" x1="390" y1="73" x2="406" y2="73" marker-end="url(#ah)"/>
+    <line class="arrow" x1="514" y1="73" x2="530" y2="73" marker-end="url(#ah)"/>
+    <line class="arrow" x1="638" y1="73" x2="654" y2="73" marker-end="url(#ah)"/>
+  </g>
+  <text class="note" x="40" y="116">next photo once the planned step stays under 1 cm; gripper opens and closes on a script</text>
+
+  <!-- CEM loop -->
+  <text class="head" x="40" y="160">PICKING ONE MOVE (ABOUT 3 SECONDS ON AN RTX 5080)</text>
+
+  <rect class="box" x="40" y="180" width="310" height="100" rx="8"/>
+  <text class="num" x="62" y="208">01 / GUESS</text>
+  <text class="title" x="62" y="234">200 random moves</text>
+  <text class="sub" x="62" y="258">each one 5 cm or less in x, y, z</text>
+
+  <rect class="box" x="450" y="180" width="310" height="100" rx="8"/>
+  <text class="num" x="472" y="208">02 / IMAGINE</text>
+  <text class="title" x="472" y="234">Predictor runs each move</text>
+  <text class="sub" x="472" y="258">features after the move, no physics</text>
+
+  <rect class="box" x="450" y="320" width="310" height="100" rx="8"/>
+  <text class="num" x="472" y="348">03 / SCORE</text>
+  <text class="title" x="472" y="374">Energy vs the goal photo</text>
+  <text class="sub" x="472" y="398">lower energy = looks more like the goal</text>
+
+  <rect class="box" x="40" y="320" width="310" height="100" rx="8"/>
+  <text class="num" x="62" y="348">04 / REFINE</text>
+  <text class="title" x="62" y="374">Keep the best 10</text>
+  <text class="sub" x="62" y="398">sample new moves near them; 5 rounds</text>
+
+  <line class="arrow" x1="350" y1="230" x2="442" y2="230" marker-end="url(#ah)"/>
+  <line class="arrow" x1="605" y1="280" x2="605" y2="312" marker-end="url(#ah)"/>
+  <line class="arrow" x1="450" y1="370" x2="358" y2="370" marker-end="url(#ah)"/>
+  <line class="arrow" x1="195" y1="320" x2="195" y2="288" marker-end="url(#ah)"/>
+
+  <!-- act -->
+  <rect class="act" x="190" y="448" width="420" height="56" rx="8"/>
+  <text class="title" x="400" y="473" text-anchor="middle">Run the best move for 0.4 s</text>
+  <text class="sub" x="400" y="493" text-anchor="middle">take a new photo, start over</text>
+  <path class="warm" d="M 120 420 L 120 476 L 182 476" marker-end="url(#wh)"/>
+</svg>

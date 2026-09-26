@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img"
+  aria-label="V-JEPA 2-AC in two steps. Step 1: an encoder watches internet video with patches hidden and a predictor guesses the features of the hidden patches. Step 2: with the encoder frozen, an action-conditioned predictor takes the current frame's features, a 7-number arm move, and the arm state, and predicts the features after the move. The gap between that prediction and the goal image's features is the energy the planner minimizes.">
+  <style>
+    .bg { fill: #062940; }
+    .band { fill: none; stroke: #1f4d68; stroke-width: 1; stroke-dasharray: 4 4; }
+    .box { fill: #0a3450; stroke: #1f4d68; stroke-width: 1; }
+    .hot { fill: #0a3450; stroke: #6fd6c3; stroke-width: 1.5; }
+    .pop { fill: #0a3450; stroke: #ff9b85; stroke-width: 1.5; }
+    .num { font: 600 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #8fd3f4; letter-spacing: 0.08em; }
+    .head { font: 600 13px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; letter-spacing: 0.08em; }
+    .title { font: 600 16px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #e6f1ec; }
+    .sub { font: 400 13px system-ui, -apple-system, "Segoe UI", sans-serif; fill: #9fc3cd; }
+    .note { font: 400 12px ui-monospace, "SF Mono", Menlo, Consolas, monospace; fill: #9fc3cd; }
+    .arrow { stroke: #6fd6c3; stroke-width: 2; fill: none; }
+    .arrowhead { fill: #6fd6c3; }
+    .patch { fill: #1f4d68; }
+    .hidden { fill: #062940; stroke: #ff9b85; stroke-width: 1; stroke-dasharray: 2 2; }
+  </style>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="800" height="600"/>
+  <text class="head" x="40" y="36">V-JEPA 2-AC IN TWO STEPS</text>
+
+  <!-- ================= Step 1 ================= -->
+  <rect class="band" x="24" y="52" width="752" height="178" rx="10"/>
+  <text class="num" x="40" y="78">STEP 1 / LEARN BY WATCHING</text>
+  <text class="sub" x="40" y="98">over 1 million hours of internet video, no labels</text>
+
+  <!-- video clip with hidden patches -->
+  <rect class="box" x="40" y="116" width="170" height="96" rx="8"/>
+  <g transform="translate(58,128)">
+    <rect class="patch" x="0" y="0" width="30" height="20" rx="2"/>
+    <rect class="patch" x="34" y="0" width="30" height="20" rx="2"/>
+    <rect class="hidden" x="68" y="0" width="30" height="20" rx="2"/>
+    <rect class="patch" x="102" y="0" width="30" height="20" rx="2"/>
+    <rect class="hidden" x="0" y="24" width="30" height="20" rx="2"/>
+    <rect class="hidden" x="34" y="24" width="30" height="20" rx="2"/>
+    <rect class="patch" x="68" y="24" width="30" height="20" rx="2"/>
+    <rect class="patch" x="102" y="24" width="30" height="20" rx="2"/>
+  </g>
+  <text class="sub" x="58" y="196">video, some patches hidden</text>
+
+  <rect class="hot" x="270" y="116" width="200" height="96" rx="8"/>
+  <text class="title" x="290" y="146">Encoder</text>
+  <text class="sub" x="290" y="170">vision transformer, 1 billion</text>
+  <text class="sub" x="290" y="189">weights; video to features</text>
+
+  <rect class="box" x="530" y="116" width="230" height="96" rx="8"/>
+  <text class="title" x="550" y="146">Predictor</text>
+  <text class="sub" x="550" y="170">guesses the features of the</text>
+  <text class="sub" x="550" y="189">hidden patches, not the pixels</text>
+
+  <line class="arrow" x1="210" y1="164" x2="262" y2="164" marker-end="url(#ah)"/>
+  <line class="arrow" x1="470" y1="164" x2="522" y2="164" marker-end="url(#ah)"/>
+
+  <!-- ================= Step 2 ================= -->
+  <rect class="band" x="24" y="250" width="752" height="330" rx="10"/>
+  <text class="num" x="40" y="276">STEP 2 / LEARN WHAT ARM MOVES DO</text>
+  <text class="sub" x="40" y="296">62 hours of robot video from the DROID dataset; encoder frozen</text>
+
+  <!-- row A: current frame -->
+  <rect class="box" x="40" y="316" width="150" height="64" rx="8"/>
+  <text class="title" x="56" y="344">Camera now</text>
+  <text class="sub" x="56" y="366">256 × 256 frame</text>
+
+  <rect class="hot" x="230" y="316" width="150" height="64" rx="8"/>
+  <text class="title" x="246" y="344">Encoder</text>
+  <text class="sub" x="246" y="366">frozen, 256 tokens</text>
+
+  <!-- row B: action + state -->
+  <rect class="box" x="40" y="402" width="340" height="64" rx="8"/>
+  <text class="title" x="56" y="430">Move + arm state</text>
+  <text class="sub" x="56" y="452">x, y, z, roll, pitch, yaw, gripper</text>
+
+  <!-- predictor -->
+  <rect class="hot" x="430" y="316" width="160" height="150" rx="8"/>
+  <text class="title" x="448" y="346">Predictor</text>
+  <text class="sub" x="448" y="370">300 million weights</text>
+  <text class="sub" x="448" y="398">output: features of</text>
+  <text class="sub" x="448" y="417">the scene after the</text>
+  <text class="sub" x="448" y="436">move, before it runs</text>
+
+  <!-- row C: goal -->
+  <rect class="box" x="40" y="496" width="150" height="64" rx="8"/>
+  <text class="title" x="56" y="524">Goal image</text>
+  <text class="sub" x="56" y="546">the target view</text>
+
+  <rect class="hot" x="230" y="496" width="150" height="64" rx="8"/>
+  <text class="title" x="246" y="524">Encoder</text>
+  <text class="sub" x="246" y="546">same weights</text>
+
+  <!-- energy -->
+  <rect class="pop" x="630" y="420" width="130" height="140" rx="8"/>
+  <text class="title" x="648" y="450">Energy</text>
+  <text class="sub" x="648" y="474">average gap</text>
+  <text class="sub" x="648" y="493">between the two</text>
+  <text class="sub" x="648" y="512">feature maps</text>
+  <text class="note" x="648" y="542">lower = closer</text>
+
+  <!-- arrows -->
+  <line class="arrow" x1="190" y1="348" x2="222" y2="348" marker-end="url(#ah)"/>
+  <line class="arrow" x1="380" y1="348" x2="422" y2="348" marker-end="url(#ah)"/>
+  <line class="arrow" x1="380" y1="434" x2="422" y2="434" marker-end="url(#ah)"/>
+  <line class="arrow" x1="190" y1="528" x2="222" y2="528" marker-end="url(#ah)"/>
+  <path class="arrow" d="M 590 400 L 695 400 L 695 412" marker-end="url(#ah)"/>
+  <line class="arrow" x1="380" y1="528" x2="622" y2="528" marker-end="url(#ah)"/>
+</svg>
